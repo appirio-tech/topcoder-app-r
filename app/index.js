@@ -1,7 +1,28 @@
-import React, { Component } from 'react'
-import ReactDOM from'react-dom'
+import React from 'react'
+import { render } from 'react-dom'
+import createBrowserHistory from 'history/lib/createBrowserHistory'
+import { Router, Route, Link } from 'react-router'
 
-ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('root')
-)
+const App = React.createClass({
+  render: function() {
+    return (
+      <div>Hello, Nick</div>
+    )
+  }
+})
+
+const Home = React.createClass({
+  render: function() {
+    return (
+      <div>At home</div>
+    )
+  }
+})
+
+render((
+  <Router history={createBrowserHistory()}>
+    <Route path="/" component={App}>
+      <Route path="home" component={Home}/>
+    </Route>
+  </Router>
+), document.getElementById('root'))

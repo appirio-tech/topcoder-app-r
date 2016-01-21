@@ -12,6 +12,8 @@
     "coffee-script": "^1.10.0",
     "css-loader": "^0.23.0",
     "envify": "^3.4.0",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.15.0",
     "file-loader": "^0.8.4",
     "html-webpack-plugin": "^1.6.2",
     "json-loader": "^0.5.4",
@@ -27,7 +29,8 @@
   },
   "scripts": {
     "build": "webpack --bail --progress --build",
-    "dev": "webpack-dev-server --history-api-fallback --dev --inline --progress"
+    "dev": "webpack-dev-server --history-api-fallback --dev --inline --progress",
+    "lint": "eslint ."
   },
   "dependencies": {
     "appirio-styles": "0.x.x",

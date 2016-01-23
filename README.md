@@ -1,6 +1,6 @@
 # Topcoder-App-R
 
-This repository houses new topcoder pages, using React, Redux, and Webpack.
+This repository houses new Topcoder pages, using React, Redux, and Webpack.
 
 ## Installation
 

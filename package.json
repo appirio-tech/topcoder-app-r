@@ -2,7 +2,7 @@
   "name": "topcoder-app-r",
   "description": "Topcoder pages in React and Redux",
   "devDependencies": {
-    "appirio-tech-webpack-config": "^0.2.0",
+    "appirio-tech-webpack-config": "^0.2.15",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",

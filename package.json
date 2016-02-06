@@ -34,11 +34,12 @@
   },
   "dependencies": {
     "appirio-styles": "0.x.x",
+    "appirio-tech-ng-ui-components": "^2.1.2",
     "history": "^1.17.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",
-    "react-router": "^1.0.3",
+    "react-router": "^2.0.0-rc6",
     "redux": "^3.0.5"
   }
 }

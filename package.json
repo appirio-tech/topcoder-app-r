@@ -28,8 +28,8 @@
     "webpack-dev-server": "^1.12.1"
   },
   "scripts": {
-    "build": "webpack --bail --progress --build",
-    "dev": "webpack-dev-server --history-api-fallback --dev --inline --progress",
+    "build": "webpack --bail --progress --build --tc",
+    "dev": "webpack-dev-server --history-api-fallback --dev --inline --progress --tc",
     "lint": "eslint ."
   },
   "dependencies": {

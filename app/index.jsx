@@ -1,4 +1,6 @@
 import React from 'react'
+import Search from './Search'
+import MemberSearch from './MemberSearch'
 import { render } from 'react-dom'
 import { Router, Route, browserHistory } from 'react-router'
 
@@ -7,24 +9,6 @@ const App = React.createClass({
     return (
       <Search>
       </Search>
-    )
-  }
-})
-
-const Search = React.createClass({
-  render: function() {
-    return (
-      <div>
-        <MemberSearch></MemberSearch>
-      </div>
-    )
-  }
-})
-
-const MemberSearch = React.createClass({
-  render: function() {
-    return (
-      <div>Member Search Page</div>
     )
   }
 })

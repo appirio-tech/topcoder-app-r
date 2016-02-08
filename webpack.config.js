@@ -12,4 +12,22 @@ const config = require('appirio-tech-webpack-config')({
   template: './app/index.html'
 })
 
+// Adding react hot loader
+const jsxLoader = {
+  test: /\.jsx?$/,
+  loaders: [
+    'react-hot',
+    'babel?' + JSON.stringify( {presets: ['es2015', 'react']} )
+  ],
+  exclude: /node_modules\/(?!appirio-tech.*)/
+}
+
+// Loop over loaders and replace
+config.module.loaders.forEach((loader, i, loaders) => {
+  if (loader.loader === 'babel' && String(loader.test) === String(/\.jsx?$/)) {
+    jsxLoader.include = loader.include
+    loaders[i] = jsxLoader
+  }
+})
+
 module.exports = config

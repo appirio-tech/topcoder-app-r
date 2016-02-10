@@ -1,9 +1,13 @@
-import React from 'react'
+import TopMembersList from '../TopMembersList'
+import MemberList from './MemberList'
 
 export default React.createClass({
   render: function() {
     return (
-      <div><h1>Member Search Page</h1></div>
+      <div>
+        <TopMembersList />
+        <MemberList />
+      </div>
     )
   }
 })

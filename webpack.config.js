@@ -1,4 +1,5 @@
 require('./node_modules/coffee-script/register')
+const webpack = require('webpack')
 
 if (process.env.TRAVIS_BRANCH == 'master') process.env.ENV = 'PROD'
 if (process.env.TRAVIS_BRANCH == 'dev') process.env.ENV = 'DEV'
@@ -11,6 +12,13 @@ const config = require('appirio-tech-webpack-config')({
   },
   template: './app/index.html'
 })
+
+// Add ProvidePlugin
+
+config.plugins.push(new webpack.ProvidePlugin({
+  'React': 'react'
+}))
+
 
 // Adding react hot loader
 const jsxLoader = {

@@ -15,6 +15,7 @@ if (process.env.ENV === 'DEV') {
   middleware.push(logger)
 }
 
+
 const store = createStore(
   reducers,
   applyMiddleware(

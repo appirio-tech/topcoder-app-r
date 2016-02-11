@@ -7,6 +7,21 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 
+const middleware = []
+
+if (process.env.ENV === 'DEV') {
+  const createLogger = require('redux-logger')
+  const logger = createLogger()
+  middleware.push(logger)
+}
+
+const store = createStore(
+  reducers,
+  applyMiddleware(
+    ...middleware
+  )
+)
+
 const App = React.createClass({
   render: function() {
     return (
@@ -15,10 +30,8 @@ const App = React.createClass({
   }
 })
 
-const createStoreWithMiddleware = applyMiddleware()(createStore)
-
 render((
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <Route path="/search/members" component={MemberSearch} />

@@ -1,3 +1,6 @@
 export function updateText(text) {
-  console.log('text has changed: ', text)
+  return {
+    type: 'SEARCH_UPDATED',
+    payload: text
+  }
 }

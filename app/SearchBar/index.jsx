@@ -1,20 +1,16 @@
-import { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateText } from '../actions/index'
+import { updateText } from '../actions'
 import { bindActionCreators } from 'redux'
 
-class SearchReact extends Component {
-  renderSearchTerm() {
-    return this.props.term
-  }
-
-
-
+class SearchReact extends React.Component {
   render() {
     return (
       <div>
-        <input />
-        <h1>{this.renderSearchTerm()}</h1>
+        <input
+          type="text"
+          value={this.props.term}
+          onChange={(e) => this.props.updateText(e.target.value)}/>
+        <h1>{this.props.term}</h1>
       </div>
     )
   }

@@ -14,7 +14,6 @@ const config = require('appirio-tech-webpack-config')({
 })
 
 // Add ProvidePlugin
-
 config.plugins.push(new webpack.ProvidePlugin({
   'React': 'react'
 }))

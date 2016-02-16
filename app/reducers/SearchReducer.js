@@ -7,7 +7,7 @@ export function searchForTerm(state = initialState, action) {
 
   switch (action.type) {
   case 'SEARCH_UPDATED':
-    return { term: deferred.promise }
+    return { term: action.text }
   }
 
   return state

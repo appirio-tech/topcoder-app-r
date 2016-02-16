@@ -38,6 +38,7 @@
     "appirio-styles": "0.x.x",
     "appirio-tech-ng-ui-components": "^2.1.2",
     "history": "^1.17.0",
+    "q": "^1.4.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",

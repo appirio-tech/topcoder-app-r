@@ -1,9 +1,13 @@
-const initialState = { term: 'initial term' }
+import Q from 'q'
 
-export default function(state = initialState, action) {
-  switch(action.type) {
+const initialState = { term: '' }
+
+export function searchForTerm(state = initialState, action) {
+  const deferred = Q.defer()
+
+  switch (action.type) {
   case 'SEARCH_UPDATED':
-    return { term: action.payload }
+    return { term: deferred.promise }
   }
 
   return state

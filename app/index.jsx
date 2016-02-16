@@ -2,12 +2,13 @@ import Nav from './Nav'
 import MemberSearch from './MemberSearch'
 import { render } from 'react-dom'
 import { Router, Route, browserHistory } from 'react-router'
+import thunk from 'redux-thunk'
 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 
-const middleware = []
+const middleware = [thunk]
 
 if (process.env.ENV === 'DEV') {
   const createLogger = require('redux-logger')

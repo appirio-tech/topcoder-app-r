@@ -1,9 +1,11 @@
 require('./node_modules/coffee-script/register')
 const webpack = require('webpack')
 
-if (process.env.TRAVIS_BRANCH == 'master') process.env.ENV = 'PROD'
-if (process.env.TRAVIS_BRANCH == 'dev') process.env.ENV = 'DEV'
-if (process.env.TRAVIS_BRANCH == 'qa') process.env.ENV = 'QA'
+const CI = process.env.TRAVIS_BRANCH
+
+if (CI == 'master') process.env.ENV = 'PROD'
+if (CI == 'dev')    process.env.ENV = 'DEV'
+if (CI == 'qa')     process.env.ENV = 'QA'
 
 const config = require('appirio-tech-webpack-config')({
   dirname: __dirname,
@@ -13,18 +15,18 @@ const config = require('appirio-tech-webpack-config')({
   template: './app/index.html'
 })
 
-// Add ProvidePlugin
+// import X from Y added to files when using these globals
 config.plugins.push(new webpack.ProvidePlugin({
-  'React': 'react'
+  'React': 'react',
+  '_': 'lodash'
 }))
-
 
 // Adding react hot loader
 const jsxLoader = {
   test: /\.jsx?$/,
   loaders: [
     'react-hot',
-    'babel?' + JSON.stringify( {presets: ['es2015', 'react']} )
+    'babel?' + JSON.stringify( {presets: ['es2015', 'react', 'stage-2']} )
   ],
   exclude: /node_modules\/(?!appirio-tech.*)/
 }

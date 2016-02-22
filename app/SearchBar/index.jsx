@@ -1,24 +1,24 @@
+import { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { updateText } from '../actions'
-import { bindActionCreators } from 'redux'
-import find from
+import searchText from '../actions/searchText'
 
-class SearchReact extends React.Component {
+class SearchBar extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { term: '' }
+    this.state = { text: '', results: { name: '' } }
 
     this.onInputChange = this.onInputChange.bind(this)
+    this.onFormSubmit  = this.onFormSubmit.bind(this)
   }
 
   onInputChange(event) {
-    this.setState({ term: event.target.value})
+    this.setState({ text: event.target.value })
   }
 
   onFormSubmit(event) {
     event.preventDefault()
-
+    this.props.searchText(event.target[0].value)
   }
 
   render() {
@@ -26,24 +26,29 @@ class SearchReact extends React.Component {
       <form onSubmit={this.onFormSubmit}>
         <input
           type="text"
-          placeholder="Search ye here"
-          value={this.state.term}
+          placeholder="Competenze o persone"
+          value={this.state.text}
           onChange={this.onInputChange}/>
-        <button type="submit">Submit</button>
-        <h1>{this.state.term}</h1>
+        <button type="submit">Cerca</button>
+        <p>loading: {this.props.loading.toString()}</p>
+        <h1>search result: {this.props.foundValue}</h1>
       </form>
     )
   }
 }
 
+SearchBar.propTypes = {
+  searchText: PropTypes.func.isRequired,
+  loading   : PropTypes.bool.isRequired
+}
+
 function mapStateToProps(state) {
   return {
-    term: state.search.term
+    loading: state.searchForTerm.loading,
+    foundValue: state.searchForTerm.results.name
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateText }, dispatch)
-}
+const actionsToBind = { searchText }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchReact)
+export default connect(mapStateToProps, actionsToBind)(SearchBar)

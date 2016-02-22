@@ -5,7 +5,7 @@ import { Router, Route, browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import reducers from './reducers'
 
 const middleware = [thunk]
@@ -16,11 +16,9 @@ if (process.env.ENV === 'DEV') {
   middleware.push(logger)
 }
 
-
-const store = createStore(
-  reducers,
-  applyMiddleware(
-    ...middleware
+const store = createStore(reducers, compose(
+    applyMiddleware(...middleware),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 )
 
@@ -32,6 +30,8 @@ const App = React.createClass({
   }
 })
 
+const mountNode = document.getElementById('root')
+
 render((
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -40,4 +40,4 @@ render((
       </Route>
     </Router>
   </Provider>
-), document.getElementById('root'))
+), mountNode)

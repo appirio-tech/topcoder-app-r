@@ -15,23 +15,32 @@ export default {
     {
       'id': 4,
       'name': 'Redux'
+    },
+    {
+      'id': 5,
+      'name': 'checking-facebook'
     }
   ],
   'users': [
     {
       id: 3,
       'username': 'nick',
-      'skills': [1, 3, 4]
+      'skills': ['JavaScript', 'React', 'Redux']
     },
     {
       id: 3,
       'username': 'sheldon',
-      'skills': [1, 2, 3, 4]
+      'skills': ['JavaScript', 'Python', 'React', 'Redux']
     },
     {
       id: 3,
       'username': 'leonard',
-      'skills': [2]
+      'skills': ['Python']
+    },
+    {
+      id: 4,
+      'username': 'deepu',
+      'skills': ['checking-facebook']
     }
   ]
 }

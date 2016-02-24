@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {
   SEARCH_TEXT_REQUEST, SEARCH_TEXT_SUCCESS,
   SEARCH_TEXT_FAILURE
@@ -12,8 +13,7 @@ export default function(state = initialState, action) {
 
   case SEARCH_TEXT_SUCCESS:
   case SEARCH_TEXT_FAILURE:
-    return _.merge({}, state, { loading: false, results: action.results }
-    )
+    return _.merge({}, state, { loading: false, results: action.results })
 
   default:
     return state

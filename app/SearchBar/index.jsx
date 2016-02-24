@@ -29,8 +29,11 @@ class SearchBar extends React.Component {
           placeholder="Competenze o persone"
           value={this.state.text}
           onChange={this.onInputChange}/>
+
         <button type="submit">Cerca</button>
+
         <p>loading: {this.props.loading.toString()}</p>
+
         <h1>search result: {this.props.foundValue}</h1>
       </form>
     )

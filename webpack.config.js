@@ -17,23 +17,27 @@ const config = require('appirio-tech-webpack-config')({
 
 // import X from Y added to files when using these globals
 config.plugins.push(new webpack.ProvidePlugin({
-  'React': 'react',
-  '_': 'lodash'
+  'React': 'react'
 }))
 
 // Adding react hot loader
+const babelOptions = {
+  presets: [ 'es2015', 'react', 'stage-2' ],
+  plugins: [ 'lodash' ]
+}
+
 const jsxLoader = {
-  test: /\.jsx?$/,
+  test: /\.(js|jsx)$/,
   loaders: [
     'react-hot',
-    'babel?' + JSON.stringify( {presets: ['es2015', 'react', 'stage-2']} )
+    'babel?' + JSON.stringify(babelOptions)
   ],
   exclude: /node_modules\/(?!appirio-tech.*)/
 }
 
 // Loop over loaders and replace
 config.module.loaders.forEach((loader, i, loaders) => {
-  if (loader.loader === 'babel' && String(loader.test) === String(/\.jsx?$/)) {
+  if (loader.loader === 'babel' && String(loader.test) === String(/\.(js|jsx)$/)) {
     jsxLoader.include = loader.include
     loaders[i] = jsxLoader
   }

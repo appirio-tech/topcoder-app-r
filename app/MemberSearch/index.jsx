@@ -1,13 +1,21 @@
-import TopMembersList from '../TopMembersList'
+// import TopMembersList from '../TopMembersList'
 import MemberList from './MemberList'
 
-export default React.createClass({
+const members = [
+  {'name': 'nick', 'skills': ['JavaScript', 'React', 'Redux']},
+  {'name': 'member2', 'skills': ['C++', 'C++++++++++', 'C']}
+]
+
+const MemberSearch = React.createClass({
   render: function() {
     return (
       <div>
-        <TopMembersList />
-        <MemberList />
+        <h1>Here</h1>
+
+        <MemberList members={members} />
       </div>
     )
   }
 })
+
+export default MemberSearch

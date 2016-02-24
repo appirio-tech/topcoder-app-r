@@ -1,31 +1,18 @@
-import Nav from './Nav'
-import MemberSearch from './MemberSearch'
-import { render } from 'react-dom'
-import { Router, Route, browserHistory } from 'react-router'
-import thunk from 'redux-thunk'
-
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
-import reducers from './reducers'
+import { Router, Route, browserHistory } from 'react-router'
+import { render } from 'react-dom'
+import store from './config/store'
 
-const middleware = [thunk]
-
-if (process.env.ENV === 'DEV') {
-  const createLogger = require('redux-logger')
-  const logger = createLogger()
-  middleware.push(logger)
-}
-
-const store = createStore(reducers, compose(
-    applyMiddleware(...middleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-  )
-)
+import MemberSearch from './MemberSearch'
+import Nav from './Nav'
 
 const App = React.createClass({
   render: function() {
     return (
-      <Nav />
+      <div>
+        <Nav />
+        {this.props.children}
+      </div>
     )
   }
 })

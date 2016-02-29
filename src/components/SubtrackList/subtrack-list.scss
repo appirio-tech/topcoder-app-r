@@ -1,0 +1,61 @@
+@import 'topcoder/tc-includes';
+
+/* Top Subtrack Item Styles */
+.user-tracks-list,
+.subtracks-list {
+  margin-top: 10px;
+
+  @media (max-width: 700px) {
+    white-space: nowrap;
+  }
+}
+
+.subtrack-item {
+  padding: 5px 10px;
+  display: inline-block;
+  border-radius: 131px;
+  font-weight: 600;
+  margin-bottom: 5px;
+
+  .subtrack-rating,
+  .subtrack-ranking,
+  .subtrack-wins {
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    line-height: 16px;
+  }
+
+  .track-code {
+    color: rgba($white, 0.5);
+  }
+
+  .track-copilot-code {
+    color: #CECFD0;
+    margin-left: 4px;
+    font-size: 12px;
+  }
+
+  .subtrack-win-icon {
+    height: 10px;
+    width: 10px;
+    fill: #fff;
+  }
+}
+
+.subtrack-item.track-design {
+  background-color: #21B2F1;
+}
+
+.subtrack-item.track-develop {
+  background-color: #05C14F;
+}
+
+.subtrack-item.track-datascience {
+  background-color: #FC9A00;
+}
+
+.subtrack-item.track-copilot {
+  background-color: #9D9FA0;
+  font-size: 14px;
+}

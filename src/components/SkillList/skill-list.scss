@@ -1,0 +1,41 @@
+// @import 'topcoder/tc-includes'
+
+.skill-list {
+  white-space: initial;
+  @media (max-width: 700px) {
+    white-space: nowrap;
+  }
+
+  .skill-item.skill-match {
+    .skill-hash,
+    .skill-text {
+      color: #323638;
+    }
+  }
+
+  .skill-item {
+    position: static;
+
+    .skill-text:hover,
+    .skill-text.special-tag:hover {
+      color: #0096FF;
+      cursor: pointer;
+    }
+
+    .skill-text.special-tag {
+      color: #B47DD6;
+    }
+  }
+
+  .skill-hash {
+    color: #d1d3d4;
+  }
+
+  .skill-text {
+    color: #737380;
+  }
+}
+
+.skills-list.no-skills {
+  color: #D1D3D4;
+}

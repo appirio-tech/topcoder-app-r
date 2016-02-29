@@ -1,6 +1,6 @@
 import { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import searchText from '../actions/searchText'
+import searchText from '../../actions/searchText'
 
 class SearchBar extends React.Component {
   constructor(props) {

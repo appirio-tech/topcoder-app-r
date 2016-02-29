@@ -10,9 +10,9 @@ if (CI == 'qa')     process.env.ENV = 'QA'
 const config = require('appirio-tech-webpack-config')({
   dirname: __dirname,
   entry: {
-    app: './app/index'
+    app: './src/index'
   },
-  template: './app/index.html'
+  template: './src/index.html'
 })
 
 // import X from Y added to files when using these globals

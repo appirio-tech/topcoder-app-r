@@ -17,8 +17,8 @@
     "coffee-script": "^1.10.0",
     "css-loader": "^0.23.0",
     "envify": "^3.4.0",
-    "eslint": "^1.10.3",
-    "eslint-plugin-react": "^3.15.0",
+    "eslint": "^2.2.0",
+    "eslint-plugin-react": "^4.1.0",
     "file-loader": "^0.8.4",
     "html-webpack-plugin": "^1.6.2",
     "json-loader": "^0.5.4",
@@ -37,6 +37,7 @@
   "dependencies": {
     "appirio-styles": "0.x.x",
     "appirio-tech-ng-ui-components": "^2.1.2",
+    "classnames": "^2.2.3",
     "history": "^1.17.0",
     "q": "^1.4.1",
     "react": "^0.14.6",

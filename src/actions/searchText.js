@@ -16,12 +16,12 @@ function searchForText(text) {
 
 export default function searchText(searchText) {
   return dispatch => {
-    let deferred = Q.defer()
+    const deferred = Q.defer()
 
     dispatch({ type: SEARCH_TEXT_REQUEST })
 
-    setTimeout(function() {
-      let results = searchForText(searchText)
+    setTimeout(() => {
+      const results = searchForText(searchText)
 
       dispatch({
         type: SEARCH_TEXT_SUCCESS,

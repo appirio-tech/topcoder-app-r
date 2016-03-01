@@ -1,31 +1,9 @@
 export const mockData = {
-  'skills': [
-    {
-      'id': 1,
-      'name': 'JavaScript'
-    },
-    {
-      'id': 2,
-      'name': 'Python'
-    },
-    {
-      'id': 3,
-      'name': 'React'
-    },
-    {
-      'id': 4,
-      'name': 'Redux'
-    },
-    {
-      'id': 5,
-      'name': 'checking-facebook'
-    }
-  ],
-  'users': [
+  users: [
     {
       id: 1,
-      'username': 'nick',
-      'subtracks': [
+      username: 'nick',
+      subtracks: [
         {
           name: 'First to Finish',
           code: 'F2F',
@@ -45,25 +23,25 @@ export const mockData = {
           wins: 4
         }
       ],
-      'skills': [
+      skills: [
         {
-          'id': 1,
-          'name': 'JavaScript'
+          id: 1,
+          name: 'JavaScript'
         },
         {
-          'id': 3,
-          'name': 'React'
+          id: 3,
+          name: 'React'
         },
         {
-          'id': 4,
-          'name': 'Redux'
+          id: 4,
+          name: 'Redux'
         }
       ]
     },
     {
       id: 2,
-      'username': 'sheldon',
-      'subtracks': [
+      username: 'sheldon',
+      subtracks: [
         {
           name: 'First to Finish',
           code: 'F2F',
@@ -83,29 +61,29 @@ export const mockData = {
           wins: 4
         }
       ],
-      'skills': [
+      skills: [
         {
-          'id': 1,
-          'name': 'JavaScript'
+          id: 1,
+          name: 'JavaScript'
         },
         {
-          'id': 2,
-          'name': 'Python'
+          id: 2,
+          name: 'Python'
         },
         {
-          'id': 3,
-          'name': 'React'
+          id: 3,
+          name: 'React'
         },
         {
-          'id': 4,
-          'name': 'Redux'
+          id: 4,
+          name: 'Redux'
         }
       ]
     },
     {
       id: 3,
-      'username': 'leonard',
-      'subtracks': [
+      username: 'leonard',
+      subtracks: [
         {
           name: 'First to Finish',
           code: 'F2F',
@@ -125,17 +103,17 @@ export const mockData = {
           wins: 4
         }
       ],
-      'skills': [
+      skills: [
         {
-          'id': 2,
-          'name': 'Python'
+          id: 2,
+          name: 'Python'
         }
       ]
     },
     {
       id: 4,
-      'username': 'deepu',
-      'subtracks': [
+      username: 'deepu',
+      subtracks: [
         {
           name: 'First to Finish',
           code: 'F2F',
@@ -155,10 +133,10 @@ export const mockData = {
           wins: 4
         }
       ],
-      'skills': [
+      skills: [
         {
-          'id': 5,
-          'name': 'checking-facebook'
+          id: 5,
+          name: 'checking-facebook'
         }
       ]
     }

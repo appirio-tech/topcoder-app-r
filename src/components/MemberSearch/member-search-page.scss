@@ -1,5 +1,33 @@
 @import 'topcoder/tc-includes';
 
+body {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
 .member-search-page {
   background-color: $medium-gray;
+}
+
+.member-match {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  border: 1px solid #a3a3ae;
+  border: 1px solid rgba(163, 163, 174, 0.3);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.13);
+
+  @media (max-width: 700px) {
+    display: block;
+  }
+}
+
+#svg-icons {
+  height: 0;
+  width: 0;
+}
+
+.list-container {
+  border: 1px solid #a3a3ae;
+  border: 1px solid rgba(163, 163, 174, 0.3);
+  margin-bottom: 20px;
 }

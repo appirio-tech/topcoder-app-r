@@ -1,0 +1,189 @@
+@import 'topcoder/tc-includes';
+
+/* User Info Styles */
+.user-info {
+  background-color: #fff;
+  flex: 1 1 50%;
+  padding: 20px;
+  position: relative;
+
+  @media (max-width: 700px) {
+    display: block;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .user-bio {
+    font-size: 14px;
+    line-height: 20px;
+    color: #394146;
+    margin-top: 20px;
+  }
+}
+
+/* User Profile Styles */
+.user-profile {
+  display: flex;
+
+  .user-avatar {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+    position: relative;
+
+    @media (max-width: 700px) {
+      margin-right: 10px;
+    }
+
+    .default-avatar {
+      height: 60px;
+      width: 60px;
+      display: inline-block;
+      fill: green;
+    }
+
+    .user-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .user-rank {
+      width: 17.5px;
+      height: 16.5px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+    }
+
+    .user-rank-wrap.level-1 .user-rank {
+      fill: #9D9FA0;
+    }
+
+    .user-rank-wrap.level-2 .user-rank {
+      fill: #69C329;
+    }
+
+    .user-rank-wrap.level-3 .user-rank {
+      fill: #616BD5;
+    }
+
+    .user-rank-wrap.level-4 .user-rank {
+      fill: #FCD617;
+    }
+
+    .user-rank-wrap.level-5 .user-rank {
+      fill: #EF3A3A;
+    }
+  }
+
+  .user-avatar.user-avatar-small {
+    height: 50px;
+    width: 50px;
+
+    .user-image,
+    .default-avatar {
+      width: 50px;
+      height: 50px;
+    }
+
+    .user-rank-wrap {
+      width: 7px;
+      height: 7px;
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-radius: 50%;
+
+      .user-rank {
+        display: none;
+      }
+    }
+
+    .user-rank-wrap.level-1 {
+      background-color: #9D9FA0;
+    }
+
+    .user-rank-wrap.level-2 {
+      background-color: #69C329;
+    }
+
+    .user-rank-wrap.level-3 {
+      background-color: #616BD5;
+    }
+
+    .user-rank-wrap.level-4 {
+      background-color: #FCD617;
+    }
+
+    .user-rank-wrap.level-5 {
+      background-color: #EF3A3A;
+    }
+  }
+
+  .username-and-details {
+    display: inline-block;
+    vertical-align: top;
+    /* aligns the top of the avatar and the details */
+    position: relative;
+    top: -4px;
+
+    .username {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 25px;
+      margin-bottom: 5px;
+
+      @media (max-width: 700px) {
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom: 3px;
+      }
+    }
+
+    .user-details {
+      .user-details-1 {
+        color: #394146;
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 3px;
+
+        @media (max-width: 700px) {
+          font-size: 14px;
+          line-height: 16px;
+        }
+
+        .user-country {
+          text-transform: uppercase;
+        }
+
+        .user-info-sep {
+          height: 10px;
+          width: 1px;
+          border-left: 1px solid #394146;
+          display: inline-block;
+          position: relative;
+        }
+      }
+
+      .member-since {
+        color: #A3A3AE;
+        font-size: 12px;
+        line-height: 16px;
+
+        @media (max-width: 700px) {
+          font-size: 14px;
+          line-height: 16px;
+        }
+      }
+    }
+  }
+
+}

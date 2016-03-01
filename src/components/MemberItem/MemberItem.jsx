@@ -3,10 +3,12 @@ import UserInfo from '../UserInfo/UserInfo'
 import MemberSearchUserStats
   from '../MemberSearchUserStats/MemberSearchUserStats'
 
+
+
 const MemberItem = ({ member }) => {
   // Render tracks or subtracks based on data
   return (
-    <div>
+    <div className="member-item">
       <UserInfo user={member}/>
       <MemberSearchUserStats member={member} />
     </div>

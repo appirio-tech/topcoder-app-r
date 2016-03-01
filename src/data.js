@@ -3,6 +3,10 @@ export const mockData = {
     {
       id: 1,
       username: 'nick',
+      level: 5,
+      country: 'Russia',
+      memberSince: 'Dec 2050',
+      totalWins: 1000,
       subtracks: [
         {
           name: 'First to Finish',
@@ -41,6 +45,10 @@ export const mockData = {
     {
       id: 2,
       username: 'sheldon',
+      level: 5,
+      country: 'China',
+      memberSince: 'Oct 2005',
+      totalWins: 55,
       subtracks: [
         {
           name: 'First to Finish',
@@ -83,6 +91,10 @@ export const mockData = {
     {
       id: 3,
       username: 'leonard',
+      level: 5,
+      country: 'Poland',
+      memberSince: 'Feb 2015',
+      totalWins: 213,
       subtracks: [
         {
           name: 'First to Finish',
@@ -113,6 +125,10 @@ export const mockData = {
     {
       id: 4,
       username: 'deepu',
+      level: 5,
+      country: 'Vietnam',
+      memberSince: 'Jan 2011',
+      totalWins: 425,
       subtracks: [
         {
           name: 'First to Finish',

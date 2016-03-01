@@ -3,9 +3,9 @@ const webpack = require('webpack')
 
 const CI = process.env.TRAVIS_BRANCH
 
-if (CI == 'master') process.env.ENV = 'PROD'
-if (CI == 'dev')    process.env.ENV = 'DEV'
-if (CI == 'qa')     process.env.ENV = 'QA'
+if (CI === 'master') process.env.ENV = 'PROD'
+if (CI === 'dev')    process.env.ENV = 'DEV'
+if (CI === 'qa')     process.env.ENV = 'QA'
 
 const config = require('appirio-tech-webpack-config')({
   dirname: __dirname,
@@ -17,7 +17,7 @@ const config = require('appirio-tech-webpack-config')({
 
 // import X from Y added to files when using these globals
 config.plugins.push(new webpack.ProvidePlugin({
-  'React': 'react'
+  React: 'react'
 }))
 
 // Adding react hot loader

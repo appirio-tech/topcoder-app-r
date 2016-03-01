@@ -13,7 +13,7 @@ class MemberSearch extends Component {
   constructor(props) {
     super(props)
 
-    let { query } = props.location
+    const { query } = props.location
     this.searchTermFromQuery = query.q
 
     this.memberResults = mockData.users
@@ -26,22 +26,23 @@ class MemberSearch extends Component {
   }
 
   getMemberSearchResults() {
-    let searchTerm = this.searchTermFromQuery
+    const searchTerm = this.searchTermFromQuery
     console.log(searchTerm)
 
   }
 
   render() {
-    let members   = this.memberResults
-    let isLoading = this.props.isLoading || false
+    const members   = this.memberResults
+    const isLoading = this.props.isLoading || false
     let memberSearchContent
 
-    if (isLoading)
+    if (isLoading) {
       memberSearchContent = <h1>Loading members now...</h1>
-    else if (members)
+    } else if (members) {
       memberSearchContent = <MemberList members={members} />
-    else
+    } else {
       memberSearchContent = <NoResults entry="hello" />
+    }
 
     return (
       <div className="member-search-page">

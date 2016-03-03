@@ -7,7 +7,7 @@ const MemberList = ({ members }) => (
 
     <ul>
       {members.map(member =>
-        <MemberItem key={member.id} member={member} />
+        <MemberItem key={member.userId} member={member} />
       )}
     </ul>
   </div>

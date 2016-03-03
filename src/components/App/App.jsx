@@ -1,9 +1,9 @@
-import Nav from '../Nav/Nav'
+// import Nav from '../Nav/Nav'
+      // <Nav />
 
 const App = (props) => {
   return (
     <div>
-      <Nav />
       {props.children}
     </div>
   )

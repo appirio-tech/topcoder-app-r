@@ -1,0 +1,106 @@
+@import 'topcoder/tc-includes';
+
+$page-background: #E8EAEC;
+$skill-gray: #737380;
+$list-header-bg: #DEDEE0;
+$list-header-color: #737380;
+$track-match: #323638;
+$gray-border: rgba(163, 163, 175, 0.3);
+$shadow: rgba(0, 0, 0, 0.13);
+$mobile-width: 668px;
+$tablet-width: 732px;
+$desktop-width: 992px;
+$gutter-mobile: 10px;
+$gutter-tablet: 16px;
+$gutter-desktop: 32px;
+
+//fonts
+@mixin roboto {
+    font-family: roboto, Arial, sans-serif;
+}
+
+@mixin roboto-m {
+    font-family: roboto, Arial, sans-serif;
+    font-weight: 500;
+}
+
+@mixin roboto-b {
+    font-family: roboto, Arial, sans-serif;
+    font-weight: 700;
+}
+
+//mixins
+@mixin mobile {
+    @media (max-width: #{$tablet-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$desktop-width}) {
+        @content;
+    }
+}
+
+
+.track-item-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 5px;
+  width: 100%;
+  @include mobile {
+    flex-wrap: nowrap;
+    padding-right: 20px;
+    width: auto;
+    display: block;
+    white-space: nowrap;
+  }
+
+  .track-item {
+    margin-right: 5px;
+    margin-top: 5px;
+    height: 26px;
+    border-radius: 26px;
+    padding: 0 10px;
+    line-height: 26px;
+    font-size: 14px;
+    color: $white;
+    font-weight: bold;
+    background-color: $design;
+    display: inline-block;
+    white-space: nowrap;
+
+    &.track-disabled {
+      background-color: $gray-light;
+    }
+    &.track-design {
+      background-color: $design;
+    }
+    &.track-develop {
+      background-color: $level-2;
+    }
+    &.track-data_science {
+      background-color: $data_science;
+    }
+    &.track-fs {
+      background-color: $level-1;
+    }
+    @include mobile {
+      &:last-child {
+        margin-right: 15px;
+      }
+    }
+    .subtrack-name {
+      font-size: 12px;
+      font-weight: bold;
+      opacity: 0.5;
+      white-space: nowrap;
+    }
+  }
+}

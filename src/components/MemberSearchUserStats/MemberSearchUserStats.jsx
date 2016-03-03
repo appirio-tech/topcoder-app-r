@@ -1,13 +1,24 @@
 import { PropTypes } from 'react'
 import SkillList from '../SkillList/SkillList'
 import SubtrackList from '../SubtrackList/SubtrackList'
+import TrackList from '../TrackList/TrackList'
 
 const MemberSearchUserStats = ({ member }) => {
-  // Render tracks or subtracks based on data
+  // TODO: Add functionality for no skills or tracks
+
+  let userStatsList
+
+  if (member.subtracks) {
+    userStatsList = <SubtrackList subtracks={member.subtracks} />
+  } else {
+    userStatsList = <TrackList tracks={member.tracks} />
+  }
+
   return (
     <div>
       <SkillList skills={member.skills} />
-      <SubtrackList subtracks={member.subtracks} />
+
+      {userStatsList}
     </div>
   )
 }

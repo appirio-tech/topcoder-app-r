@@ -1,5 +1,5 @@
 import { PropTypes } from 'react'
-import SubtrackItem from '../SubtrackItem/SubtrackItem'
+import SubtrackItem from './SubtrackItem'
 
 require('./subtrack-list.scss')
 

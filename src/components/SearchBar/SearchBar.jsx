@@ -1,6 +1,6 @@
 import { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import searchText from '../../actions/searchText'
+// import searchForMembers from '../../actions/searchForMembers'
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class SearchBar extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault()
-    this.props.searchText(event.target[0].value)
+    // this.props.searchForMembers(event.target[0].value)
   }
 
   render() {
@@ -42,17 +42,16 @@ class SearchBar extends React.Component {
 }
 
 SearchBar.propTypes = {
-  searchText: PropTypes.func.isRequired,
   loading   : PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    loading: state.searchForTerm.loading,
-    foundValue: state.searchForTerm.results.name
+    loading: state.searchForMembers.loading,
+    foundValue: state.searchForMembers.results.name
   }
 }
 
-const actionsToBind = { searchText }
+// const actionsToBind = { searchForMembers }
 
-export default connect(mapStateToProps, actionsToBind)(SearchBar)
+export default connect(mapStateToProps)(SearchBar)

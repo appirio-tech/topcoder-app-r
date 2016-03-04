@@ -1,5 +1,7 @@
 // import Nav from '../Nav/Nav'
-      // <Nav />
+// <Nav />
+
+require('./app.scss')
 
 const App = (props) => {
   return (

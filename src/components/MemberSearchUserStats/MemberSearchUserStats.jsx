@@ -14,9 +14,10 @@ const MemberSearchUserStats = ({ member }) => {
     userStatsList = <TrackList tracks={member.tracks} />
   }
 
+  // FIXME: Remove || [] once api supports empty skills array
   return (
     <div>
-      <SkillList skills={member.skills} />
+      <SkillList skills={member.skills || []} />
 
       {userStatsList}
     </div>

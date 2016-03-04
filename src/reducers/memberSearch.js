@@ -2,7 +2,7 @@ import _ from 'lodash'
 import {
   MEMBER_SEARCH_REQUEST, MEMBER_SEARCH_SUCCESS,
   MEMBER_SEARCH_FAILURE
-} from '../actions/loadMemberSearch'
+} from '../config/constants'
 
 const initialState = { loading: true, memberSearchResults: [] }
 

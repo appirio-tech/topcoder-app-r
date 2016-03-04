@@ -1,50 +1,71 @@
+import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
-
-export const MEMBER_SEARCH_REQUEST = 'MEMBER_SEARCH_REQUEST'
-export const MEMBER_SEARCH_SUCCESS = 'MEMBER_SEARCH_SUCCESS'
-export const MEMBER_SEARCH_FAILURE = 'MEMBER_SEARCH_FAILURE'
+import { status, json } from '../config/helpers'
+import {
+  MEMBER_SEARCH_REQUEST, MEMBER_SEARCH_SUCCESS,
+  MEMBER_SEARCH_FAILURE, memberSearchUrl,
+  memberSearchTagUrl } from '../config/constants'
 
 export default function loadMemberSearch(searchTerm) {
-  const memberSearchUrl = 'http://search-tc-members-jmrdk5a3saqrjcyc23cs5bgkje.us-east-1.es.amazonaws.com/members/_search'
-
   const memberSearchOptions = {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      query: {
-        nested: {
-          path: 'skills',
-          query: {
-            match: {'skills.name': 'python'}
-          }
-        }
-      },
-      sort: [
-        {'maxRating.rating': 'desc'}
-      ]
-      // _source: {
-        // include: ['userId', 'handle', 'maxRating.rating']
-      // }
-      // query: {
-      //   match: { handle: searchTerm }
-      // }
-    })
+    headers: { 'Content-Type': 'application/json' }
   }
-
 
   return (dispatch => {
     dispatch({ type: MEMBER_SEARCH_REQUEST })
+    // TODO: Handle searchTerm === ''
 
-    const mockIdentifyTagRequest = new Promise()
+    isSearchTermATag(searchTerm)
+    .then(({ isTag, results }) => {
+      console.log(isTag, results)
+      getUsernameMatches(searchTerm)
+      // const memberSearchAPICalls = [getUsernameMatches(searchTerm)]
 
-    mockIdentifyTagRequest
-    .then(response => {
-      console.log('response?????????? ', response)
-      // make 1 or 2 searches for members (and top members)
+      // if (isTag) {
+      //   memberSearchAPICalls.unshift(getTopMembers(results.name))
+      // }
 
-      fetch(memberSearchUrl, memberSearchOptions)
+      // Promise.all(memberSearchAPICalls)
+      // .then(results => {
+
+      // })
+    })
+
+    function isSearchTermATag(searchTerm) {
+      const options = _.merge({}, memberSearchOptions, {
+        body: JSON.stringify({
+          query: { match: { name: searchTerm } }
+        })
+      })
+
+      return fetch(memberSearchTagUrl, options)
+      .then(status)
+      .then(json)
+      .then(data => {
+        const results = data.hits.hits
+
+        console.log(results)
+
+        return {
+          isTag: Boolean(results.length),
+          results: results[0]._source
+        }
+      })
+      .catch(err => {
+        console.log('3232323232')
+        dispatch({ type: MEMBER_SEARCH_FAILURE })
+      })
+    }
+
+    function getUsernameMatches(searchTerm) {
+      const options = _.merge({}, memberSearchOptions, {
+        body: JSON.stringify({
+          query: { match: { handle: searchTerm } }
+        })
+      })
+
+      return fetch(memberSearchUrl, options)
       .then(status)
       .then(json)
       .then(data => {
@@ -59,21 +80,10 @@ export default function loadMemberSearch(searchTerm) {
           memberSearchResults
         })
       })
-    })
-    .catch(err => {
-      console.log('ERROR: ', err)
-    })
+      .catch(err => {
+        console.log('hearhaewkjfhewakjla')
+        dispatch({ type: MEMBER_SEARCH_FAILURE })
+      })
+    }
   })
-}
-
-function status(response) {
-  if (response.status >= 200 && response.status < 400) {
-    return Promise.resolve(response)
-  } else {
-    return Promise.reject(new Error(response.statusText))
-  }
-}
-
-function json(response) {
-  return response.json()
 }

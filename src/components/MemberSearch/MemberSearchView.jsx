@@ -1,3 +1,4 @@
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
 import NoResults from '../NoResults/NoResults'
 // import TopMembersList from '../TopMemberList/TopMemberList'
 import MemberList from '../MemberList/MemberList'
@@ -15,7 +16,7 @@ const MemberSearchView = (props) => {
   } else if (!isLoading && !members.length) {
     memberSearchContent = <NoResults entry="should be on state" />
   } else {
-    memberSearchContent = <h1>Loading members now...</h1>
+    memberSearchContent = <LoadingIndicator />
   }
 
   return (

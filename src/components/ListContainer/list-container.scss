@@ -1,0 +1,21 @@
+.list-container {
+  border: 1px solid #a3a3ae;
+  border: 1px solid rgba(163, 163, 174, 0.3);
+  margin-bottom: 20px;
+}
+
+.list-header {
+  background-color: #DFDFE1;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 13px 15px;
+
+  .header-text {
+    color: #737380;
+  }
+
+  .list-count {
+    color: #737380;
+    opacity: 0.5;
+  }
+}

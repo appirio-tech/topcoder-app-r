@@ -3,6 +3,8 @@ import SkillList from '../SkillList/SkillList'
 import SubtrackList from '../SubtrackList/SubtrackList'
 import TrackList from '../TrackList/TrackList'
 
+require('./user-stats.scss')
+
 const MemberSearchUserStats = ({ member }) => {
   // TODO: Add functionality for no skills or tracks
 
@@ -16,10 +18,12 @@ const MemberSearchUserStats = ({ member }) => {
 
   // FIXME: Remove || [] once api supports empty skills array
   return (
-    <div>
-      <SkillList skills={member.skills || []} />
+    <div className="user-stats">
+      <div className="user-stats-wrap">
+        <SkillList skills={member.skills || []} />
 
-      {userStatsList}
+        {userStatsList}
+      </div>
     </div>
   )
 }

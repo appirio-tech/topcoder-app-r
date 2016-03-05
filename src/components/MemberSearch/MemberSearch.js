@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import MemberSearchView from './MemberSearchView'
 import loadMemberSearch from '../../actions/loadMemberSearch'
+// import setSearchTerm from '../../actions/setSearchTerm'
 
 class MemberSearch extends Component {
   constructor(props) {
@@ -9,14 +10,10 @@ class MemberSearch extends Component {
   }
 
   componentWillMount() {
-    debugger
     const searchTermFromQuery = this.props.location.query.q
 
-    this.getMemberSearchResults(searchTermFromQuery)
-  }
-
-  getMemberSearchResults(searchTerm) {
-    this.props.loadMemberSearch(searchTerm)
+    // this.props.setSearchTerm(searchTermFromQuery)
+    this.props.loadMemberSearch(searchTermFromQuery)
   }
 
   render() {
@@ -34,6 +31,7 @@ const mapStateToProps = ({ memberSearch }) => {
 
 const actionsToBind = {
   loadMemberSearch
+  // setSearchTerm
 }
 
 export default connect(mapStateToProps, actionsToBind)(MemberSearch)

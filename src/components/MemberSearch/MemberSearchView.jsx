@@ -1,6 +1,6 @@
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
 import NoResults from '../NoResults/NoResults'
-import TopMemberList from '../TopMemberList/TopMemberList'
+import ListContainer from '../ListContainer/ListContainer'
 import MemberList from '../MemberList/MemberList'
 
 require('./member-search-view.scss')
@@ -23,7 +23,7 @@ const MemberSearchView = (props) => {
   let topMemberContent
 
   if (topMembers.length) {
-    topMemberContent = <TopMemberList topMembers={topMembers} />
+    topMemberContent = <ListContainer topMembers={topMembers} />
   }
 
   return (

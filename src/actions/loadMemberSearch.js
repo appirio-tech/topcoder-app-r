@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
-import { status, json } from '../config/helpers'
+import { status, json } from '../helpers'
 import {
   START_MEMBER_SEARCH, USERNAME_SEARCH_SUCCESS,
   USERNAME_SEARCH_FAILURE, TOP_MEMBER_SEARCH_SUCCESS,
@@ -17,37 +17,33 @@ export default function loadMemberSearch(searchTerm) {
     dispatch({ type: START_MEMBER_SEARCH })
     // TODO: Handle searchTerm === ''
 
-    isSearchTermATag(searchTerm)
-    .then(({ isTag, results }) => {
-      console.log(isTag, results)
-
+    checkIfSearchTermIsATag(searchTerm)
+    .then((tag) => {
       const memberSearchAPICalls = [getUsernameMatches(searchTerm)]
 
-      if (isTag) {
-        memberSearchAPICalls.unshift(getTopMembers(results.name))
+      if (tag) {
+        memberSearchAPICalls.unshift(getTopMembers(tag.name))
       }
 
       return Promise.all(memberSearchAPICalls)
     })
 
-    function isSearchTermATag(searchTerm) {
+    function checkIfSearchTermIsATag(searchTerm) {
       const url = memberSearchTagUrl + '/?q=' + searchTerm
 
       return fetch(url, memberSearchOptions)
       .then(status)
       .then(json)
       .then(data => {
-        const results = data.hits.hits
+        const tag = data.hits.hits
 
-        return {
-          isTag: Boolean(results.length),
-          results: results[0]._source
-        }
+        return tag.length ? tag[0]._source : null
       })
       .catch(err => {
         // FIXME: How do we handle error determining if search term is a tag?
         console.error(err)
-        dispatch({ type: USERNAME_SEARCH_FAILURE })
+        // Error loading leaderboard and load username results only?
+        // dispatch({ type: USERNAME_SEARCH_FAILURE })
       })
     }
 

@@ -1,0 +1,42 @@
+.user-track-item {
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 131px;
+  display: inline-block;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 5px;
+
+  .track-name {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+.user-track-item.track-design {
+  background-color: #21B2F1;
+}
+
+.user-track-item.track-develop {
+  background-color: #05C14F;
+}
+
+.user-track-item.track-data_science {
+  background-color: #FC9A00;
+}
+
+.user-track-item.track-copilot {
+  background-color: #9D9FA0;
+  font-size: 14px;
+
+  .track-copilot-code {
+    color: #CECFD0;
+    margin-left: 4px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+
+.user-track-item.no-track {
+  background-color: #f0f0f0;
+}

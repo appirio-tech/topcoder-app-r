@@ -1,13 +1,25 @@
 import { PropTypes } from 'react'
+import _ from 'lodash'
+import moment from 'moment'
+import classNames from 'classnames'
+import { memberLevel } from '../../helpers'
+import ISOCountries from '../../helpers/ISOCountries'
+
 require('./user-info.scss')
 
-const UserInfo = ({ user, rank }) => {
+const UserInfo = ({ user, userPlace }) => {
   // FIXME: Show level dynamically, not just hardcoded to 5
   // FIXME: Show country name, not code
+  const memberSince = moment(user.createdAt).format('MMM YYYY')
+  const userCountry = _.find(ISOCountries, {alpha3: user.competitionCountryCode}).name
+
   let numberWins
 
   switch (user.wins) {
   case 0:
+  // Remove these when backend returns wins property for every member
+  case undefined:
+  case null:
     numberWins = ''
     break
   case 1:
@@ -17,17 +29,23 @@ const UserInfo = ({ user, rank }) => {
     numberWins = ` ${user.wins} wins`
   }
 
+  const userRating = user.maxRating ? user.maxRating.rating : 0
+  const userRankStyles = classNames(
+    'user-rank-wrap',
+    `level-${memberLevel(userRating)}`
+  )
+
   return (
     <div className="user-info">
       <div className="user-profile">
-        {rank !== undefined ? <div className="list-number">{rank + 1}</div> : ''}
+        {userPlace !== undefined ? <div className="list-number">{userPlace + 1}</div> : ''}
 
         <div className="user-avatar">
           <svg className="default-avatar"><use xlinkHref="#ico-user-default"></use></svg>
 
           <img className="user-image" src={user.photoURL} />
 
-          <div className="user-rank-wrap level-5">
+          <div className={userRankStyles}>
             <svg className="user-rank"><use xlinkHref="#level-designator"></use></svg>
           </div>
         </div>
@@ -37,13 +55,13 @@ const UserInfo = ({ user, rank }) => {
 
           <div className="user-details">
             <div className="user-details-1">
-              <span className="user-country">{user.competitionCountryCode}</span>
+              <span className="user-country">{userCountry}</span>
 
               <span className="total-wins">{numberWins}</span>
             </div>
 
             <div className="member-since">
-              Member since <span className="member-since-mm-yyyy">{user.createdAt}</span>
+              Member since <span className="member-since-mm-yyyy">{memberSince}</span>
             </div>
           </div>
         </div>
@@ -54,7 +72,7 @@ const UserInfo = ({ user, rank }) => {
 
 UserInfo.propTypes = {
   user: PropTypes.object.isRequired,
-  rank: PropTypes.number
+  userPlace: PropTypes.number
 }
 
 export default UserInfo

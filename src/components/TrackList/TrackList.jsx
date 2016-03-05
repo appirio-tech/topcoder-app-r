@@ -1,12 +1,16 @@
 import { PropTypes } from 'react'
 import TrackItem from './TrackItem'
 
-require('./track-list.scss')
-
 const TrackList = ({ tracks }) => {
+  if (tracks.length) {
+    tracks = tracks.map(t => <TrackItem key={t} track={t} />)
+  } else {
+    tracks = <TrackItem track={''} />
+  }
+
   return (
-    <div className="track-item-list">
-      {tracks.map(t => <TrackItem key={t} track={t} />)}
+    <div className="user-tracks-list">
+      {tracks}
     </div>
   )
 }

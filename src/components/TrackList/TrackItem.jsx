@@ -1,10 +1,13 @@
 import { PropTypes } from 'react'
 import classNames from 'classnames'
 
+require('./track-item.scss')
+
 const TrackItem = ({ track }) => {
   const subtrackStyles = classNames(
-    'track-item',
-    'track-' + track.toLowerCase()
+    'user-track-item',
+    { [`track-${track.toLowerCase()}`]: track.length },
+    { 'no-track': !track.length }
   )
 
   const trackMap = {
@@ -15,7 +18,11 @@ const TrackItem = ({ track }) => {
 
   track = trackMap[track]
 
-  return <span className={subtrackStyles}>{track}</span>
+  return (
+    <span className={subtrackStyles}>
+      <span className="track-name">{track || 'No track'}</span>
+    </span>
+  )
 }
 
 TrackItem.propTypes = {

@@ -1,0 +1,43 @@
+.user-stats {
+  background-color: #fcfcfc;
+  max-width: 440px;
+  flex: 1 1 50%;
+  padding: 25px 30px 25px 20px;
+  border-left: 1px solid #f0f0f0;
+  position: relative;
+  font-size :12px;
+  line-height: 14px;
+  color: #737380;
+  @media (max-width: 700px) {
+    padding: 15px;
+    max-width: initial;
+    height: 80px;
+    overflow-y: hidden;
+    font-size: 14px;
+    line-height: 16px;
+    border-left: none;
+  }
+
+  .user-stats-wrap {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 20px;
+    @media (max-width: 700px) {
+      overflow: hidden;
+      position: initial;
+      top: initial;
+      transform: initial;
+      overflow-x: scroll;
+      padding-bottom: 50px;
+    }
+
+    .user-tracks-list,
+    .top-subtracks-list {
+      margin-top: 10px;
+      @media (max-width: 700px) {
+        white-space: nowrap;
+      }
+    }
+  }
+}

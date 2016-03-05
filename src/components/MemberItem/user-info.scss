@@ -24,6 +24,17 @@
 .user-profile {
   display: flex;
 
+  .list-number {
+    font-family: 'Source-Sans-Pro', Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    line-height: 28px;
+    color: #B7B7B7;
+    background-color: #fff;
+    margin-right: 31px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
   .user-avatar {
     display: inline-block;
     width: 60px;

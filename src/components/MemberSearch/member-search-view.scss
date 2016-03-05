@@ -1,11 +1,5 @@
 @import 'topcoder/tc-includes';
 
-body {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
-  padding: 50px !important;
-  background-color: #eee;
-}
-
 .member-search-view {
   background-color: $medium-gray;
 }
@@ -26,10 +20,4 @@ body {
 #svg-icons {
   height: 0;
   width: 0;
-}
-
-.list-container {
-  border: 1px solid #a3a3ae;
-  border: 1px solid rgba(163, 163, 174, 0.3);
-  margin-bottom: 20px;
 }

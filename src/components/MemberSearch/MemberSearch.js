@@ -9,13 +9,13 @@ class MemberSearch extends Component {
   }
 
   componentWillMount() {
+    debugger
     const searchTermFromQuery = this.props.location.query.q
 
     this.getMemberSearchResults(searchTermFromQuery)
   }
 
   getMemberSearchResults(searchTerm) {
-    // dispatch action to get search results
     this.props.loadMemberSearch(searchTerm)
   }
 
@@ -27,7 +27,8 @@ class MemberSearch extends Component {
 const mapStateToProps = ({ memberSearch }) => {
   return {
     loading: memberSearch.loading,
-    memberSearchResults: memberSearch.memberSearchResults
+    usernameSearchResults: memberSearch.usernameSearchResults,
+    topMemberSearchResults: memberSearch.topMemberSearchResults
   }
 }
 

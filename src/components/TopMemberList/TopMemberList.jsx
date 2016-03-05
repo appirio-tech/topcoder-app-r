@@ -1,27 +1,24 @@
-import { connect } from 'react-redux'
+import { PropTypes } from 'react'
+import MemberItem from '../MemberItem/MemberItem'
 
-const TopMemberList = (props) => {
-  const topMembers = props.topMembers.map((topMember) => {
-    return <li>{topMember.name + ', ' + topMember.skills[0]}</li>
-  })
 
+// FIXME: Add tag to state and reference tag in header
+const TopMemberList = ({ topMembers }) => {
   return (
-    <div className="top-members">
-      <h1>Top Members with (TODO-skill or country name)</h1>
-      <ul>{ topMembers }</ul>
+    <div className="top-members-list">
+      <h1>Top Members in ADD TAG TO STATE</h1>
+
+      <ul>
+        {topMembers.map((member, index) => {
+          return <MemberItem key={member.userId} member={member} rank={index}/>
+        })}
+      </ul>
     </div>
   )
 }
 
-function mapStateToProps(state) {
-  state = [
-    {name: 'nick', skills: ['JavaScript']},
-    {name: 'sheldon', skills: ['Python']}
-  ]
-
-  return {
-    topMembers: state.topMembers
-  }
+TopMemberList.propTypes = {
+  topMembers: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
-export default connect(mapStateToProps)(TopMemberList)
+export default TopMemberList

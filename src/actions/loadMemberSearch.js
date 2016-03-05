@@ -2,8 +2,9 @@ import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
 import { status, json } from '../config/helpers'
 import {
-  MEMBER_SEARCH_REQUEST, MEMBER_SEARCH_SUCCESS,
-  MEMBER_SEARCH_FAILURE, memberSearchUrl,
+  START_MEMBER_SEARCH, USERNAME_SEARCH_SUCCESS,
+  USERNAME_SEARCH_FAILURE, TOP_MEMBER_SEARCH_SUCCESS,
+  TOP_MEMBER_SEARCH_FAILURE, memberSearchUrl,
   memberSearchTagUrl } from '../config/constants'
 
 export default function loadMemberSearch(searchTerm) {
@@ -13,39 +14,30 @@ export default function loadMemberSearch(searchTerm) {
   }
 
   return (dispatch => {
-    dispatch({ type: MEMBER_SEARCH_REQUEST })
+    dispatch({ type: START_MEMBER_SEARCH })
     // TODO: Handle searchTerm === ''
 
     isSearchTermATag(searchTerm)
     .then(({ isTag, results }) => {
       console.log(isTag, results)
-      getUsernameMatches(searchTerm)
-      // const memberSearchAPICalls = [getUsernameMatches(searchTerm)]
 
-      // if (isTag) {
-      //   memberSearchAPICalls.unshift(getTopMembers(results.name))
-      // }
+      const memberSearchAPICalls = [getUsernameMatches(searchTerm)]
 
-      // Promise.all(memberSearchAPICalls)
-      // .then(results => {
+      if (isTag) {
+        memberSearchAPICalls.unshift(getTopMembers(results.name))
+      }
 
-      // })
+      return Promise.all(memberSearchAPICalls)
     })
 
     function isSearchTermATag(searchTerm) {
-      const options = _.merge({}, memberSearchOptions, {
-        body: JSON.stringify({
-          query: { match: { name: searchTerm } }
-        })
-      })
+      const url = memberSearchTagUrl + '/?q=' + searchTerm
 
-      return fetch(memberSearchTagUrl, options)
+      return fetch(url, memberSearchOptions)
       .then(status)
       .then(json)
       .then(data => {
         const results = data.hits.hits
-
-        console.log(results)
 
         return {
           isTag: Boolean(results.length),
@@ -53,8 +45,9 @@ export default function loadMemberSearch(searchTerm) {
         }
       })
       .catch(err => {
-        console.log('3232323232')
-        dispatch({ type: MEMBER_SEARCH_FAILURE })
+        // FIXME: How do we handle error determining if search term is a tag?
+        console.error(err)
+        dispatch({ type: USERNAME_SEARCH_FAILURE })
       })
     }
 
@@ -69,20 +62,53 @@ export default function loadMemberSearch(searchTerm) {
       .then(status)
       .then(json)
       .then(data => {
-        console.log('rawData: ', data)
-        const memberSearchResults = data.hits.hits.map(m => m._source)
+        const usernameSearchResults = data.hits.hits.map(m => m._source)
 
-        console.log('member response: ')
-        console.log(memberSearchResults)
+        console.log('Member list: ')
+        console.log(usernameSearchResults)
 
         dispatch({
-          type: MEMBER_SEARCH_SUCCESS,
-          memberSearchResults
+          type: USERNAME_SEARCH_SUCCESS,
+          usernameSearchResults
         })
       })
       .catch(err => {
-        console.log('hearhaewkjfhewakjla')
-        dispatch({ type: MEMBER_SEARCH_FAILURE })
+        console.error(err)
+        dispatch({ type: USERNAME_SEARCH_FAILURE })
+      })
+    }
+
+    function getTopMembers(tag) {
+      // FIXME: handle other tags besides skill
+      const options = _.merge({}, memberSearchOptions, {
+        body: JSON.stringify({
+          query: {
+            nested: {
+              path: 'skills',
+              query: { match: {'skills.name': tag} }
+            }
+          },
+          sort: [
+            {'maxRating.rating': 'desc'}
+          ]
+        })
+      })
+
+      return fetch(memberSearchUrl, options)
+      .then(status)
+      .then(json)
+      .then(data => {
+        const topMemberSearchResults = data.hits.hits.map(m => m._source)
+        console.log('Topmembers: ', topMemberSearchResults)
+
+        dispatch({
+          type: TOP_MEMBER_SEARCH_SUCCESS,
+          topMemberSearchResults
+        })
+      })
+      .catch(err => {
+        console.error(err)
+        dispatch({ type: TOP_MEMBER_SEARCH_FAILURE })
       })
     }
   })

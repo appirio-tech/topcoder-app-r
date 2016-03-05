@@ -1,14 +1,26 @@
 import { PropTypes } from 'react'
 require('./user-info.scss')
 
-const UserInfo = ({ user }) => {
+const UserInfo = ({ user, rank }) => {
   // FIXME: Show level dynamically, not just hardcoded to 5
   // FIXME: Show country name, not code
+  let numberWins
+
+  switch (user.wins) {
+  case 0:
+    numberWins = ''
+    break
+  case 1:
+    numberWins = ' 1 win'
+    break
+  default:
+    numberWins = ` ${user.wins} wins`
+  }
 
   return (
     <div className="user-info">
       <div className="user-profile">
-        {/*<div className="list-number">1</div>*/}
+        {rank !== undefined ? <div className="list-number">{rank + 1}</div> : ''}
 
         <div className="user-avatar">
           <svg className="default-avatar"><use xlinkHref="#ico-user-default"></use></svg>
@@ -25,9 +37,9 @@ const UserInfo = ({ user }) => {
 
           <div className="user-details">
             <div className="user-details-1">
-              <span className="user-country">{user.competitionCountryCode} </span>
+              <span className="user-country">{user.competitionCountryCode}</span>
 
-              <span className="total-wins"><span className="total-wins-count">{user.wins}</span> win{user.wins === 1 ? '' : 's'} total</span>
+              <span className="total-wins">{numberWins}</span>
             </div>
 
             <div className="member-since">
@@ -41,7 +53,8 @@ const UserInfo = ({ user }) => {
 }
 
 UserInfo.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  rank: PropTypes.number
 }
 
 export default UserInfo

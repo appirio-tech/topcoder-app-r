@@ -5,7 +5,7 @@ import UserStats from './UserStats'
 require('./member-item.scss')
 
 // FIXME: Move SVGs somewhere...
-const MemberItem = ({ member, userPlace }) => {
+const MemberItem = ({ member, userPlace, showBio }) => {
   return (
     <div className="member-item">
       <svg id="svg-icons" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@ const MemberItem = ({ member, userPlace }) => {
           </symbol>
         </defs>
       </svg>
-      <UserInfo user={member} userPlace={userPlace}/>
+      <UserInfo user={member} userPlace={userPlace} showBio={showBio}/>
 
       <UserStats member={member} />
     </div>

@@ -1,19 +1,26 @@
-import TopMemberList from '../TopMemberList/TopMemberList'
+import { PropTypes } from 'react'
 
 require('./list-container.scss')
 
-// FIXME: Add tag to state and reference tag in header
-      // <h1>Top Members in ADD TAG TO STATE</h1>
-const ListContainer = ({ topMembers }) => {
+const ListContainer = ({ headerText, children, listCount }) => {
+  listCount = <span className="list-count">{listCount}</span>
+
   return (
     <div className="list-container">
       <div className="list-header">
-        <span className="header-text">Top Members with JavaScript</span>
+        <span className="header-text">{headerText}</span>
+        {listCount}
       </div>
 
-      <TopMemberList topMembers={topMembers}/>
+      {children}
     </div>
   )
+}
+
+ListContainer.propTypes = {
+  headerText: PropTypes.string.isRequired,
+  children  : PropTypes.object.isRequired,
+  listCount : PropTypes.number
 }
 
 export default ListContainer

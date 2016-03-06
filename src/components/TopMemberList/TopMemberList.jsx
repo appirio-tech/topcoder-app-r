@@ -1,8 +1,6 @@
 import { PropTypes } from 'react'
 import MemberItem from '../MemberItem/MemberItem'
 
-// FIXME: Add tag to state and reference tag in header
-      // <h1>Top Members in ADD TAG TO STATE</h1>
 const TopMemberList = ({ topMembers }) => {
   topMembers = topMembers
     .sort((a, b) => {

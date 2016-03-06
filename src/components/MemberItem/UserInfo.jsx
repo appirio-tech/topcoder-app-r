@@ -7,11 +7,14 @@ import ISOCountries from '../../helpers/ISOCountries'
 
 require('./user-info.scss')
 
-const UserInfo = ({ user, userPlace }) => {
+const UserInfo = ({ user, userPlace, showBio }) => {
   // FIXME: Show level dynamically, not just hardcoded to 5
   // FIXME: Show country name, not code
   const memberSince = moment(user.createdAt).format('MMM YYYY')
-  const userCountry = _.find(ISOCountries, {alpha3: user.competitionCountryCode}).name
+
+  const countryObject = _.find(ISOCountries, {alpha3: user.competitionCountryCode})
+  // can remove if backend fixes country object?
+  const userCountry = countryObject ? countryObject.name : ''
 
   let numberWins
 
@@ -29,6 +32,14 @@ const UserInfo = ({ user, userPlace }) => {
     numberWins = ` ${user.wins} wins`
   }
 
+  let userBio
+  if (showBio && user.description) {
+    userBio = (
+      <div className="user-bio">
+        {user.description}
+      </div>
+    )
+  }
   const userRating = user.maxRating ? user.maxRating.rating : 0
   const userRankStyles = classNames(
     'user-rank-wrap',
@@ -66,13 +77,16 @@ const UserInfo = ({ user, userPlace }) => {
           </div>
         </div>
       </div>
+
+      {userBio}
     </div>
   )
 }
 
 UserInfo.propTypes = {
-  user: PropTypes.object.isRequired,
-  userPlace: PropTypes.number
+  user     : PropTypes.object.isRequired,
+  userPlace: PropTypes.number,
+  showBio  : PropTypes.bool
 }
 
 export default UserInfo

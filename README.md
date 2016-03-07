@@ -74,9 +74,8 @@ To contribute to the repository, please create a feature branch off of the dev b
 
 SCSS Files
   - Use SCSS syntax, but do not overly nest
-  - Follow the [BEM](https://en.bem.info/method/naming-convention/) naming convention
   - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles)
-  - Reuse our [UI Components](https://github.com/appirio-tech/ng-ui-components)
+  - Reuse our [React Components](https://github.com/appirio-tech/react-components)
   - When adding media queries, nest them inside the element, rather than creating a new section
   ```
   .box {

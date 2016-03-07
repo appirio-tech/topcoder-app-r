@@ -14,7 +14,7 @@ render((
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <Route path="search" component={MemberSearch} />
+        <Route path="search/member" component={MemberSearch} />
       </Route>
     </Router>
   </Provider>

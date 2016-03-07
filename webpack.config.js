@@ -1,11 +1,11 @@
 require('./node_modules/coffee-script/register')
 const webpack = require('webpack')
 
-const CI = process.env.TRAVIS_BRANCH
+const branch = process.env.TRAVIS_BRANCH
 
-if (CI === 'master') process.env.ENV = 'PROD'
-if (CI === 'dev')    process.env.ENV = 'DEV'
-if (CI === 'qa')     process.env.ENV = 'QA'
+if (branch === 'master') process.env.ENV = 'PROD'
+if (branch === 'dev')    process.env.ENV = 'DEV'
+if (branch === 'qa')     process.env.ENV = 'QA'
 
 const config = require('appirio-tech-webpack-config')({
   dirname: __dirname,

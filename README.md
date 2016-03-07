@@ -11,7 +11,7 @@ Install dependencies by running the following in the root of the project:
  - **Note:** You must use npm 3. Type `npm -v` to ensure you have a 3.x version.
 
 ## NPM Commands
-- To run locally, run `npm run dev` and head to `localhost:8080/search`
+- To run locally, run `npm start` and head to `localhost:8080/search`
 - To create the build: `npm run build`
 - To run the test runner and view specs.html: `TODO: need to update`
 
@@ -74,9 +74,8 @@ To contribute to the repository, please create a feature branch off of the dev b
 
 SCSS Files
   - Use SCSS syntax, but do not overly nest
-  - Follow the [BEM](https://en.bem.info/method/naming-convention/) naming convention
   - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles)
-  - Reuse our [UI Components](https://github.com/appirio-tech/ng-ui-components)
+  - Reuse our [React Components](https://github.com/appirio-tech/react-components)
   - When adding media queries, nest them inside the element, rather than creating a new section
   ```
   .box {

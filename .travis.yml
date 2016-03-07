@@ -52,13 +52,13 @@ env:
     # DEV_AWS_SECRET
     - secure: aujwdxDV3RflY+rZ16OfkRIBC/e4nkQzum/eOzIQYljctOkc3WeCBkqznT9eRb+g970PeQZzEd2skO/ZoyyhER3Cw8XGLUhb7ahR0jRFaW4NBBaePXYU4sH7VaieU3ypwV/EERbDtIxaEHsUU8Nw4971HajbrK00arca9dgNUec1h1qj36Aq9DhkHUoNhT6fapmiMD+1gPpefZWyPY0f/354RZFnyZoHng0IOLorgifBvqZKIJRpVQimsC7DUH5CrddtO7Us/ImCyqqyiPrWXuNTQmXjQ2LbF0QTxhVxpo7+ifKk/zRg6/b0DhUiyc0Xyt2aR7xZQMv7rIbHwqCjqWgMVV3zuN/3nYSLj6vCzU2y7JN01AMl3pZJnZfEkr43mJTPTtD1e3UE7U3vDYlH5BKTMV82HuOEneSdWJKZhuvXJo6xQNVrnpBc5rVFmZD9eejOLwlmOkFdJEYWNx4bJkVBgFGdeoE/7IFAzzKkYi9H8oQjW7h7ZCo+WgjvhpAdrRdhciPbzdNGLspToV8ttwql6u42eC/q8Tzi3ZrrVCyt8PBClGShMR93ezQoHXEsePHEgV6eKSRSrXDvR0Vdh7ZwoPiFHf6GOx7utlrCfkRKW977X0QkB3lHKlQfU9bcMatWeT8WeLRf7oWYEQx+x5/9a4lswvCr3lVUCxBsbZU=
     # # QA_AWS_KEY
-    # - secure: ADD QA KEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # - secure: ADD ENCRYPTED QA KEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     # # QA_AWS_SECRET
-    # - secure: ADD QA SECRET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # - secure: ADD ENCRYPTED QA SECRET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     # # MASTER_AWS_KEY
-    # - secure: ADD PROD KEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # - secure: ADD ENCRYPTED PROD KEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     # # MASTER_AWS_SECRET
-    # - secure: ADD PROD SECRET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # - secure: ADD ENCRYPTED PROD SECRET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 addons:
   apt:
     sources:

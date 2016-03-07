@@ -11,5 +11,5 @@ export const TOP_MEMBER_SEARCH_SUCCESS = 'TOP_MEMBER_SEARCH_SUCCESS'
 export const TOP_MEMBER_SEARCH_FAILURE = 'TOP_MEMBER_SEARCH_FAILURE'
 
 // Urls
-export const memberSearchUrl = 'http://search-tc-members-jmrdk5a3saqrjcyc23cs5bgkje.us-east-1.es.amazonaws.com/members/_search'
+export const memberSearchUrl = 'https://api.topcoder-dev.com/v3/members/_search'
 export const memberSearchTagUrl = 'http://search-topcoder-squ62azmqlwkvnmztjmk4cq5fq.us-east-1.es.amazonaws.com/tags/_search'

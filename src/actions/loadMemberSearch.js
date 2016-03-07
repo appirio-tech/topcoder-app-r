@@ -50,7 +50,10 @@ export default function loadMemberSearch(searchTerm) {
     function getUsernameMatches(searchTerm) {
       const options = _.merge({}, memberSearchOptions, {
         body: JSON.stringify({
-          query: { match: { handle: searchTerm } }
+          param: {
+            query: { match: { handle: searchTerm } }
+          },
+          method: 'get'
         })
       })
 
@@ -58,7 +61,7 @@ export default function loadMemberSearch(searchTerm) {
       .then(status)
       .then(json)
       .then(data => {
-        const usernameSearchResults = data.hits.hits.map(m => m._source)
+        const usernameSearchResults = data.result.content
 
         console.log('Member list: ')
         console.log(usernameSearchResults)
@@ -78,15 +81,20 @@ export default function loadMemberSearch(searchTerm) {
       // FIXME: handle other tags besides skill
       const options = _.merge({}, memberSearchOptions, {
         body: JSON.stringify({
-          query: {
-            nested: {
-              path: 'skills',
-              query: { match: {'skills.name': tag} }
-            }
+          param: {
+            from: 0,
+            size: 10,
+            query: {
+              nested: {
+                path: 'skills',
+                query: { match: {'skills.name': tag} }
+              }
+            },
+            sort: [
+              {wins: 'desc'}
+            ]
           },
-          sort: [
-            {'maxRating.rating': 'desc'}
-          ]
+          method: 'get'
         })
       })
 
@@ -94,7 +102,7 @@ export default function loadMemberSearch(searchTerm) {
       .then(status)
       .then(json)
       .then(data => {
-        const topMemberSearchResults = data.hits.hits.map(m => m._source)
+        const topMemberSearchResults = data.result.content
         console.log('Topmembers: ', topMemberSearchResults)
 
         dispatch({

@@ -4,7 +4,7 @@ node_js:
 install:
 - npm install
 script:
-- npm run lint
+- npm run lint && npm run build
 sudo: false
 addons:
   apt:
@@ -12,6 +12,62 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
+deploy:
+- provider: s3
+  cache_control: private, no-store, no-cache, must-revalidate, max-age=0
+  detect_encoding: true
+  access_key_id: $AWS_KEY
+  secret_access_key: $AWS_SECRET
+  bucket: members-react.topcoder-dev.com
+  skip_cleanup: true
+  local_dir: dist
+  on:
+    branch: dev
+# - provider: s3
+#   cache_control: private, no-store, no-cache, must-revalidate, max-age=0
+#   detect_encoding: true
+#   access_key_id: $QA_AWS_KEY
+#   secret_access_key: $QA_AWS_SECRET
+#   bucket: members-react.topcoder-qa.com
+#   skip_cleanup: true
+#   local_dir: dist
+#   on:
+#     branch: qa
+# - provider: s3
+#   cache_control: private, no-store, no-cache, must-revalidate, max-age=0
+#   detect_encoding: true
+#   access_key_id: $MASTER_AWS_KEY
+#   secret_access_key: $MASTER_AWS_SECRET
+#   bucket: members-react.topcoder.com
+#   skip_cleanup: true
+#   local_dir: dist
+#   on:
+#     branch: master
+env:
+  matrix:
+    - CXX=g++-4.8
+  global:
+    # DEV_AWS_KEY
+    - secure: a5X4QlY2JD/sJnEBkT5WwwfWjYKq3ldRf/+Dh5x2oHB0swGzYyFxzVlezddPF8xDML+CcVoLHkd8WNM2F7qcxHZTDC5spH/ym2gX6YlRwFRTTFBRCJehgYs8Vit/s14f8gkuVV8fe2ubMiV+fpAw80tb3E+t+nCckmXwe8gDqDbHto5VIozTiqDOV/WvkPzaRQofTeNzSqjrAH/iRq8hJUx16shCO2ccdiLu7rnOuys+UwjWFRyjdLP01UZXd5u6a5XK3vigLGPBAqsEwSMgScATJjNIHwYofE5Q3ztD85jz/JoQatQf7LCnQUqkLT+xldMkOZuTlTHvzmVUOl2WYpVxWV9hXwBemvyuRPPtzIrZkKXi6OUgvpYwGgWn8eS1qulB1DYPrUWBtIYGQoxEchfNlmcrCIJ7BrbL9xiNUM8J+ZCWtNS01eSapMHdhAIUMLEsAjxBY+ArLuYAD+URB0d+JZrr9cORGnrGDB+1wI12Z/Qu5LEDp/TMOisK2PXEsaqzlaazr9lj2FXTYJQyyFMMWzq1v1o5lZ5mEJ5ea36eGApV1iQNmPrg7omhDHwKtBpMDFQWZ0Y1SrkIk3QTX6JfzsrehwAhAK2fZ25EaC6zcppAo0ia5/VZoWzxHFQyhkC47hRrM7C6nCriQPDc9kKsmTSX5rp5e/DNpiZ67qM=
+    # DEV_AWS_SECRET
+    - secure: p+od0xD/9vpMbR2AI6gZWknNAtvvIfq6jXIF98DEsDlqrrMFv4SwtuXLlCmX5PBnB/cWOkwgRhymI7/3+fLrDC+wqlhDEWyzSpVOvAcVAb5LEP7IDen0W8kTj2q9I2VRX+keL7lxQCknAf/21sRZeJfJhLGR+O3NcytEdsjlpFCopA6luZYv1QSd+nRJiTsI7I69T0hr7jZk+YioyjEEp/4qzI2qyJH7E5Ry+DD3gXnC3zva48Huq6rvOtLpgFmio1b1rNAcA55Q9Y3vb1jJyZhKpRvtel9OM9ekTxANEGJVaMzxyZXT7EFTxwxS+ub5c2HRzxedMnD3tY29ku2JJx7Ofm+Yxt9DZXSK7EV99xxE71kIhI9lZFiWZviym08MHGc4pee6+Cl6ZkiV44v4XnwbgUq8GCOkmDMQBQtGhXq7dC6jB/r7P7CJs+DIGDF7qNt/xizVOC1THS8GUCN68aWMVperP+IlUXo5d2XekhO6vjHk6o44K8A1s7yblBWXj54B6NfJnBzUK2X0g6Y2xdW6tmoKtad1r1I3062skc+UiU+6m4fGS8pLFElJNj+8N7QANoEw9oJDZfuQ47uVQzPjAA1/qdcy3ksMek0siNFbpZnMqzOJTPf2Xe7YgKuCPg0QczESXIjOeEIU0om7SWmGEIuMFqt6obQW0M3VHn0=
+    # # QA_AWS_KEY
+    # - secure: ADD QA KEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # # QA_AWS_SECRET
+    # - secure: ADD QA SECRET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # # MASTER_AWS_KEY
+    # - secure: ADD PROD KEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # # MASTER_AWS_SECRET
+    # - secure: ADD PROD SECRET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+
+
+# Notifications are not working
 notifications:
   slack:
     secure: PMGlpdBoRzMlIjCsPWdXJ1wf550b+mpX0x44ggGWNL7ErpNebfyqIbXf4VJXYQDmhVJt31ygDaxTtj8XwZJlbvQjE6WGHU26KvL/efGJJL5EmgFD8LDBFpsbn49PyoZuVOTbSzqP8d8WCCPo4oBvX2r2Q2Ixh/tUx7i4Bcv0XwNpWAR75v1Yq/NftEI48k2GcI3oHqmuEgLHdP93k1rCUM4sBsgkr4PCltZfoE2AWlF6wY59w/oFiKj4FwycY8QjJZa/zbSQq1B/9QD7n4YBY4QjVv3LmjshEiQv1HGo2rNLV+/BB5ZoQ6JEH9h+seduHNTF+mkToKbJ2YjDERLlqLFYWVQKXTqFkSdYuknguJ3uOfXFaGtPDSqTRljE6WW6UDIJi9lDpxFHjH2q848/2O03RKtYeFKJWNbVb7Q2PWTBFxx6OurYra+tbUAorQiYmAQxd0vJY+qzGIDJZIQ8yDE4C10heOhfRyU8wJSKF3xJUKKWVGfBuHivFBZOETFSg0uVBcJnsXRcErvEQz0LuKaZfP81bIokcKUGxum/xyp9mYhYqWDvIj31RUhDMiRxXTPe9PhW0mlOtRG7tm2+8G08exHPSfONSV2IPUtlQt4j2/+I22ncOwtsm6yZzXXbDjoMR2sCHIyJj3lVECOqAnCfNJ6Q0CNJ93LqxKSHdFU=

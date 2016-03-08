@@ -15,6 +15,9 @@ const config = require('appirio-tech-webpack-config')({
   template: './src/index.html'
 })
 
+// Set asset prefix to CDN
+config.output.publicPath = 'member-r.topcoder-dev.com'
+
 // import X from Y added to files when using these globals
 config.plugins.push(new webpack.ProvidePlugin({
   React: 'react'

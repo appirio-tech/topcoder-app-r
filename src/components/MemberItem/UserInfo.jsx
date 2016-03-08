@@ -14,7 +14,8 @@ const UserInfo = ({ user, userPlace, showBio }) => {
 
   const countryObject = _.find(ISOCountries, {alpha3: user.competitionCountryCode})
   // can remove if backend fixes country object?
-  const userCountry = countryObject ? countryObject.name : ''
+  // const userCountry = countryObject ? countryObject.name : ''
+  const userCountry = user.competitionCountryName
 
   let numberWins
 

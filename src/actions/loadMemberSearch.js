@@ -51,6 +51,8 @@ export default function loadMemberSearch(searchTerm) {
       const options = _.merge({}, memberSearchOptions, {
         body: JSON.stringify({
           param: {
+            from: 0,
+            size: 10,
             query: { match: { handle: searchTerm } }
           },
           method: 'get'
@@ -91,7 +93,7 @@ export default function loadMemberSearch(searchTerm) {
               }
             },
             sort: [
-              {wins: 'desc'}
+              {'maxRating.rating': 'desc', wins: 'desc'}
             ]
           },
           method: 'get'

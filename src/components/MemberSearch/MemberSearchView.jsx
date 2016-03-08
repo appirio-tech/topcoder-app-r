@@ -17,7 +17,9 @@ const MemberSearchView = (props) => {
 
   if (!isLoading && members.length) {
     // FIXME: show complete count, not just the first 10
-    memberMatch = <MemberItem member={members[0]} showBio />
+    const exactMemberMatch = members.splice(0, 1)[0]
+
+    memberMatch = <MemberItem member={exactMemberMatch} showBio />
     memberSearchContent = (
       <ListContainer
         headerText={'Usernames matching (GET TAG FROM STATE)'}
@@ -27,6 +29,7 @@ const MemberSearchView = (props) => {
       </ListContainer>
     )
   } else if (!isLoading && !members.length) {
+    // tranclude no results and use children on props
     memberSearchContent = <NoResults entry="ADD SEARCH TERM TO REDUX STATE" />
   } else {
     // FIXME: move to page wide, not just memberSearchContent

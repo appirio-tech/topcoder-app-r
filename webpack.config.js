@@ -16,7 +16,8 @@ const config = require('appirio-tech-webpack-config')({
 })
 
 // Set asset prefix to CDN
-config.output.publicPath = '//d2w5g0u9h79yyx.cloudfront.net'
+if (branch)
+  config.output.publicPath = '//d2w5g0u9h79yyx.cloudfront.net'
 
 // import X from Y added to files when using these globals
 config.plugins.push(new webpack.ProvidePlugin({

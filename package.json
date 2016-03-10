@@ -4,7 +4,7 @@
   "scripts": {
     "build": "webpack --bail --progress --build --tc",
     "start": "webpack-dev-server --history-api-fallback --dev --hot --inline --progress --tc --port 3000",
-    "lint": "eslint ."
+    "lint": "eslint --format table --ext .js,.jsx ."
   },
   "devDependencies": {
     "appirio-tech-webpack-config": "^0.2.21",

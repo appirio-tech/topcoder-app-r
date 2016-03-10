@@ -1,18 +1,21 @@
 import { PropTypes } from 'react'
-import _ from 'lodash'
+// import _ from 'lodash'
 import moment from 'moment'
-import classNames from 'classnames'
 import { memberLevel } from '../../helpers'
-import ISOCountries from '../../helpers/ISOCountries'
+// import ISOCountries from '../../helpers/ISOCountries'
 
+
+import DefaultUserAvatarIcon from '../../icons/DefaultUserAvatarIcon'
+import LevelDesignatorIcon from '../../icons/LevelDesignatorIcon'
+import classNames from 'classnames'
 require('./user-info.scss')
 
-const UserInfo = ({ user, userPlace, showBio }) => {
+const UserInfo = ({ user, userPlace, exactMatch }) => {
   // FIXME: Show level dynamically, not just hardcoded to 5
   // FIXME: Show country name, not code
   const memberSince = moment(user.createdAt).format('MMM YYYY')
 
-  const countryObject = _.find(ISOCountries, {alpha3: user.competitionCountryCode})
+  // const countryObject = _.find(ISOCountries, {alpha3: user.competitionCountryCode})
   // can remove if backend fixes country object?
   // const userCountry = countryObject ? countryObject.name : ''
   const userCountry = user.competitionCountryName
@@ -34,7 +37,7 @@ const UserInfo = ({ user, userPlace, showBio }) => {
   }
 
   let userBio
-  if (showBio && user.description) {
+  if (exactMatch && user.description) {
     userBio = (
       <div className="user-bio">
         {user.description}
@@ -47,18 +50,19 @@ const UserInfo = ({ user, userPlace, showBio }) => {
     `level-${memberLevel(userRating)}`
   )
 
+          // <svg className="default-avatar"><use xlinkHref="#ico-user-default"></use></svg>
   return (
     <div className="user-info">
       <div className="user-profile">
         {userPlace !== undefined ? <div className="list-number">{userPlace + 1}</div> : ''}
 
         <div className="user-avatar">
-          <svg className="default-avatar"><use xlinkHref="#ico-user-default"></use></svg>
+          <DefaultUserAvatarIcon width={'60px'} height={'60px'}/>
 
           <img className="user-image" src={user.photoURL} />
 
           <div className={userRankStyles}>
-            <svg className="user-rank"><use xlinkHref="#level-designator"></use></svg>
+            <LevelDesignatorIcon className="user-rank"/>
           </div>
         </div>
 

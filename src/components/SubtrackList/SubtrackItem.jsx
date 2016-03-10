@@ -1,4 +1,6 @@
 import { PropTypes } from 'react'
+
+import TrophyIcon from '../../icons/TrophyIcon'
 import classNames from 'classnames'
 
 const SubtrackItem = ({ subtrack }) => {
@@ -10,9 +12,7 @@ const SubtrackItem = ({ subtrack }) => {
   return (
     <span className={subtrackStyles}>
       <span className="subtrack-wins">
-        <svg className="subtrack-win-icon">
-          <use xlinkHref="#trophy-cup"></use>
-        </svg>
+        <TrophyIcon fill={'level'} />
 
         <span>{subtrack.rating || subtrack.wins}</span>
       </span>

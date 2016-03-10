@@ -19,7 +19,7 @@ const MemberSearchView = (props) => {
     // FIXME: show complete count, not just the first 10
     const exactMemberMatch = members.splice(0, 1)[0]
 
-    memberMatch = <MemberItem member={exactMemberMatch} showBio />
+    memberMatch = <MemberItem member={exactMemberMatch} exactMatch />
     memberSearchContent = (
       <ListContainer
         headerText={'Usernames matching (GET TAG FROM STATE)'}

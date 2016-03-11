@@ -51,9 +51,28 @@ export default function loadMemberSearch(searchTerm) {
       const options = _.merge({}, memberSearchOptions, {
         body: JSON.stringify({
           param: {
-            from: 0,
-            size: 10,
-            query: { match: { handle: searchTerm } }
+            from: 0, size: 11,
+            query: {
+              filtered: {
+                query: {
+                  bool: {
+                    should: [
+                      { match: { 'handle.phrase': searchTerm } },
+                      { match: { handle: searchTerm } }
+                    ]
+                  }
+                },
+                filter: {
+                  bool: {
+                    should: [
+                      { exists: { field: 'description' } },
+                      { exists: { field: 'skills' } },
+                      { exists: { field: 'photoURL ' } }
+                    ]
+                  }
+                }
+              }
+            }
           },
           method: 'get'
         })

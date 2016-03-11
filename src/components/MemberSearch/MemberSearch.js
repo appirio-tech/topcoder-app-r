@@ -2,7 +2,6 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import MemberSearchView from './MemberSearchView'
 import loadMemberSearch from '../../actions/loadMemberSearch'
-// import setSearchTerm from '../../actions/setSearchTerm'
 
 class MemberSearch extends Component {
   constructor(props) {
@@ -12,7 +11,6 @@ class MemberSearch extends Component {
   componentWillMount() {
     const searchTermFromQuery = this.props.location.query.q
 
-    // this.props.setSearchTerm(searchTermFromQuery)
     this.props.loadMemberSearch(searchTermFromQuery)
   }
 
@@ -31,7 +29,6 @@ const mapStateToProps = ({ memberSearch }) => {
 
 const actionsToBind = {
   loadMemberSearch
-  // setSearchTerm
 }
 
 export default connect(mapStateToProps, actionsToBind)(MemberSearch)

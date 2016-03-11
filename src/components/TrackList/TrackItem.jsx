@@ -1,7 +1,5 @@
 import { PropTypes } from 'react'
 import classNames from 'classnames'
-import TrophyIcon from '../../icons/TrophyIcon'
-
 
 require('./track-item.scss')
 
@@ -23,7 +21,6 @@ const TrackItem = ({ track }) => {
   return (
     <span className={subtrackStyles}>
       <span className="track-name">{track || 'No track'}</span>
-      <TrophyIcon fill={'tomato'} />
     </span>
   )
 }

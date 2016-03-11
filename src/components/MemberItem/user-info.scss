@@ -6,7 +6,6 @@
   flex: 1 1 50%;
   padding: 20px;
   position: relative;
-
   @media (max-width: 700px) {
     display: block;
     border-bottom: 1px solid #F0F0F0;
@@ -41,16 +40,12 @@
     height: 60px;
     margin-right: 20px;
     position: relative;
-
     @media (max-width: 700px) {
       margin-right: 10px;
     }
 
     .default-avatar {
-      height: 60px;
-      width: 60px;
-      display: inline-block;
-      fill: green;
+      border-radius: 50%;
     }
 
     .user-image {
@@ -72,34 +67,13 @@
       right: 0;
       z-index: 10;
     }
-
-    .user-rank-wrap.level-1 .user-rank {
-      fill: #9D9FA0;
-    }
-
-    .user-rank-wrap.level-2 .user-rank {
-      fill: #69C329;
-    }
-
-    .user-rank-wrap.level-3 .user-rank {
-      fill: #616BD5;
-    }
-
-    .user-rank-wrap.level-4 .user-rank {
-      fill: #FCD617;
-    }
-
-    .user-rank-wrap.level-5 .user-rank {
-      fill: #EF3A3A;
-    }
   }
 
   .user-avatar.user-avatar-small {
     height: 50px;
     width: 50px;
 
-    .user-image,
-    .default-avatar {
+    .user-image {
       width: 50px;
       height: 50px;
     }
@@ -151,7 +125,6 @@
       font-size: 22px;
       line-height: 25px;
       margin-bottom: 5px;
-
       @media (max-width: 700px) {
         font-size: 24px;
         line-height: 28px;
@@ -165,7 +138,6 @@
         font-size: 12px;
         line-height: 16px;
         margin-bottom: 3px;
-
         @media (max-width: 700px) {
           font-size: 14px;
           line-height: 16px;
@@ -180,7 +152,6 @@
         color: #A3A3AE;
         font-size: 12px;
         line-height: 16px;
-
         @media (max-width: 700px) {
           font-size: 14px;
           line-height: 16px;

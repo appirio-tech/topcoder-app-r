@@ -1,13 +1,11 @@
 import { PropTypes } from 'react'
 // import _ from 'lodash'
 import moment from 'moment'
-import { memberLevel } from '../../helpers'
+import { memberLevelByRating } from '../../helpers'
 // import ISOCountries from '../../helpers/ISOCountries'
-
 
 import DefaultUserAvatarIcon from '../../icons/DefaultUserAvatarIcon'
 import LevelDesignatorIcon from '../../icons/LevelDesignatorIcon'
-import classNames from 'classnames'
 require('./user-info.scss')
 
 const UserInfo = ({ user, userPlace, exactMatch }) => {
@@ -45,24 +43,25 @@ const UserInfo = ({ user, userPlace, exactMatch }) => {
     )
   }
   const userRating = user.maxRating ? user.maxRating.rating : 0
-  const userRankStyles = classNames(
-    'user-rank-wrap',
-    `level-${memberLevel(userRating)}`
-  )
+  const userLevel = memberLevelByRating(userRating)
 
-          // <svg className="default-avatar"><use xlinkHref="#ico-user-default"></use></svg>
+  let userImage
+  if (user.photoURL) {
+    userImage = <img className="user-image" src={user.photoURL} />
+  } else {
+    userImage = <DefaultUserAvatarIcon width={'60px'} height={'60px'}/>
+  }
+
   return (
     <div className="user-info">
       <div className="user-profile">
         {userPlace !== undefined ? <div className="list-number">{userPlace + 1}</div> : ''}
 
         <div className="user-avatar">
-          <DefaultUserAvatarIcon width={'60px'} height={'60px'}/>
+          {userImage}
 
-          <img className="user-image" src={user.photoURL} />
-
-          <div className={userRankStyles}>
-            <LevelDesignatorIcon className="user-rank"/>
+          <div className="user-rank-wrap">
+            <LevelDesignatorIcon level={userLevel}/>
           </div>
         </div>
 
@@ -77,7 +76,7 @@ const UserInfo = ({ user, userPlace, exactMatch }) => {
             </div>
 
             <div className="member-since">
-              Member since <span className="member-since-mm-yyyy">{memberSince}</span>
+              Member since {memberSince}
             </div>
           </div>
         </div>

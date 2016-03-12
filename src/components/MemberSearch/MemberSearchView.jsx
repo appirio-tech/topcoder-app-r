@@ -1,16 +1,19 @@
-import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
-import NoResults from '../NoResults/NoResults'
+import _ from 'lodash'
 import ListContainer from '../ListContainer/ListContainer'
-import MemberItem from '../MemberItem/MemberItem'
 import TopMemberList from '../TopMemberList/TopMemberList'
 import MemberList from '../MemberList/MemberList'
+import MemberItem from '../MemberItem/MemberItem'
+import NoResults from '../NoResults/NoResults'
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
 
 require('./member-search-view.scss')
 
 const MemberSearchView = (props) => {
-  const members    = props.usernameSearchResults
-  const topMembers = props.topMemberSearchResults
-  const isLoading  = props.loading
+  const members       = props.usernameSearchResults
+  const topMembers    = props.topMemberSearchResults
+  const isLoading     = props.loading
+  const searchTerm    = props.currentSearchTerm
+  const searchTermTag = props.searchTermTag
 
   let memberSearchContent
   let memberMatch
@@ -22,32 +25,37 @@ const MemberSearchView = (props) => {
     memberMatch = <MemberItem member={exactMemberMatch} exactMatch />
     memberSearchContent = (
       <ListContainer
-        headerText={'Usernames matching (GET TAG FROM STATE)'}
+        headerText={`Usernames matching ${searchTerm}`}
         listCount={members.length}
       >
         <MemberList members={members} />
       </ListContainer>
     )
   } else if (!isLoading && !members.length) {
-    // tranclude no results and use children on props
-    memberSearchContent = <NoResults entry="ADD SEARCH TERM TO REDUX STATE" />
+    memberSearchContent = ''
   } else {
     // FIXME: move to page wide, not just memberSearchContent
     memberSearchContent = <LoadingIndicator />
   }
 
-  let topMemberContent
+  let topMemberContent = ''
 
   if (topMembers.length) {
     topMemberContent = (
-      <ListContainer headerText={'Top Members with (GET TAG FROM STATE)'}>
+      <ListContainer headerText={`Top Members in ${_.capitalize(searchTerm)}`}>
         <TopMemberList topMembers={topMembers} />
       </ListContainer>
     )
   }
 
+  let noResults = null
+  if (!isLoading && !memberMatch && !members.length && !topMembers.length) {
+    noResults = <NoResults entry={searchTerm} />
+  }
+
   return (
     <div className="member-search-view">
+      {noResults}
       {memberMatch}
       {topMemberContent}
       {memberSearchContent}

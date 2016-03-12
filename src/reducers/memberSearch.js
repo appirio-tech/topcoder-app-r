@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import {
-  START_MEMBER_SEARCH, USERNAME_SEARCH_SUCCESS,
-  USERNAME_SEARCH_FAILURE, TOP_MEMBER_SEARCH_SUCCESS,
-  TOP_MEMBER_SEARCH_FAILURE
+  START_MEMBER_SEARCH, CLEAR_MEMBER_SEARCH,
+  USERNAME_SEARCH_SUCCESS, USERNAME_SEARCH_FAILURE,
+  TOP_MEMBER_SEARCH_SUCCESS, TOP_MEMBER_SEARCH_FAILURE
 } from '../config/constants'
 
 const initialState = {
@@ -16,6 +16,11 @@ export default function(state = initialState, action) {
   case START_MEMBER_SEARCH:
     return _.merge({}, state, {
       loading: true
+    })
+  case CLEAR_MEMBER_SEARCH:
+    return _.merge({}, state, {
+      usernameSearchResults: [],
+      topMemberSearchResults: []
     })
 
   case USERNAME_SEARCH_SUCCESS:

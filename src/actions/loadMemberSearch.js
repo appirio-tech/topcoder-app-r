@@ -2,10 +2,10 @@ import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
 import { status, json } from '../helpers'
 import {
-  START_MEMBER_SEARCH, USERNAME_SEARCH_SUCCESS,
-  USERNAME_SEARCH_FAILURE, TOP_MEMBER_SEARCH_SUCCESS,
-  TOP_MEMBER_SEARCH_FAILURE, memberSearchUrl,
-  memberSearchTagUrl } from '../config/constants'
+  START_MEMBER_SEARCH, CLEAR_MEMBER_SEARCH,
+  USERNAME_SEARCH_SUCCESS, USERNAME_SEARCH_FAILURE,
+  TOP_MEMBER_SEARCH_SUCCESS, TOP_MEMBER_SEARCH_FAILURE,
+  memberSearchUrl, memberSearchTagUrl } from '../config/constants'
 
 export default function loadMemberSearch(searchTerm) {
   const memberSearchOptions = {
@@ -14,6 +14,7 @@ export default function loadMemberSearch(searchTerm) {
   }
 
   return (dispatch => {
+    dispatch({ type: CLEAR_MEMBER_SEARCH })
     dispatch({ type: START_MEMBER_SEARCH })
     // TODO: Handle searchTerm === ''
 
@@ -26,6 +27,10 @@ export default function loadMemberSearch(searchTerm) {
       }
 
       return Promise.all(memberSearchAPICalls)
+      .then(data => {
+        console.log('Topmembers after promise: ', data[0])
+        console.log('username matches after promise: ', data[1])
+      })
     })
 
     function checkIfSearchTermIsATag(searchTerm) {
@@ -91,10 +96,17 @@ export default function loadMemberSearch(searchTerm) {
           type: USERNAME_SEARCH_SUCCESS,
           usernameSearchResults
         })
+
+        return usernameSearchResults
       })
       .catch(err => {
         console.error(err)
-        dispatch({ type: USERNAME_SEARCH_FAILURE })
+        dispatch({
+          type: USERNAME_SEARCH_FAILURE,
+          usernameSearchResults: []
+        })
+
+        return []
       })
     }
 
@@ -103,8 +115,7 @@ export default function loadMemberSearch(searchTerm) {
       const options = _.merge({}, memberSearchOptions, {
         body: JSON.stringify({
           param: {
-            from: 0,
-            size: 10,
+            from: 0, size: 10,
             query: {
               nested: {
                 path: 'skills',
@@ -112,7 +123,17 @@ export default function loadMemberSearch(searchTerm) {
               }
             },
             sort: [
-              {'maxRating.rating': 'desc', wins: 'desc'}
+              {
+                'skills.score': {
+                  order: 'desc',
+                  nested_filter: { //eslint-disable-line camelcase
+                    term: {
+                      'skills.name': tag
+                    }
+                  }
+                }
+              },
+              { wins: 'desc' }
             ]
           },
           method: 'get'
@@ -123,6 +144,10 @@ export default function loadMemberSearch(searchTerm) {
       .then(status)
       .then(json)
       .then(data => {
+        // if (!data.result) {
+        //   throw new Error()
+        // }
+
         const topMemberSearchResults = data.result.content
         console.log('Topmembers: ', topMemberSearchResults)
 
@@ -130,10 +155,17 @@ export default function loadMemberSearch(searchTerm) {
           type: TOP_MEMBER_SEARCH_SUCCESS,
           topMemberSearchResults
         })
+
+        return topMemberSearchResults
       })
       .catch(err => {
         console.error(err)
-        dispatch({ type: TOP_MEMBER_SEARCH_FAILURE })
+        dispatch({
+          type: TOP_MEMBER_SEARCH_FAILURE,
+          topMemberSearchResults: []
+        })
+
+        return []
       })
     }
   })

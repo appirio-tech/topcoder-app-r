@@ -1,5 +1,4 @@
 const RobotIcon = ({ width, height }) => {
-  console.log('fjeklajflk;weajfawjfl;')
   return (
     <svg width={ width || '86px' } height={ height || '86px' } viewBox="0 0 86 86" version="1.1">
       <g id="Profile-Web" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">

@@ -13,7 +13,7 @@ const MemberSearchView = (props) => {
   const topMembers    = props.topMemberSearchResults
   const isLoading     = props.loading
   const searchTerm    = props.currentSearchTerm
-  const searchTermTag = props.searchTermTag
+  // const searchTermTag = props.searchTermTag
 
   let memberSearchContent
   let memberMatch

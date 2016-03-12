@@ -1,6 +1,6 @@
 const DefaultUserAvatarIcon = ({ width, height }) => {
   return (
-    <svg className="default-avatar" width={width || '141px'} height={height || '141px'} viewBox="0 0 141 141" version="1.1">
+    <svg className="default-avatar" width={ width || '141px' } height={ height || '141px' } viewBox="0 0 141 141" version="1.1">
       <defs>
         <rect id="path-1" x="0.8" y="0.5" width="140" height="140" rx="306"></rect>
       </defs>

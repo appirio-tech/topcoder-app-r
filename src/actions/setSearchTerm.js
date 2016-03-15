@@ -6,7 +6,5 @@ export default function setSearchTerm(currentSearchTerm) {
       type: SET_SEARCH_TERM,
       currentSearchTerm
     })
-
-
   }
 }

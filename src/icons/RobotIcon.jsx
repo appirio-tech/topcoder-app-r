@@ -1,3 +1,5 @@
+import React from 'react'
+
 const RobotIcon = ({ width, height }) => {
   return (
     <svg width={ width || '86px' } height={ height || '86px' } viewBox="0 0 86 86" version="1.1">

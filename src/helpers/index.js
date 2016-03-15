@@ -72,3 +72,43 @@ export function getSubtrackAbbreviation(subtrack) {
 
   return abbreviation
 }
+
+// Subtrack filtering
+export function getMostRecentSubtracks(userStatsByTrack, numResults) {
+  const subtrackStats = []
+
+  // If a user is a copilot with > 10 challenges and > 80% fulfillment,
+  // add it to the list of subtracks
+  const hasQualifyingFulfillment   = _.get(userStatsByTrack, 'COPILOT.fulfillment', 0) >= 80
+  const hasQualifyingNumChallenges = _.get(userStatsByTrack, 'COPILOT.contests', 0) >= 10
+
+  if (hasQualifyingFulfillment && hasQualifyingNumChallenges) {
+    subtrackStats.push({
+      track: 'COPILOT',
+      subtrack: 'COPILOT',
+      fulfillmentScore: userStatsByTrack.COPILOT.fulfillment
+    })
+  }
+
+  // Process Data Science subtracks
+  const marathonMatchStats = _.get(userStatsByTrack, 'DATA_SCIENCE.MARATHON_MATCH')
+  const SRMStats = _.get(userStatsByTrack, 'DATA_SCIENCE.SRM')
+  if (marathonMatchStats.mostRecentEventDate) {
+    subtrackStats.push({
+      track: 'DATA_SCIENCE',
+      subtrack: 'MARATHON_MATCH',
+      mostRecentEventDate: marathonMatchStats.mostRecentEventDate
+    })
+  }
+}
+
+// Miscellaneous helpers
+export function getRoundedPercentage(number) {
+  if (_.isFinite(number)) {
+    const roundedNumber = Math.round(number)
+
+    return String(roundedNumber) + '%'
+  }
+
+  return ''
+}

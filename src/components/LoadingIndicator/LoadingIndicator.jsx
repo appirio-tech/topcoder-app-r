@@ -1,3 +1,5 @@
+import React from 'react'
+
 require('./loading-indicator.scss')
 
 const LoadingIndicator = () => {

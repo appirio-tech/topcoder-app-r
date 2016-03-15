@@ -1,3 +1,5 @@
+import React from 'react'
+
 const TrophyIcon = ({ fill }) => {
   return (
     <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1">

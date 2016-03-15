@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import SkillList from '../SkillList/SkillList'
 import SubtrackList from '../SubtrackList/SubtrackList'
 import TrackList from '../TrackList/TrackList'

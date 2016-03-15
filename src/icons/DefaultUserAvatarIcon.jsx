@@ -1,3 +1,5 @@
+import React from 'react'
+
 const DefaultUserAvatarIcon = ({ width, height }) => {
   return (
     <svg className="default-avatar" width={ width || '141px' } height={ height || '141px' } viewBox="0 0 141 141" version="1.1">

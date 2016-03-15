@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 
 import TrophyIcon from '../../icons/TrophyIcon'
 import classNames from 'classnames'

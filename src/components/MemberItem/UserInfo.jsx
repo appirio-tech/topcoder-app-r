@@ -1,38 +1,25 @@
 import React, { PropTypes } from 'react'
-// import _ from 'lodash'
+import _ from 'lodash'
 import moment from 'moment'
-import { memberLevelByRating } from '../../helpers'
-// import ISOCountries from '../../helpers/ISOCountries'
+import { memberLevelByRating, singlePluralFormatter } from '../../helpers'
+import ISOCountries from '../../helpers/ISOCountries'
 
 import DefaultUserAvatarIcon from '../../icons/DefaultUserAvatarIcon'
 import LevelDesignatorIcon from '../../icons/LevelDesignatorIcon'
 require('./user-info.scss')
 
 const UserInfo = ({ user, userPlace, exactMatch }) => {
-  // FIXME: Show level dynamically, not just hardcoded to 5
-  // FIXME: Show country name, not code
   const memberSince = moment(user.createdAt).format('MMM YYYY')
 
-  // const countryObject = _.find(ISOCountries, {alpha3: user.competitionCountryCode})
-  // can remove if backend fixes country object?
-  // const userCountry = countryObject ? countryObject.name : ''
-  const userCountry = user.competitionCountryName
+  const countryObject = _.find(ISOCountries, {alpha3: user.competitionCountryCode})
+  const userCountry = countryObject ? countryObject.name : ''
+  // FIXME: common country name should come directly from backend
+  // const userCountry = user.competitionCountryName
 
-  let numberWins
+  const numberWins = singlePluralFormatter(user.wins, 'win')
 
-  switch (user.wins) {
-  case 0:
-  // Remove these when backend returns wins property for every member
-  case undefined:
-  case null:
-    numberWins = ''
-    break
-  case 1:
-    numberWins = ' 1 win'
-    break
-  default:
-    numberWins = ` ${user.wins} wins`
-  }
+
+  // FIXME: Move nested HTML into separate React components!!!
 
   let userBio
   if (exactMatch && user.description) {
@@ -72,7 +59,7 @@ const UserInfo = ({ user, userPlace, exactMatch }) => {
             <div className="user-details-1">
               <span className="user-country">{userCountry}</span>
 
-              <span className="total-wins">{numberWins}</span>
+              <span className="total-wins">{' ' + numberWins}</span>
             </div>
 
             <div className="member-since">

@@ -6,7 +6,7 @@ require('./subtrack-list.scss')
 const SubtrackList = ({ subtracks }) => {
   return (
     <div className="subtracks-list">
-      {subtracks.map(s => <SubtrackItem key={s.name} subtrack={s} />)}
+      {subtracks.map((s, i) => <SubtrackItem key={i} subtrack={s} />)}
     </div>
   )
 }

@@ -5,7 +5,7 @@ const LevelDesignatorIcon = ({ width, height, level }) => {
   const fill = memberColorByLevel(level)
 
   return (
-    <svg className="user-rank" width={ width || '20px' } height={ height|| '20px' } viewBox="0 0 20 20" version="1.1">
+    <svg className="user-rank" width={ width || '20px' } height={ height || '20px' } viewBox="0 0 20 20" version="1.1">
       <g id="Member-List" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
         <g id="List-cards-members-desktop" transform="translate(-1787.000000, -747.000000)">
           <g id="level-designator-big" transform="translate(1788.000000, 748.000000)">

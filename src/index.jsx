@@ -1,3 +1,4 @@
+import React from 'react'
 import { Provider } from 'react-redux'
 import browserHistory from 'react-router/lib/browserHistory'
 import Route from 'react-router/lib/Route'

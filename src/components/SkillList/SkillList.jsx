@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import SkillItem from './SkillItem'
 
 import classNames from 'classnames'

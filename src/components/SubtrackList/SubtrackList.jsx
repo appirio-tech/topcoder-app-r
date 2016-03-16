@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import SubtrackItem from './SubtrackItem'
 
 require('./subtrack-list.scss')
@@ -6,7 +6,7 @@ require('./subtrack-list.scss')
 const SubtrackList = ({ subtracks }) => {
   return (
     <div className="subtracks-list">
-      {subtracks.map(s => <SubtrackItem key={s.name} subtrack={s} />)}
+      {subtracks.map((s, i) => <SubtrackItem key={i} subtrack={s} />)}
     </div>
   )
 }

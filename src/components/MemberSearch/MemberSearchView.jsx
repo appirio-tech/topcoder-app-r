@@ -1,3 +1,4 @@
+import React from 'react'
 import _ from 'lodash'
 import ListContainer from '../ListContainer/ListContainer'
 import TopMemberList from '../TopMemberList/TopMemberList'

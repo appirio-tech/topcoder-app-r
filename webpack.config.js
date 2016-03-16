@@ -1,5 +1,4 @@
 require('./node_modules/coffee-script/register')
-const webpack = require('webpack')
 
 const branch = process.env.TRAVIS_BRANCH
 
@@ -18,11 +17,6 @@ const config = require('appirio-tech-webpack-config')({
 // Set asset prefix to CDN
 if (branch)
   config.output.publicPath = '//d2w5g0u9h79yyx.cloudfront.net/'
-
-// import X from Y added to files when using these globals
-config.plugins.push(new webpack.ProvidePlugin({
-  React: 'react'
-}))
 
 // Adding react hot loader
 const babelOptions = {

@@ -12,10 +12,14 @@
 
 .subtrack-item {
   padding: 5px 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
   display: inline-block;
   border-radius: 131px;
   font-weight: 600;
-  margin-bottom: 5px;
+  &:last-child {
+    margin-right: 0;
+  }
 
   .subtrack-rating,
   .subtrack-ranking,
@@ -26,8 +30,13 @@
     line-height: 16px;
   }
 
+  .subtrack-wins svg {
+    margin-right: 2px;
+  }
+
   .track-code {
     color: rgba($white, 0.5);
+    margin-left: 3px;
   }
 
   .track-copilot-code {
@@ -37,19 +46,19 @@
   }
 }
 
-.subtrack-item.track-design {
+.subtrack-item.track-DESIGN {
   background-color: #21B2F1;
 }
 
-.subtrack-item.track-develop {
+.subtrack-item.track-DEVELOP {
   background-color: #05C14F;
 }
 
-.subtrack-item.track-datascience {
+.subtrack-item.track-DATA_SCIENCE {
   background-color: #FC9A00;
 }
 
-.subtrack-item.track-copilot {
+.subtrack-item.track-COPILOT {
   background-color: #9D9FA0;
   font-size: 14px;
 }

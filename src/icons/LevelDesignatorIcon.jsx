@@ -1,3 +1,4 @@
+import React from 'react'
 import { memberColorByLevel } from '../helpers'
 
 const LevelDesignatorIcon = ({ width, height, level }) => {

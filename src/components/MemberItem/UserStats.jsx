@@ -1,17 +1,19 @@
-import { PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import SkillList from '../SkillList/SkillList'
 import SubtrackList from '../SubtrackList/SubtrackList'
 import TrackList from '../TrackList/TrackList'
+import { getMostRecentSubtracks } from '../../helpers'
 
 require('./user-stats.scss')
 
-const MemberSearchUserStats = ({ member }) => {
+const UserStats = ({ member }) => {
   // TODO: Add functionality for no skills or tracks
-
   let userStatsList
 
-  if (member.subtracks) {
-    userStatsList = <SubtrackList subtracks={member.subtracks} />
+  if (member.stats) {
+    const subtracks = getMostRecentSubtracks(member.stats, 5)
+
+    userStatsList = <SubtrackList subtracks={subtracks} />
   } else {
     userStatsList = <TrackList tracks={member.tracks} />
   }
@@ -28,8 +30,8 @@ const MemberSearchUserStats = ({ member }) => {
   )
 }
 
-MemberSearchUserStats.propTypes = {
+UserStats.propTypes = {
   member: PropTypes.object.isRequired
 }
 
-export default MemberSearchUserStats
+export default UserStats

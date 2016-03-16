@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import UserInfo from './UserInfo'
 import UserStats from './UserStats'
 import classNames from 'classnames'

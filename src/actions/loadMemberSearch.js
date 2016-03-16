@@ -72,7 +72,7 @@ export default function loadMemberSearch(searchTerm) {
                     should: [
                       { exists: { field: 'description' } },
                       { exists: { field: 'skills' } },
-                      { exists: { field: 'photoURL ' } }
+                      { exists: { field: 'photoURL' } }
                     ]
                   }
                 }

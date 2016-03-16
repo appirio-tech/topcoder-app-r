@@ -52,8 +52,11 @@ export function getSubtrackAbbreviation(subtrack) {
     CODE                          : 'C',
     CONCEPTUALIZATION             : 'C',
     CONTENT_CREATION              : 'CC',
+    COPILOT                       : 'FS',
     COPILOT_POSTING               : 'CP',
+    DESIGN                        : 'D',
     DESIGN_FIRST_2_FINISH         : 'DF2F',
+    DEVELOPMENT                   : 'Dev',
     FIRST_2_FINISH                : 'FF',
     IDEA_GENERATION               : 'IG',
     MARATHON_MATCH                : 'MM',
@@ -63,7 +66,7 @@ export function getSubtrackAbbreviation(subtrack) {
     SRM                           : 'SRM',
     TEST_SUITES                   : 'TS',
     UI_PROTOTYPE_COMPETITION      : 'P',
-    WEB_DESIGN                    : 'W',
+    WEB_DESIGNS                   : 'W',
     WIDGET_OR_MOBILE_SCREEN_DESIGN: 'WI',
     WIREFRAMES                    : 'WF'
   }
@@ -74,7 +77,7 @@ export function getSubtrackAbbreviation(subtrack) {
 }
 
 // Subtrack filtering
-export function getMostRecentSubtracks(userStatsByTrack, numResults) {
+export function getMostRecentSubtracks(userStatsByTrack, numResults = Infinity) {
   const subtrackStats = []
 
   // If a user is a copilot with > 10 challenges and > 80% fulfillment,
@@ -85,20 +88,86 @@ export function getMostRecentSubtracks(userStatsByTrack, numResults) {
   if (hasQualifyingFulfillment && hasQualifyingNumChallenges) {
     subtrackStats.push({
       track: 'COPILOT',
-      subtrack: 'COPILOT',
-      fulfillmentScore: userStatsByTrack.COPILOT.fulfillment
+      name: 'COPILOT',
+      stat: getSubtrackStat(userStatsByTrack.COPILOT)
     })
   }
 
-  // Process Data Science subtracks
+  // Process subtracks in Data Science
   const marathonMatchStats = _.get(userStatsByTrack, 'DATA_SCIENCE.MARATHON_MATCH')
-  const SRMStats = _.get(userStatsByTrack, 'DATA_SCIENCE.SRM')
+  const SRMStats           = _.get(userStatsByTrack, 'DATA_SCIENCE.SRM')
+
   if (marathonMatchStats.mostRecentEventDate) {
     subtrackStats.push({
       track: 'DATA_SCIENCE',
-      subtrack: 'MARATHON_MATCH',
-      mostRecentEventDate: marathonMatchStats.mostRecentEventDate
+      name: 'MARATHON_MATCH',
+      mostRecentEventDate: marathonMatchStats.mostRecentEventDate,
+      stat: getSubtrackStat(marathonMatchStats)
     })
+  }
+
+  if (SRMStats.mostRecentEventDate) {
+    subtrackStats.push({
+      track: 'DATA_SCIENCE',
+      name: 'SRM',
+      mostRecentEventDate: SRMStats.mostRecentEventDate,
+      stat: getSubtrackStat(SRMStats)
+    })
+  }
+
+  // Process subtracks in Develop and Design
+  const designSubtracks  = _.get(userStatsByTrack, 'DESIGN.subTracks', [])
+  const developSubtracks = _.get(userStatsByTrack, 'DEVELOP.subTracks', [])
+
+  designSubtracks.forEach((subtrack) => {
+    if (subtrack.mostRecentEventDate) {
+      subtrackStats.push({
+        track: 'DESIGN',
+        name: subtrack.name,
+        mostRecentEventDate: subtrack.mostRecentEventDate,
+        stat: getSubtrackStat(subtrack)
+      })
+    }
+  })
+
+  developSubtracks.forEach((subtrack) => {
+    if (subtrack.mostRecentEventDate) {
+      subtrackStats.push({
+        track: 'DEVELOP',
+        name: subtrack.name,
+        mostRecentEventDate: subtrack.mostRecentEventDate,
+        stat: getSubtrackStat(subtrack)
+      })
+    }
+  })
+
+  const sortedSubtracks = subtrackStats.sort((a, b) => {
+    return b.mostRecentEventDate - a.mostRecentEventDate
+  })
+
+  return sortedSubtracks.slice(0, numResults)
+}
+
+export function getSubtrackStat(subtrackStats) {
+  if (subtrackStats.fulfillment) {
+    return {
+      value: subtrackStats.fulfillment,
+      type: 'fulfillment'
+    }
+  }
+
+  const subtrackRating = _.get(subtrackStats, 'rank.rating')
+
+  if (subtrackRating) {
+    return {
+      value: subtrackRating,
+      type: 'rating'
+    }
+  }
+
+  return {
+    value: subtrackStats.wins || 0,
+    type: 'wins'
   }
 }
 
@@ -111,4 +180,21 @@ export function getRoundedPercentage(number) {
   }
 
   return ''
+}
+
+export function numberWithCommas(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+export function singlePluralFormatter(num, noun) {
+  switch (num) {
+  case 0:
+  case undefined:
+  case null:
+    return ''
+  case 1:
+    return `1 ${noun}`
+  default:
+    return `${num} ${noun}s`
+  }
 }

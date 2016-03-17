@@ -33,10 +33,6 @@ export default function loadMemberSearch(searchTerm) {
       }
 
       return Promise.all(memberSearchAPICalls)
-      .then(data => {
-        console.log('Topmembers after promise: ', data[0])
-        console.log('username matches after promise: ', data[1])
-      })
     })
 
     function checkIfSearchTermIsATag(searchTerm) {
@@ -93,14 +89,15 @@ export default function loadMemberSearch(searchTerm) {
       .then(status)
       .then(json)
       .then(data => {
-        const usernameSearchResults = data.result.content
+        const usernameSearchResults = _.get(data, 'result.content', [])
 
         console.log('Member list: ')
         console.log(usernameSearchResults)
-
+        
         dispatch({
           type: USERNAME_SEARCH_SUCCESS,
-          usernameSearchResults
+          usernameSearchResults,
+          totalUsernameMatches: _.get(data, 'result.metadata.totalCount', 0)
         })
 
         return usernameSearchResults
@@ -118,6 +115,8 @@ export default function loadMemberSearch(searchTerm) {
 
     function getTopMembers(tag) {
       // FIXME: handle other tags besides skill
+      // once backend supports it
+
       const options = _.merge({}, memberSearchOptions, {
         body: JSON.stringify({
           param: {
@@ -150,11 +149,7 @@ export default function loadMemberSearch(searchTerm) {
       .then(status)
       .then(json)
       .then(data => {
-        // if (!data.result) {
-        //   throw new Error()
-        // }
-
-        const topMemberSearchResults = data.result.content
+        const topMemberSearchResults = _.get(data, 'result.content', [])
         console.log('Topmembers: ', topMemberSearchResults)
 
         dispatch({

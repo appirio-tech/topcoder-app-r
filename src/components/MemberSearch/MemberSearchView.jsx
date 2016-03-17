@@ -10,7 +10,8 @@ import { getSearchTagPreposition } from '../../helpers'
 require('./member-search-view.scss')
 
 const MemberSearchView = (props) => {
-  const members       = props.usernameSearchResults
+  let usernameMatches = props.usernameSearchResults
+  const totalCount    = props.totalUsernameMatches
   const topMembers    = props.topMemberSearchResults
   const isLoading     = props.loading
   const searchTerm    = props.currentSearchTerm
@@ -19,21 +20,26 @@ const MemberSearchView = (props) => {
   let memberSearchContent
   let memberMatch
 
-  if (!isLoading && members.length) {
+  if (!isLoading && usernameMatches.length) {
     // FIXME: show complete count, not just the first 10
     // BADDDDD MUTATING STATE
-    const exactMemberMatch = members.splice(0, 1)[0]
 
-    memberMatch = <MemberItem member={exactMemberMatch} exactMatch />
+    const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm.toLowerCase()
+
+    if (isExactMatch && !tag) {
+      memberMatch = <MemberItem member={usernameMatches[0]} exactMatch />
+      usernameMatches = usernameMatches.slice(1)
+    }
+
     memberSearchContent = (
       <ListContainer
         headerText={`Usernames matching "${searchTerm}"`}
-        listCount={members.length}
+        listCount={totalCount}
       >
-        <MemberList members={members} />
+        <MemberList members={usernameMatches} />
       </ListContainer>
     )
-  } else if (!isLoading && !members.length) {
+  } else if (!isLoading && !usernameMatches.length) {
     memberSearchContent = ''
   } else {
     // FIXME: move to page wide, not just memberSearchContent
@@ -53,7 +59,7 @@ const MemberSearchView = (props) => {
   }
 
   let noResults = null
-  if (!isLoading && !memberMatch && !members.length && !topMembers.length) {
+  if (!isLoading && !memberMatch && !usernameMatches.length && !topMembers.length) {
     noResults = <NoResults entry={searchTerm} />
   }
 

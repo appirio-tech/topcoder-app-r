@@ -87,6 +87,13 @@ Recommended Theme
 }
 ```
 
+Automatic JavaScript linting in Sublime Text
+- Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under "Installing via Package Control"
+- Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`
+
+JavaScript linting
+- `npm run lint` will lint your files for you. Please make sure all `.jsx` and `.js` code passes linting, otherwise the Travis build will fail.
+
 Code expander
 - Examples:
   - `div.cool-class` becomes `<div className="cool-class"></div>`
@@ -95,10 +102,3 @@ Code expander
 - Configure Emmet to work with React, e.g. classes expand to `className` instead of `class`
 - Follow the instructions under [Get Emmet working](http://www.nitinh.com/2015/02/setting-sublime-text-react-jsx-development/)
   - **Note:** Add the last snippet of code to `reg_replace.sublime-settings` by navigating to  `Sublime Text -> Preferences -> Package Settings -> Reg Replace -> Settings-User`
-
-JavaScript linting
-- `npm run lint` will lint your files for you. Please make sure all `.jsx` and `.js` code passes linting, otherwise the Travis build will fail.
-
-Automatic JavaScript linting in Sublime Text
-- Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under "Installing via Package Control"
-- Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import MemberSearchView from './MemberSearchView'
-import loadMemberSearch from '../../actions/loadMemberSearch'
-import setSearchTerm from '../../actions/setSearchTerm'
+import MemberSearchView from '../components/MemberSearch/MemberSearch'
+import loadMemberSearch from '../actions/loadMemberSearch'
+import setSearchTerm from '../actions/setSearchTerm'
 
 class MemberSearch extends Component {
   constructor(props) {

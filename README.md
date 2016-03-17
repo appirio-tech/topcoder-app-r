@@ -11,13 +11,63 @@ Install dependencies by running the following in the root of the project:
  - **Note:** You must use npm 3. Type `npm -v` to ensure you have a 3.x version.
 
 ## NPM Commands
-- To run locally, run `npm start` and head to `localhost:8080/search/members?q=javascript`
+- To run locally, run `npm start` and head to `localhost:3000/search/members?q=javascript`
+- To run the test runner: `npm test`
+- To make sure your code passes linting: `npm run lint`
 - To create the build: `npm run build`
-- To run the test runner and view specs.html: `TODO: need to update`
+
+## Contributing
+
+### Pull Requests
+
+To contribute to the repository, please create a feature branch off of the dev branch. Once you're finished working on the feature, make a pull request to merge it into dev. Please make sure that every pull request has passed the build checks, which appear just before the "Merge pull request" button in github.
+
+### Code Style
+
+JavaScript
+  - Please use ES2015 syntax whenever possible
+  - Specific rules are enforced via `.eslintrc.json`
+  - Run `npm run lint` to check your code against the linter
+
+SCSS Files
+  - This repository uses flexbox for arranging content
+  - The use of any extra CSS libraries should be discussed with the team
+  - Use SCSS syntax, but do not overly nest
+  - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles/tree/master/styles/topcoder)
+  - To include variables from the style guide mentioned above, place `@import 'topcoder/tc-includes;'` at the top of your `.scss` file. Locally, you can look in `./node_modules/appirio-styles/styles/topcoder/_tc-colors.scss` to find many colors already defined (e.g. `#A3A3AE` => `$accent-gray`)
+  - When adding media queries, nest them inside the element, rather than creating a new section
+  ```
+  @import 'topcoder/tc-includes;'
+
+  $my-local-var: 50px;
+
+  .box {
+    height: $my-local-var;
+    width: 50px;
+    color: $medium-gray;
+    @media screen and (min-width: 768px) {
+      height: 100px;
+      width: 100px;
+      color: $dark-gray;
+    }
+
+    .inside-box {
+      font-size: 14px;
+      @media screen and (min-width: 768px) {
+        font-size: 18px;
+      }
+    }
+  }
+  ```
+
+### Writing Tests
+- `npm test` will run the current tests
+- Place your test files in the same directory as the component it's testing
+- Test files should be named `ComponentName.spec.js`
 
 ## Recommended Developer Tools
 
-Syntax highlighting for ES6 and React JSX
+### Syntax highlighting for ES6 and React JSX
 - Install [babel](https://packagecontrol.io/packages/Babel) via the package manager in Sublime Text
   - **Note:** Sublime Text 3 is required for this plugin
 - Set the plugin as the default syntax for a particular extension
@@ -27,7 +77,7 @@ Syntax highlighting for ES6 and React JSX
   - Then `Babel -> JavaScript (Babel)`
   - Repeat for any other extensions, e.g. `.jsx`
 
-Recommended Theme
+### Recommended Theme
 - Install [Oceanic Next Color Theme](https://github.com/voronianski/oceanic-next-color-scheme) via the Sublime Text package manager.
 - Add the following to `Sublime Text -> Preferences -> Settings-User` (`⌘ + ,` on Mac)
 ```
@@ -37,7 +87,11 @@ Recommended Theme
 }
 ```
 
-Code expander
+### Automatic JavaScript linting in Sublime Text
+- Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under "Installing via Package Control"
+- Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`
+
+### Code expander
 - Examples:
   - `div.cool-class` becomes `<div className="cool-class"></div>`
   - `a` becomes `<a href=""></a>`
@@ -45,56 +99,3 @@ Code expander
 - Configure Emmet to work with React, e.g. classes expand to `className` instead of `class`
 - Follow the instructions under [Get Emmet working](http://www.nitinh.com/2015/02/setting-sublime-text-react-jsx-development/)
   - **Note:** Add the last snippet of code to `reg_replace.sublime-settings` by navigating to  `Sublime Text -> Preferences -> Package Settings -> Reg Replace -> Settings-User`
-
-JavaScript linting
-- Install [ESLint](http://eslint.org/docs/user-guide/getting-started) with `npm i -g eslint`
-- For new projects, you can create a local `.eslintrc.json` file by running `eslint --init`
-  - **Note:** If you're using ES6, make sure you add `"modules": true` to `"ecmaFeatures"` and `"node": true` to `"env"` in your `.eslintrc.json` file
-  - **Note:** If you are using React, make sure you have `eslint` and `eslint-plugin-react` as `devDependencies` in your `package.json` file
-  - **Optional**: Add `"lint": "eslint ."` to your `package.json` file to run linting at any time via `npm run lint`
-
-Automatic JavaScript linting in Sublime Text
-- Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under "Installing via Package Control"
-- Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`
-
-### Testing
-
-
-### Description of Files and Folders
-
-## Contributing
-
-### Style Guide and Naming Conventions
-
-### Pull Requests
-
-To contribute to the repository, please create a feature branch off of the dev branch. Once you're finished working on the feature, make a pull request to merge it into dev. Then, make sure to delete the branch when it's no longer used. Please make sure that every pull request has passed the build checks, which appear just before the "Merge pull request" button in github.
-
-### Adding New Content
-
-SCSS Files
-  - Use SCSS syntax, but do not overly nest
-  - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles)
-  - Reuse our [React Components](https://github.com/appirio-tech/react-components)
-  - When adding media queries, nest them inside the element, rather than creating a new section
-  ```
-  .box {
-    height: 50px;
-    width: 50px;
-    @media screen and (min-width: 768px) {
-      height: 100px;
-      width: 100px;
-    }
-    
-    .inside-box {
-      font-size: 14px;
-      @media screen and (min-width: 768px) {
-        font-size: 18px;
-      }
-    }
-  }
-  ```
-  - This repository uses flexbox for arranging content. The use of any extra CSS libraries should be discussed with the team
-
-JavaScript
-  - See this section on [naming conventions and style guide](https://github.com/appirio-tech/topcoder-app/blob/dev/README.md#style-guide-and-naming-conventions)

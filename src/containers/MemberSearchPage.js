@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import MemberSearchView from './MemberSearchView'
-import loadMemberSearch from '../../actions/loadMemberSearch'
-import { setSearchTerm } from '../../actions/setSearchTerm'
+import MemberSearchView from '../components/MemberSearch/MemberSearch'
+import loadMemberSearch from '../actions/loadMemberSearch'
+import setSearchTerm from '../actions/setSearchTerm'
 
 class MemberSearch extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class MemberSearch extends Component {
 const mapStateToProps = ({ memberSearch, searchTerm }) => {
   return {
     loading: memberSearch.loading,
-    
+
     usernameSearchResults : memberSearch.usernameSearchResults,
     totalUsernameMatches  : memberSearch.totalUsernameMatches,
     topMemberSearchResults: memberSearch.topMemberSearchResults,

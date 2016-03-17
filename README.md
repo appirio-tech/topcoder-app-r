@@ -67,7 +67,7 @@ SCSS Files
 
 ## Recommended Developer Tools
 
-Syntax highlighting for ES6 and React JSX
+### Syntax highlighting for ES6 and React JSX
 - Install [babel](https://packagecontrol.io/packages/Babel) via the package manager in Sublime Text
   - **Note:** Sublime Text 3 is required for this plugin
 - Set the plugin as the default syntax for a particular extension
@@ -77,7 +77,7 @@ Syntax highlighting for ES6 and React JSX
   - Then `Babel -> JavaScript (Babel)`
   - Repeat for any other extensions, e.g. `.jsx`
 
-Recommended Theme
+### Recommended Theme
 - Install [Oceanic Next Color Theme](https://github.com/voronianski/oceanic-next-color-scheme) via the Sublime Text package manager.
 - Add the following to `Sublime Text -> Preferences -> Settings-User` (`⌘ + ,` on Mac)
 ```
@@ -87,11 +87,11 @@ Recommended Theme
 }
 ```
 
-Automatic JavaScript linting in Sublime Text
+### Automatic JavaScript linting in Sublime Text
 - Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under "Installing via Package Control"
 - Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`
 
-Code expander
+### Code expander
 - Examples:
   - `div.cool-class` becomes `<div className="cool-class"></div>`
   - `a` becomes `<a href=""></a>`

@@ -1,11 +1,11 @@
 import React from 'react'
-import _ from 'lodash'
 import ListContainer from '../ListContainer/ListContainer'
 import TopMemberList from '../TopMemberList/TopMemberList'
 import MemberList from '../MemberList/MemberList'
 import MemberItem from '../MemberItem/MemberItem'
 import NoResults from '../NoResults/NoResults'
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
+import { getSearchTagPreposition } from '../../helpers'
 
 require('./member-search-view.scss')
 
@@ -14,19 +14,20 @@ const MemberSearchView = (props) => {
   const topMembers    = props.topMemberSearchResults
   const isLoading     = props.loading
   const searchTerm    = props.currentSearchTerm
-  // const searchTermTag = props.searchTermTag
+  const tag           = props.searchTermTag
 
   let memberSearchContent
   let memberMatch
 
   if (!isLoading && members.length) {
     // FIXME: show complete count, not just the first 10
+    // BADDDDD MUTATING STATE
     const exactMemberMatch = members.splice(0, 1)[0]
 
     memberMatch = <MemberItem member={exactMemberMatch} exactMatch />
     memberSearchContent = (
       <ListContainer
-        headerText={`Usernames matching ${searchTerm}`}
+        headerText={`Usernames matching "${searchTerm}"`}
         listCount={members.length}
       >
         <MemberList members={members} />
@@ -41,9 +42,11 @@ const MemberSearchView = (props) => {
 
   let topMemberContent = ''
 
-  if (topMembers.length) {
+  if (topMembers.length && tag) {
+    const preposition = getSearchTagPreposition(tag.domain)
+
     topMemberContent = (
-      <ListContainer headerText={`Top Members in ${_.capitalize(searchTerm)}`}>
+      <ListContainer headerText={`Top Members ${preposition} ${tag.name}`}>
         <TopMemberList topMembers={topMembers} />
       </ListContainer>
     )

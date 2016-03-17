@@ -5,6 +5,7 @@ import {
   START_MEMBER_SEARCH, CLEAR_MEMBER_SEARCH,
   USERNAME_SEARCH_SUCCESS, USERNAME_SEARCH_FAILURE,
   TOP_MEMBER_SEARCH_SUCCESS, TOP_MEMBER_SEARCH_FAILURE,
+  SET_SEARCH_TAG,
   memberSearchUrl, memberSearchTagUrl } from '../config/constants'
 
 export default function loadMemberSearch(searchTerm) {
@@ -23,6 +24,11 @@ export default function loadMemberSearch(searchTerm) {
       const memberSearchAPICalls = [getUsernameMatches(searchTerm)]
 
       if (tag) {
+        dispatch({
+          type: SET_SEARCH_TAG,
+          searchTermTag: tag
+        })
+
         memberSearchAPICalls.unshift(getTopMembers(tag.name))
       }
 

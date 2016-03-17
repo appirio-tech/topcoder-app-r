@@ -2,7 +2,7 @@
   "name": "topcoder-app-r",
   "description": "Topcoder pages in React and Redux",
   "scripts": {
-    "build": "webpack --bail --progress --build --tc",
+    "build": "rm -rf dist && webpack --bail --progress --build --tc",
     "start": "webpack-dev-server --history-api-fallback --dev --hot --inline --progress --tc --port 3000",
     "lint": "eslint --format table --ext .js,.jsx ."
   },

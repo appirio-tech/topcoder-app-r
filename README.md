@@ -91,9 +91,6 @@ Automatic JavaScript linting in Sublime Text
 - Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under "Installing via Package Control"
 - Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`
 
-JavaScript linting
-- `npm run lint` will lint your files for you. Please make sure all `.jsx` and `.js` code passes linting, otherwise the Travis build will fail.
-
 Code expander
 - Examples:
   - `div.cool-class` becomes `<div className="cool-class"></div>`

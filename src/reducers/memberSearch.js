@@ -24,7 +24,6 @@ export default function(state = initialState, action) {
     })
 
   case USERNAME_SEARCH_SUCCESS:
-  debugger
     return _.merge({}, state, {
       loading: false,
       usernameSearchResults: action.usernameSearchResults,

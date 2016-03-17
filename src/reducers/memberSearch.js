@@ -24,10 +24,16 @@ export default function(state = initialState, action) {
     })
 
   case USERNAME_SEARCH_SUCCESS:
+    return _.merge({}, state, {
+      loading: false,
+      usernameSearchResults: action.usernameSearchResults,
+      totalUsernameMatches: action.totalUsernameMatches
+    })
   case USERNAME_SEARCH_FAILURE:
     return _.merge({}, state, {
       loading: false,
-      usernameSearchResults: action.usernameSearchResults
+      usernameSearchResults: action.usernameSearchResults,
+      totalUsernameMatches: 0
     })
 
   case TOP_MEMBER_SEARCH_SUCCESS:

@@ -24,11 +24,13 @@ class MemberSearch extends Component {
 const mapStateToProps = ({ memberSearch, searchTerm }) => {
   return {
     loading: memberSearch.loading,
-    usernameSearchResults: memberSearch.usernameSearchResults,
+
+    usernameSearchResults : memberSearch.usernameSearchResults,
+    totalUsernameMatches  : memberSearch.totalUsernameMatches,
     topMemberSearchResults: memberSearch.topMemberSearchResults,
 
     currentSearchTerm: searchTerm.currentSearchTerm,
-    searchTermTag: searchTerm.searchTermTag
+    searchTermTag    : searchTerm.searchTermTag
   }
 }
 

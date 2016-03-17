@@ -198,3 +198,16 @@ export function singlePluralFormatter(num, noun) {
     return `${num} ${noun}s`
   }
 }
+
+export function getSearchTagPreposition(tagType) {
+  switch (tagType) {
+  case 'SKILL':
+    return 'in'
+  case 'COUNTRY':
+    return 'from'
+  case 'EVENT':
+    return 'at the'
+  default:
+    return 'in'
+  }
+}

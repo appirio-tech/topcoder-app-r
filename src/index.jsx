@@ -1,22 +1,17 @@
-import React from 'react'
-import { Provider } from 'react-redux'
+import 'babel-polyfill'
+import React          from 'react'
+import { render }     from 'react-dom'
+import { Provider }   from 'react-redux'
 import browserHistory from 'react-router/lib/browserHistory'
-import Route from 'react-router/lib/Route'
-import Router from 'react-router/lib/Router'
-import { render } from 'react-dom'
-import store from './config/store'
+import Router         from 'react-router/lib/Router'
 
-import MemberSearch from './components/MemberSearch/MemberSearch'
-import App from './components/App/App'
+import store  from './config/store'
+import routes from './routes'
 
 const mountNode = document.getElementById('root')
 
 render((
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={App}>
-        <Route path="search/members" component={MemberSearch} />
-      </Route>
-    </Router>
+    <Router history={browserHistory} routes={routes} />
   </Provider>
 ), mountNode)

@@ -9,7 +9,7 @@ if (branch === 'qa')     process.env.ENV = 'QA'
 const config = require('appirio-tech-webpack-config')({
   dirname: __dirname,
   entry: {
-    app: ['babel-polyfill', './src/index']
+    app: ['./src/index']
   },
   template: './src/index.html'
 })

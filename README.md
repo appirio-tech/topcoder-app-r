@@ -16,6 +16,55 @@ Install dependencies by running the following in the root of the project:
 - To make sure your code passes linting: `npm run lint`
 - To create the build: `npm run build`
 
+## Contributing
+
+### Pull Requests
+
+To contribute to the repository, please create a feature branch off of the dev branch. Once you're finished working on the feature, make a pull request to merge it into dev. Please make sure that every pull request has passed the build checks, which appear just before the "Merge pull request" button in github.
+
+### Code Style
+
+JavaScript
+  - Please use ES2015 syntax whenever possible
+  - Specific rules are enforced via `.eslintrc.json`
+  - Run `npm run lint` to check your code against the linter
+
+SCSS Files
+  - This repository uses flexbox for arranging content
+  - The use of any extra CSS libraries should be discussed with the team
+  - Use SCSS syntax, but do not overly nest
+  - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles/tree/master/styles/topcoder)
+  - To include variables from the style guide mentioned above, place `@import 'topcoder/tc-includes;'` at the top of your `.scss` file. Locally, you can look in `./node_modules/appirio-styles/styles/topcoder/_tc-colors.scss` to find many colors already defined (e.g. `#A3A3AE` => `$accent-gray`)
+  - When adding media queries, nest them inside the element, rather than creating a new section
+  ```
+  @import 'topcoder/tc-includes;'
+
+  $my-local-var: 50px;
+
+  .box {
+    height: $my-local-var;
+    width: 50px;
+    color: $medium-gray;
+    @media screen and (min-width: 768px) {
+      height: 100px;
+      width: 100px;
+      color: $dark-gray;
+    }
+
+    .inside-box {
+      font-size: 14px;
+      @media screen and (min-width: 768px) {
+        font-size: 18px;
+      }
+    }
+  }
+  ```
+
+### Writing Tests
+- `npm test` will run the current tests
+- Place your test files in the same directory as the component it's testing
+- Test files should be named `ComponentName.spec.js`
+
 ## Recommended Developer Tools
 
 Syntax highlighting for ES6 and React JSX
@@ -53,56 +102,3 @@ JavaScript linting
 Automatic JavaScript linting in Sublime Text
 - Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under "Installing via Package Control"
 - Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`
-
-### Testing
-
-
-### Description of Files and Folders
-## Contributing
-
-### Pull Requests
-
-To contribute to the repository, please create a feature branch off of the dev branch. Once you're finished working on the feature, make a pull request to merge it into dev. Please make sure that every pull request has passed the build checks, which appear just before the "Merge pull request" button in github.
-
-### Code Style
-
-JavaScript
-  - Please use ES2015 syntax whenever possible
-  - Specific rules are enforced via `.eslintrc.json`
-  - Run `npm run lint` to check your code against the linter
-
-SCSS Files
-  - This repository uses flexbox for arranging content
-  - The use of any extra CSS libraries should be discussed with the team
-  - Use SCSS syntax, but do not overly nest
-  - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles)
-  - To include variables from the style guide mentioned above, place `@import 'topcoder/tc-includes;'` at the top of your `.scss` file. Locally, you can look in `./node_modules/appirio-styles/styles/topcoder/_tc-colors.scss` to find many colors already defined (e.g. `#A3A3AE` => `$accent-gray`)
-  - When adding media queries, nest them inside the element, rather than creating a new section
-  ```
-  @import 'topcoder/tc-includes;'
-  
-  $my-local-var: 50px;
-  
-  .box {
-    height: $my-local-var;
-    width: 50px;
-    color: $medium-gray;
-    @media screen and (min-width: 768px) {
-      height: 100px;
-      width: 100px;
-      color: $dark-gray;
-    }
-    
-    .inside-box {
-      font-size: 14px;
-      @media screen and (min-width: 768px) {
-        font-size: 18px;
-      }
-    }
-  }
-  ```
-
-### Writing Tests
-- `npm test` will run the current tests
-- Place your test files in the same directory as the component it's testing
-- Test files should be named `ComponentName.spec.js`

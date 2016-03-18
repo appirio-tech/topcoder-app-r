@@ -53,7 +53,9 @@ const UserInfo = ({ user, userPlace, exactMatch }) => {
         </div>
 
         <div className="username-and-details">
-          <div className="username">{user.handle}</div>
+          <div className="username">
+            <a href={'https://www.topcoder-dev.com/members/' + user.handle}>{user.handle}</a>
+          </div>
 
           <div className="user-details">
             <div className="user-details-1">

@@ -1,6 +1,6 @@
 {
   "name": "topcoder-app-r",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Topcoder pages in React and Redux",
   "scripts": {
     "build": "rm -rf dist && webpack --bail --progress --build --tc",

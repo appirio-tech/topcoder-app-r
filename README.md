@@ -12,7 +12,7 @@ Install dependencies by running the following in the root of the project:
 
 ## NPM Commands
 - To run locally, run `npm start` and head to `localhost:3000/search/members?q=javascript`
-- To run the test runner: `npm test`
+- Run tests with `npm test` or use `npm run test:watch` to rerun tests after files change
 - To make sure your code passes linting: `npm run lint`
 - To create the build: `npm run build`
 
@@ -62,8 +62,10 @@ SCSS Files
 
 ### Writing Tests
 - `npm test` will run the current tests
+- `npm run test:watch` will rerun tests when files change
 - Place your test files in the same directory as the component it's testing
 - Test files should be named `ComponentName.spec.js`
+- Checkout the ExampleTest directory in `/src/components`
 
 ## Recommended Developer Tools
 

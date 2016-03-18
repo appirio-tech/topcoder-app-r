@@ -6,7 +6,7 @@
     "start": "webpack-dev-server --history-api-fallback --dev --hot --inline --progress --tc --port 3000",
     "build": "rm -rf dist && webpack --bail --progress --build --tc",
     "lint": "eslint --format table --ext .js,.jsx .",
-    "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel-core/register --require ignore-styles --recursive \"./src/components/**/*.spec.js\"",
+    "test": "cross-env NODE_ENV=test mocha --reporter nyan --compilers js:babel-core/register --require ignore-styles --recursive \"./src/components/**/*.spec.js\"",
     "test:watch": "watch-run -i -p 'src/**/*' npm run test"
   },
   "devDependencies": {

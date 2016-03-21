@@ -24,7 +24,7 @@ To contribute to the repository, please create a feature branch off of the dev b
 
 ### Code Style
 
-Checkout the code and comments in `src/components/ExampleComponent` for an example React component, `.scss` file, and tests.
+***Checkout the code and comments in `src/components/ExampleComponent` for an example React component, `.scss` file, and tests.***
 
 JavaScript
   - Please use ES2015 syntax whenever possible

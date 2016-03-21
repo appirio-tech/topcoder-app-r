@@ -24,6 +24,8 @@ To contribute to the repository, please create a feature branch off of the dev b
 
 ### Code Style
 
+Checkout the code and comments in `src/components/ExampleComponent` for an example React component, `.scss` file, and tests.
+
 JavaScript
   - Please use ES2015 syntax whenever possible
   - Specific rules are enforced via `.eslintrc.json`
@@ -65,7 +67,7 @@ SCSS Files
 - `npm run test:watch` will rerun tests when files change
 - Place your test files in the same directory as the component it's testing
 - Test files should be named `ComponentName.spec.js`
-- Checkout the ExampleTest directory in `/src/components`
+- Checkout the ExampleComponent directory in `/src/components`
 
 ## Recommended Developer Tools
 

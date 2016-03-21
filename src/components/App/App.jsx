@@ -2,7 +2,7 @@ import React from 'react'
 // import Nav from '../Nav/Nav'
 // <Nav />
 
-require('./app.scss')
+require('./App.scss')
 
 const App = (props) => {
   return (

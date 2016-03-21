@@ -3,7 +3,7 @@ import UserInfo from './UserInfo'
 import UserStats from './UserStats'
 import classNames from 'classnames'
 
-require('./member-item.scss')
+require('./MemberItem.scss')
 
 const MemberItem = ({ member, userPlace, exactMatch }) => {
   const memberItemStyles = classNames(

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import RobotIcon from '../../icons/RobotIcon'
 
-require('./no-results.scss')
+require('./NoResults.scss')
 
 const NoResults = ({ entry }) => {
   return (

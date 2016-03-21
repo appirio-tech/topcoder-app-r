@@ -1,6 +1,6 @@
 import React from 'react'
 
-require('./loading-indicator.scss')
+require('./LoadingIndicator.scss')
 
 const LoadingIndicator = () => {
   return (

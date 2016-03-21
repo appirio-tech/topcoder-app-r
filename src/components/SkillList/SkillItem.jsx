@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-require('./skill-item.scss')
+require('./SkillItem.scss')
 
 const SkillItem = ({ skill }) =>
   <span className="skill-hash">#

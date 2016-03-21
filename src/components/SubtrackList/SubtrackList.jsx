@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import SubtrackItem from './SubtrackItem'
 
-require('./subtrack-list.scss')
+require('./SubtrackList.scss')
 
 const SubtrackList = ({ subtracks }) => {
   return (

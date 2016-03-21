@@ -7,7 +7,7 @@ import NoResults from '../NoResults/NoResults'
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
 import { getSearchTagPreposition } from '../../helpers'
 
-require('./member-search-view.scss')
+require('./MemberSearchView.scss')
 
 const MemberSearchView = (props) => {
   let usernameMatches = props.usernameSearchResults

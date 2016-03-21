@@ -15,3 +15,15 @@ export const TOP_MEMBER_SEARCH_FAILURE = 'TOP_MEMBER_SEARCH_FAILURE'
 // Urls
 export const memberSearchUrl = ' https://xsmjngybcg.execute-api.us-east-1.amazonaws.com/dev/v3/members/_search'
 export const memberSearchTagUrl = 'https://search-topcoder-squ62azmqlwkvnmztjmk4cq5fq.us-east-1.es.amazonaws.com/tags/_search'
+export const challengeSearchUrl = 'https://ol348e2ya5.execute-api.us-east-1.amazonaws.com/dev'
+
+
+// Get paramterized domain from process.env.API_URL_***
+// Detect if a search term is a tag
+// https://xsmjngybcg.execute-api.us-east-1.amazonaws.com/dev/v3/tags/?filter=name%3Djava
+
+// Auto suggest for keywords
+// https://xsmjngybcg.execute-api.us-east-1.amazonaws.com/dev/v3/tags/_suggest?q=jav
+
+// Challenge search
+// https://ol348e2ya5.execute-api.us-east-1.amazonaws.com/dev

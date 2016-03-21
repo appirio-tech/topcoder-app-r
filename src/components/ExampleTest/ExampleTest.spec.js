@@ -5,6 +5,8 @@ import { renderToStaticMarkup as render } from 'react/lib/ReactDOMServer'
 
 import ExampleTest from './ExampleTest.jsx'
 
+// chai.should() only needs to be called once for all test files
+// Do not include in other tests
 chai.should()
 
 describe('Example Test', () => {

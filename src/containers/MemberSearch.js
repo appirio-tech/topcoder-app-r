@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import MemberSearchView from '../components/MemberSearch/MemberSearch'
+import MemberSearchView from '../components/MemberSearch/MemberSearchView'
 import loadMemberSearch from '../actions/loadMemberSearch'
 import { setSearchTerm } from '../actions/setSearchTerm'
 

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import SkillItem from './SkillItem'
 
 import classNames from 'classnames'
-require('./skill-list.scss')
+require('./SkillList.scss')
 
 // FIXME: Show only 4-5 skills based on what???
 // backend should return?

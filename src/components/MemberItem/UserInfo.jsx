@@ -6,7 +6,7 @@ import ISOCountries from '../../helpers/ISOCountries'
 
 import DefaultUserAvatarIcon from '../../icons/DefaultUserAvatarIcon'
 import LevelDesignatorIcon from '../../icons/LevelDesignatorIcon'
-require('./user-info.scss')
+require('./UserInfo.scss')
 
 const UserInfo = ({ user, userPlace, exactMatch }) => {
   const memberSince = moment(user.createdAt).format('MMM YYYY')

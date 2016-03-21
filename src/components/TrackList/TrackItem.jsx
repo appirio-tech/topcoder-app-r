@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import classNames from 'classnames'
 
-require('./track-item.scss')
+require('./TrackItem.scss')
 
 const TrackItem = ({ track }) => {
   const subtrackStyles = classNames(

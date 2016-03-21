@@ -4,7 +4,7 @@ import SubtrackList from '../SubtrackList/SubtrackList'
 import TrackList from '../TrackList/TrackList'
 import { getMostRecentSubtracks } from '../../helpers'
 
-require('./user-stats.scss')
+require('./UserStats.scss')
 
 const UserStats = ({ member }) => {
   // TODO: Add functionality for no skills or tracks

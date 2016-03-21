@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-require('./list-container.scss')
+require('./ListContainer.scss')
 
 const ListContainer = ({ headerText, children, listCount }) => {
   listCount = <span className="list-count"> {listCount}</span>

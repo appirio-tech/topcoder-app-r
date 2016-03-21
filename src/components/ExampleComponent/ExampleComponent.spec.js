@@ -46,10 +46,17 @@ describe('Example Test', () => {
     itemNames.should.equal('peaches bananas strawberries')
   })
 
-  it('dynamically adds the on-sale class for items that are on sale', () => {
-    const onSale = $('.on-sale')
+  it('adds the on-sale class for items that are on sale', () => {
+    const onSaleItem = $('.on-sale')
 
-    onSale.length.should.equal(1)
-    onSale.text().should.equal('bananas')
+    onSaleItem.length.should.equal(1)
+    onSaleItem.text().should.equal('bananas')
+  })
+
+  it('adds the dynamic item-color class for items that are featured', () => {
+    const isFeaturedItem = $('.peaches-color')
+
+    isFeaturedItem.length.should.equal(1)
+    isFeaturedItem.text().should.equal('peaches')
   })
 })

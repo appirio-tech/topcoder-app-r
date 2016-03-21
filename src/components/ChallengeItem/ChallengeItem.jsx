@@ -5,7 +5,7 @@ require('./ChallengeItem.scss')
 const ChallengeItem = ({ challenge }) => {
   console.log(challenge)
   return (
-    <div>
+    <div className="challenge-item">
       {challenge.name} from track {challenge.track}
     </div>
   )

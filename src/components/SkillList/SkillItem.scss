@@ -1,30 +1,23 @@
-.skill-item.skill-match {
-  .skill-hash,
-  .skill-text {
-    color: #323638;
-  }
-}
+@import 'topcoder/tc-includes';
 
 .skill-item {
   position: static;
+  margin-left: 5px;
+  color: $gray;
+  cursor: default;
 
-  .skill-text:hover,
-  .skill-text.special-tag:hover {
-    color: #0096FF;
-    cursor: pointer;
+  .skill-text {
+    color: #888894;
   }
 
-  .skill-text.special-tag {
+  .searched-skill {
+    color: #323638;
+  }
+
+  .special-tag {
     color: #B47DD6;
   }
-}
-
-.skill-hash {
-  // margin added on top of what we got from submissions, change!!!
-  margin-left: 5px;
-  color: #d1d3d4;
-}
-
-.skill-text {
-  color: #737380;
+  &:hover, &:hover .skill-text {
+    color: $primary;
+  }
 }

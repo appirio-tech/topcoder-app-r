@@ -4,15 +4,13 @@ import SkillItem from './SkillItem'
 import classNames from 'classnames'
 require('./SkillList.scss')
 
-// FIXME: Show only 4-5 skills based on what???
-// backend should return?
 const SkillList = ({ skills }) => {
   const skillListStyles = classNames(
     'skill-list',
     { 'no-skills': !skills.length }
   )
 
-  skills = skills.slice(0,4).map(s => <SkillItem key={s.id} skill={s.name}/>)
+  skills = skills.map(s => <SkillItem key={s.id} skill={s}/>)
 
   return (
     <div className={skillListStyles}>

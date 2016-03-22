@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import SkillList from '../SkillList/SkillList'
+import TagList from '../TagList/TagList'
 import SubtrackList from '../SubtrackList/SubtrackList'
 import TrackList from '../TrackList/TrackList'
 import { getMostRecentSubtracks, sortSkillsByScoreAndTag } from '../../helpers'
@@ -23,7 +23,7 @@ const UserStats = ({ member, searchTermTag }) => {
   return (
     <div className="user-stats">
       <div className="user-stats-wrap">
-        <SkillList skills={skills} />
+        <TagList tags={skills} label="Skills" emptyMessage="No Skills"/>
 
         {userStatsList}
       </div>

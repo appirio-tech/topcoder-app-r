@@ -1,23 +1,23 @@
 @import 'topcoder/tc-includes';
 
-.skill-item {
+.tag-item {
   position: static;
   margin-left: 5px;
   color: $gray;
   cursor: default;
 
-  .skill-text {
+  .tag-text {
     color: #888894;
   }
 
-  .searched-skill {
+  .searched-tag {
     color: #323638;
   }
 
   .special-tag {
     color: #B47DD6;
   }
-  &:hover, &:hover .skill-text {
+  &:hover, &:hover .tag-text {
     color: $primary;
   }
 }

@@ -1,0 +1,23 @@
+@import 'topcoder/tc-includes';
+
+.tag-item {
+  position: static;
+  margin-left: 5px;
+  color: $gray;
+  cursor: default;
+
+  .tag-text {
+    color: #888894;
+  }
+
+  .searched-tag {
+    color: #323638;
+  }
+
+  .special-tag {
+    color: #B47DD6;
+  }
+  &:hover, &:hover .tag-text {
+    color: $primary;
+  }
+}

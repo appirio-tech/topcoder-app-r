@@ -27,3 +27,6 @@ export const challengeSearchUrl = 'https://ol348e2ya5.execute-api.us-east-1.amaz
 
 // Challenge search
 // https://ol348e2ya5.execute-api.us-east-1.amazonaws.com/dev
+
+
+// https://internal.api.topcoder-dev.com/v3/leaderboards/?filter=name%3Djava%26type%3DMEMBER_SKILL

@@ -41,6 +41,28 @@ export function memberColorByLevel(userLevel) {
   return color
 }
 
+// Process member skills
+export function sortSkillsByScoreAndTag(skills, tag, numSkillsToReturn = Infinity) {
+  if (!skills) return []
+
+  const sortedSkills = _.orderBy(skills, 'score', 'desc')
+
+  // If the user has the tag, move it to the front
+  if (tag) {
+    const tagIndex = _.findIndex(sortedSkills, skill => {
+      return skill.name === tag.name
+    })
+
+    const tagSkill = sortedSkills.splice(tagIndex, 1)[0]
+    tagSkill.searchedTag = true
+
+    sortedSkills.unshift(tagSkill)
+  }
+
+  return sortedSkills.slice(0, numSkillsToReturn)
+
+}
+
 // Subtrack Abbreviations
 export function getSubtrackAbbreviation(subtrack) {
   const subtrackAbbreviations = {

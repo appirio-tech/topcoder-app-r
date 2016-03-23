@@ -2,14 +2,14 @@ import _ from 'lodash'
 import { SET_SEARCH_TERM, SET_SEARCH_TAG } from '../config/constants'
 
 const initialState = {
-  currentSearchTerm: ''
+  previousSearchTerm: null
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
   case SET_SEARCH_TERM:
     return _.merge({}, state, {
-      currentSearchTerm: action.currentSearchTerm
+      previousSearchTerm: action.searchTerm.toLowerCase()
     })
 
   case SET_SEARCH_TAG:

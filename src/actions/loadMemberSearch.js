@@ -1,12 +1,12 @@
 import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
-import { status, json } from '../helpers'
+import { status, json, mapTagToLeaderboardType } from '../helpers'
 import {
   START_MEMBER_SEARCH, CLEAR_MEMBER_SEARCH,
   USERNAME_SEARCH_SUCCESS, USERNAME_SEARCH_FAILURE,
   TOP_MEMBER_SEARCH_SUCCESS, TOP_MEMBER_SEARCH_FAILURE,
-  SET_SEARCH_TAG,
-  memberSearchUrl, memberSearchTagUrl } from '../config/constants'
+  SET_SEARCH_TAG, SET_SEARCH_TERM,
+  leaderboardUrl, memberSearchUrl, memberSearchTagUrl } from '../config/constants'
 
 export default function loadMemberSearch(searchTerm) {
   const memberSearchOptions = {
@@ -14,9 +14,19 @@ export default function loadMemberSearch(searchTerm) {
     headers: { 'Content-Type': 'application/json' }
   }
 
-  return (dispatch => {
-    dispatch({ type: CLEAR_MEMBER_SEARCH })
+  return ((dispatch, getState) => {
+    const state = getState()
+    const previousSearchTerm = state.searchTerm.previousSearchTerm
+    const isNewSearchTerm = searchTerm.toLowerCase() !== previousSearchTerm
+
+    if (isNewSearchTerm && state.memberSearch.loading) {
+      dispatch({ type: CLEAR_MEMBER_SEARCH })
+    } else {
+      return
+    }
+
     dispatch({ type: START_MEMBER_SEARCH })
+
     // TODO: Handle searchTerm === ''
 
     checkIfSearchTermIsATag(searchTerm)
@@ -29,10 +39,19 @@ export default function loadMemberSearch(searchTerm) {
           searchTermTag: tag
         })
 
-        memberSearchAPICalls.unshift(getTopMembers(tag.name))
+        memberSearchAPICalls.unshift(getTopMembers(tag))
       }
 
       return Promise.all(memberSearchAPICalls)
+      .then((results, hi) => {
+        console.log(results)
+        console.log(hi)
+        dispatch({ type: SET_SEARCH_TERM, searchTerm })
+      })
+      .finally(err => {
+        console.log('fewlkafjwlkaefjw: ', err)
+        console.log(`error message after Promise.all: ${err}`)
+      })
     })
 
     function checkIfSearchTermIsATag(searchTerm) {
@@ -91,9 +110,9 @@ export default function loadMemberSearch(searchTerm) {
       .then(data => {
         const usernameSearchResults = _.get(data, 'result.content', [])
 
+        throw new Error('my fake error')
         console.log('Member list: ')
         console.log(usernameSearchResults)
-        
         dispatch({
           type: USERNAME_SEARCH_SUCCESS,
           usernameSearchResults,
@@ -103,6 +122,7 @@ export default function loadMemberSearch(searchTerm) {
         return usernameSearchResults
       })
       .catch(err => {
+        console.log('here')
         console.error(err)
         dispatch({
           type: USERNAME_SEARCH_FAILURE,
@@ -114,38 +134,11 @@ export default function loadMemberSearch(searchTerm) {
     }
 
     function getTopMembers(tag) {
-      // FIXME: handle other tags besides skill
-      // once backend supports it
+      const leaderboardType = mapTagToLeaderboardType(tag.domain)
+      const queryString = `?filter=name%3D${tag.name}%26type%3D${leaderboardType}`
+      const url = leaderboardUrl + queryString
 
-      const options = _.merge({}, memberSearchOptions, {
-        body: JSON.stringify({
-          param: {
-            from: 0, size: 10,
-            query: {
-              nested: {
-                path: 'skills',
-                query: { match: {'skills.name': tag} }
-              }
-            },
-            sort: [
-              {
-                'skills.score': {
-                  order: 'desc',
-                  nested_filter: { //eslint-disable-line camelcase
-                    term: {
-                      'skills.name': tag
-                    }
-                  }
-                }
-              },
-              { wins: 'desc' }
-            ]
-          },
-          method: 'get'
-        })
-      })
-
-      return fetch(memberSearchUrl, options)
+      return fetch(url)
       .then(status)
       .then(json)
       .then(data => {

@@ -14,20 +14,17 @@ const MemberSearchView = (props) => {
   const totalCount    = props.totalUsernameMatches
   const topMembers    = props.topMemberSearchResults
   const isLoading     = props.loading
-  const searchTerm    = props.currentSearchTerm
+  const searchTerm    = props.previousSearchTerm
   const tag           = props.searchTermTag
 
   let memberSearchContent
   let memberMatch
 
   if (!isLoading && usernameMatches.length) {
-    // FIXME: show complete count, not just the first 10
-    // BADDDDD MUTATING STATE
-
-    const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm.toLowerCase()
+    const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
 
     if (isExactMatch && !tag) {
-      memberMatch = <MemberItem member={usernameMatches[0]} exactMatch />
+      memberMatch = <MemberItem member={usernameMatches[0]} withBio />
       usernameMatches = usernameMatches.slice(1)
     }
 

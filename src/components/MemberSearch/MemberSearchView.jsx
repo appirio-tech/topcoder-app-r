@@ -12,8 +12,7 @@ import { getSearchTagPreposition } from '../../helpers'
 require('./MemberSearchView.scss')
 
 const MemberSearchView = (props) => {
-  const { loading, error, moreMatchesAvailable }    = props
-  const { usernameMatches, totalCount, topMembers } = props
+  const { loading, error, usernameMatches, totalCount, topMembers } = props
   const { previousSearchTerm: searchTerm, searchTermTag: tag } = props
 
   const { exactMemberMatch, memberMatches } = renderUsernameMatches()
@@ -95,7 +94,7 @@ const MemberSearchView = (props) => {
       props.loadMemberSearch(searchTerm)
     }
 
-    if (!loading && !error && moreMatchesAvailable) {
+    if (!loading && !error && usernameMatches.length === 10) {
       return <LoadMoreButton callback={loadMore}/>
     }
 

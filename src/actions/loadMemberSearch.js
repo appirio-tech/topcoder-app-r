@@ -17,8 +17,9 @@ export default function loadMemberSearch(searchTerm) {
     if (isNewSearchTerm) {
       dispatch({ type: CLEAR_MEMBER_SEARCH })
     } else if (previousSearchTerm && numCurrentUsernameMatches >= 10) {
-      getUsernameMatches()
-      return
+      dispatch({ type: START_MEMBER_SEARCH })
+
+      return getUsernameMatches()
     }
 
     dispatch({ type: START_MEMBER_SEARCH })
@@ -44,14 +45,11 @@ export default function loadMemberSearch(searchTerm) {
     })
 
     function checkIfSearchTermIsATag() {
-      const url = memberSearchTagUrl + '/?q=' + searchTerm
+      const url = `${memberSearchTagUrl}?filter=name%3D${searchTerm}`
 
-      //FIXME: Remove fetch options when adding in new url
-      return fetchJSON(url, { method: 'POST' })
+      return fetchJSON(url)
       .then(data => {
-        const tag = data.hits.hits
-
-        return tag.length ? tag[0]._source : null
+        return _.get(data, 'result.content')[0]
       })
       .catch(err => {
         memberSearchFailure()
@@ -80,6 +78,8 @@ export default function loadMemberSearch(searchTerm) {
           usernameMatches,
           totalCount
         })
+
+        return usernameMatches
       })
       .catch(err => {
         dispatch({ type: MEMBER_SEARCH_FAILURE })
@@ -100,6 +100,8 @@ export default function loadMemberSearch(searchTerm) {
           type: TOP_MEMBER_SEARCH_SUCCESS,
           topMembers
         })
+
+        return topMembers
       })
       .catch(err => {
         memberSearchFailure()

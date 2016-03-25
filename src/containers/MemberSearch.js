@@ -23,7 +23,9 @@ class MemberSearch extends Component {
   }
 
   handleScroll() {
-    if (this.props.usernameMatches.length > 10) {
+    const { moreMatchesAvailable, usernameMatches, loading } = this.props
+
+    if (!loading && moreMatchesAvailable && usernameMatches.length > 10) {
       isEndOfScreen(this.props.loadMemberSearch, this.searchTermFromQuery)
     }
   }

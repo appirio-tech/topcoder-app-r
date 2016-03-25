@@ -10,7 +10,7 @@ const TagList = ({ tags, label, emptyMessage = '' }) => {
     { 'no-tags': !tags.length }
   )
 
-  tags = tags.map(t => <TagItem key={t.id} tag={t}/>)
+  tags = tags.map((t, i) => <TagItem key={i} tag={t}/>)
 
   return (
     <div className={tagListStyles}>

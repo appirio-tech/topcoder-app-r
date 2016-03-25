@@ -13,20 +13,14 @@ export const USERNAME_SEARCH_SUCCESS   = 'USERNAME_SEARCH_SUCCESS'
 export const TOP_MEMBER_SEARCH_SUCCESS = 'TOP_MEMBER_SEARCH_SUCCESS'
 
 // Urls
-export const memberSearchTagUrl = 'https://search-topcoder-squ62azmqlwkvnmztjmk4cq5fq.us-east-1.es.amazonaws.com/tags/_search'
+const INTERNAL_API = 'https://internal-api.topcoder-dev.com/v3' // Change to process.env.INTERNAL_API
 
-export const memberSearchUrl = 'https://internal-api.topcoder-dev.com/v3/members/_search/'
+export const memberSearchTagUrl = 'https://xsmjngybcg.execute-api.us-east-1.amazonaws.com/dev/v3/tags/'
+
+export const memberSearchUrl = `${INTERNAL_API}/members/_search/`
 export const challengeSearchUrl = 'https://ol348e2ya5.execute-api.us-east-1.amazonaws.com/dev'
 
-// FIXME: parameterize
-export const leaderboardUrl = 'https://internal-api.topcoder-dev.com/v3/leaderboards/'
-
-// Detect if a search term is a tag
-// https://xsmjngybcg.execute-api.us-east-1.amazonaws.com/dev/v3/tags/?filter=name%3Djava
-
-// Auto suggest for keywords
-// https://xsmjngybcg.execute-api.us-east-1.amazonaws.com/dev/v3/tags/_suggest?q=jav
+export const leaderboardUrl = `${INTERNAL_API}/leaderboards/`
 
 // Challenge search
 // https://ol348e2ya5.execute-api.us-east-1.amazonaws.com/dev
-

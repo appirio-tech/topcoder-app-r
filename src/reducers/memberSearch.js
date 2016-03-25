@@ -10,7 +10,7 @@ const initialState = {
   error: false,
   usernameMatches: [],
   totalCount: 0,
-  moreMatchesAvailable: true,
+  moreMatchesAvailable: false,
   topMembers: []
 }
 

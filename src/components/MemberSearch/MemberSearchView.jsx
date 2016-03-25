@@ -12,9 +12,9 @@ import { getSearchTagPreposition } from '../../helpers'
 require('./MemberSearchView.scss')
 
 const MemberSearchView = (props) => {
-  const { usernameMatches, totalCount, topMembers, loading, error } = props
-  const searchTerm = props.previousSearchTerm
-  const tag        = props.searchTermTag
+  const { loading, error, moreMatchesAvailable }    = props
+  const { usernameMatches, totalCount, topMembers } = props
+  const { previousSearchTerm: searchTerm, searchTermTag: tag } = props
 
   const { exactMemberMatch, memberMatches } = renderUsernameMatches()
   const topMemberLeaderboard = renderTopMembers()
@@ -36,13 +36,13 @@ const MemberSearchView = (props) => {
   )
 
   function renderPageState() {
-    if (loading) {
+    if (loading && !usernameMatches.length) {
       return <LoadingIndicator />
 
     } else if (error) {
       return <PageError />
 
-    } else if (!loading && searchTerm && !usernameMatches.length && !topMembers.length) {
+    } else if (searchTerm && !usernameMatches.length && !topMembers.length) {
       return <NoResults entry={searchTerm} />
     }
   }
@@ -66,7 +66,7 @@ const MemberSearchView = (props) => {
     let exactMemberMatch
     let restOfUsernameMatches
 
-    if (!loading && usernameMatches.length) {
+    if (usernameMatches.length) {
       const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
 
       if (isExactMatch && !tag) {
@@ -95,7 +95,7 @@ const MemberSearchView = (props) => {
       props.loadMemberSearch(searchTerm)
     }
 
-    if (!loading && usernameMatches.length <= 10) {
+    if (!loading && !error && moreMatchesAvailable) {
       return <LoadMoreButton callback={loadMore}/>
     }
 

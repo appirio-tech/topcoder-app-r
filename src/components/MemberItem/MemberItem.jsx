@@ -5,15 +5,15 @@ import classNames from 'classnames'
 
 require('./MemberItem.scss')
 
-const MemberItem = ({ member, userPlace, exactMatch }) => {
+const MemberItem = ({ member, userPlace, withBio }) => {
   const memberItemStyles = classNames(
     'member-item',
-    { 'exact-match': exactMatch }
+    { 'with-bio': withBio }
   )
 
   return (
     <div className={memberItemStyles}>
-      <UserInfo user={member} userPlace={userPlace} exactMatch={exactMatch}/>
+      <UserInfo user={member} userPlace={userPlace} withBio={withBio}/>
 
       <UserStats member={member} />
     </div>
@@ -22,7 +22,8 @@ const MemberItem = ({ member, userPlace, exactMatch }) => {
 
 MemberItem.propTypes = {
   member   : PropTypes.object.isRequired,
-  userPlace: PropTypes.number
+  userPlace: PropTypes.number,
+  withBio  : PropTypes.bool
 }
 
 export default MemberItem

@@ -1,173 +1,119 @@
 import _ from 'lodash'
-import fetch from 'isomorphic-fetch'
-import { status, json } from '../helpers'
+import { fetchJSON, mapTagToLeaderboardType } from '../helpers'
 import {
   START_MEMBER_SEARCH, CLEAR_MEMBER_SEARCH,
-  USERNAME_SEARCH_SUCCESS, USERNAME_SEARCH_FAILURE,
-  TOP_MEMBER_SEARCH_SUCCESS, TOP_MEMBER_SEARCH_FAILURE,
-  SET_SEARCH_TAG,
-  memberSearchUrl, memberSearchTagUrl } from '../config/constants'
+  USERNAME_SEARCH_SUCCESS, MEMBER_SEARCH_FAILURE,
+  TOP_MEMBER_SEARCH_SUCCESS, RESET_SEARCH_TERM,
+  SET_SEARCH_TAG, SET_SEARCH_TERM,
+  leaderboardUrl, memberSearchUrl, memberSearchTagUrl } from '../config/constants'
 
 export default function loadMemberSearch(searchTerm) {
-  const memberSearchOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-  }
+  return ((dispatch, getState) => {
+    const state = getState()
+    const numCurrentUsernameMatches = state.memberSearch.usernameMatches.length
+    const previousSearchTerm = state.searchTerm.previousSearchTerm
+    const isNewSearchTerm = searchTerm.toLowerCase() !== previousSearchTerm
 
-  return (dispatch => {
-    dispatch({ type: CLEAR_MEMBER_SEARCH })
+    if (isNewSearchTerm) {
+      dispatch({ type: CLEAR_MEMBER_SEARCH })
+    } else if (previousSearchTerm && numCurrentUsernameMatches >= 10) {
+      dispatch({ type: START_MEMBER_SEARCH })
+
+      return getUsernameMatches()
+    }
+
     dispatch({ type: START_MEMBER_SEARCH })
-    // TODO: Handle searchTerm === ''
+    dispatch({ type: SET_SEARCH_TERM, searchTerm })
 
-    checkIfSearchTermIsATag(searchTerm)
+    return checkIfSearchTermIsATag()
     .then((tag) => {
-      const memberSearchAPICalls = [getUsernameMatches(searchTerm)]
+      const memberSearchAPICalls = [getUsernameMatches()]
 
       if (tag) {
-        dispatch({
-          type: SET_SEARCH_TAG,
-          searchTermTag: tag
-        })
-
-        memberSearchAPICalls.unshift(getTopMembers(tag.name))
+        memberSearchAPICalls.unshift(getTopMembers(tag))
       }
 
       return Promise.all(memberSearchAPICalls)
-    })
+      .then(() => {
+        dispatch({ type: SET_SEARCH_TAG, searchTermTag: tag })
 
-    function checkIfSearchTermIsATag(searchTerm) {
-      const url = memberSearchTagUrl + '/?q=' + searchTerm
-
-      return fetch(url, memberSearchOptions)
-      .then(status)
-      .then(json)
-      .then(data => {
-        const tag = data.hits.hits
-
-        return tag.length ? tag[0]._source : null
       })
       .catch(err => {
-        // FIXME: How do we handle error determining if search term is a tag?
-        console.error(err)
-        // Error loading leaderboard and load username results only?
-        // dispatch({ type: USERNAME_SEARCH_FAILURE })
+        memberSearchFailure()
+        throw new Error(`Error thrown fetching member lists: ${err}`)
+      })
+    })
+
+    function checkIfSearchTermIsATag() {
+      const url = `${memberSearchTagUrl}?filter=name%3D${searchTerm}`
+
+      return fetchJSON(url)
+      .then(data => {
+        return _.get(data, 'result.content')[0]
+      })
+      .catch(err => {
+        memberSearchFailure()
+        throw new Error(`Error determining if search term is a tag: ${err}`)
+
       })
     }
 
-    function getUsernameMatches(searchTerm) {
-      const options = _.merge({}, memberSearchOptions, {
-        body: JSON.stringify({
-          param: {
-            from: 0, size: 11,
-            query: {
-              filtered: {
-                query: {
-                  bool: {
-                    should: [
-                      { match: { 'handle.phrase': searchTerm } },
-                      { match: { handle: searchTerm } }
-                    ]
-                  }
-                },
-                filter: {
-                  bool: {
-                    should: [
-                      { exists: { field: 'description' } },
-                      { exists: { field: 'skills' } },
-                      { exists: { field: 'photoURL' } }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          method: 'get'
-        })
-      })
+    function getUsernameMatches() {
+      const offset = numCurrentUsernameMatches
+      const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${searchTerm}&offset=${offset}&limit=10`
 
-      return fetch(memberSearchUrl, options)
-      .then(status)
-      .then(json)
+      return fetchJSON(url)
       .then(data => {
-        const usernameSearchResults = _.get(data, 'result.content', [])
+        const usernameMatches = _.get(data, 'result.content')
+        const totalCount      = _.get(data, 'result.metadata.totalCount')
 
-        console.log('Member list: ')
-        console.log(usernameSearchResults)
-        
+        if (!_.isArray(usernameMatches)) {
+          throw new Error('Expected array for username response results')
+        } else if (!_.isNumber(totalCount)) {
+          throw new Error('Expected number for metadata total count')
+        }
+
         dispatch({
           type: USERNAME_SEARCH_SUCCESS,
-          usernameSearchResults,
-          totalUsernameMatches: _.get(data, 'result.metadata.totalCount', 0)
+          usernameMatches,
+          totalCount
         })
 
-        return usernameSearchResults
+        return usernameMatches
       })
       .catch(err => {
-        console.error(err)
-        dispatch({
-          type: USERNAME_SEARCH_FAILURE,
-          usernameSearchResults: []
-        })
-
-        return []
+        dispatch({ type: MEMBER_SEARCH_FAILURE })
+        throw new Error(`Error fetching username matches: ${err}`)
       })
     }
 
     function getTopMembers(tag) {
-      // FIXME: handle other tags besides skill
-      // once backend supports it
+      const leaderboardType = mapTagToLeaderboardType(tag.domain)
+      const queryString = `?filter=name%3D${tag.name}%26type%3D${leaderboardType}`
+      const url = leaderboardUrl + queryString
 
-      const options = _.merge({}, memberSearchOptions, {
-        body: JSON.stringify({
-          param: {
-            from: 0, size: 10,
-            query: {
-              nested: {
-                path: 'skills',
-                query: { match: {'skills.name': tag} }
-              }
-            },
-            sort: [
-              {
-                'skills.score': {
-                  order: 'desc',
-                  nested_filter: { //eslint-disable-line camelcase
-                    term: {
-                      'skills.name': tag
-                    }
-                  }
-                }
-              },
-              { wins: 'desc' }
-            ]
-          },
-          method: 'get'
-        })
-      })
-
-      return fetch(memberSearchUrl, options)
-      .then(status)
-      .then(json)
+      return fetchJSON(url)
       .then(data => {
-        const topMemberSearchResults = _.get(data, 'result.content', [])
-        console.log('Topmembers: ', topMemberSearchResults)
+        const topMembers = _.get(data, 'result.content', [])
 
         dispatch({
           type: TOP_MEMBER_SEARCH_SUCCESS,
-          topMemberSearchResults
+          topMembers
         })
 
-        return topMemberSearchResults
+        return topMembers
       })
       .catch(err => {
-        console.error(err)
-        dispatch({
-          type: TOP_MEMBER_SEARCH_FAILURE,
-          topMemberSearchResults: []
-        })
+        memberSearchFailure()
 
-        return []
+        throw new Error(`Error fetching top members: ${err}`)
       })
+    }
+
+    function memberSearchFailure() {
+      dispatch({ type: MEMBER_SEARCH_FAILURE })
+      dispatch({ type: RESET_SEARCH_TERM})
     }
   })
 }
+

@@ -2,18 +2,32 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MemberSearchView from '../components/MemberSearch/MemberSearchView'
 import loadMemberSearch from '../actions/loadMemberSearch'
-import { setSearchTerm } from '../actions/setSearchTerm'
+import { isEndOfScreen } from '../helpers'
 
 class MemberSearch extends Component {
   constructor(props) {
     super(props)
+
+    this.handleScroll = this.handleScroll.bind(this)
   }
 
   componentWillMount() {
-    const searchTermFromQuery = this.props.location.query.q
+    window.addEventListener('scroll', this.handleScroll)
 
-    this.props.setSearchTerm(searchTermFromQuery)
-    this.props.loadMemberSearch(searchTermFromQuery)
+    this.searchTermFromQuery = this.props.location.query.q
+    this.props.loadMemberSearch(this.searchTermFromQuery)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+
+  handleScroll() {
+    const { moreMatchesAvailable, usernameMatches, loading } = this.props
+
+    if (!loading && moreMatchesAvailable && usernameMatches.length > 10) {
+      isEndOfScreen(this.props.loadMemberSearch, this.searchTermFromQuery)
+    }
   }
 
   render() {
@@ -24,19 +38,18 @@ class MemberSearch extends Component {
 const mapStateToProps = ({ memberSearch, searchTerm }) => {
   return {
     loading: memberSearch.loading,
+    error  : memberSearch.error,
 
-    usernameSearchResults : memberSearch.usernameSearchResults,
-    totalUsernameMatches  : memberSearch.totalUsernameMatches,
-    topMemberSearchResults: memberSearch.topMemberSearchResults,
+    usernameMatches     : memberSearch.usernameMatches,
+    moreMatchesAvailable: memberSearch.moreMatchesAvailable,
+    totalCount          : memberSearch.totalCount,
+    topMembers          : memberSearch.topMembers,
 
-    currentSearchTerm: searchTerm.currentSearchTerm,
-    searchTermTag    : searchTerm.searchTermTag
+    previousSearchTerm: searchTerm.previousSearchTerm,
+    searchTermTag     : searchTerm.searchTermTag
   }
 }
 
-const actionsToBind = {
-  loadMemberSearch,
-  setSearchTerm
-}
+const actionsToBind = { loadMemberSearch }
 
 export default connect(mapStateToProps, actionsToBind)(MemberSearch)

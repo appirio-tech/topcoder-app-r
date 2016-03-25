@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react'
 import MemberItem from '../MemberItem/MemberItem'
 
 const TopMemberList = ({ topMembers }) => {
-  topMembers = topMembers
+  // FIXME: change to use lodash!!!!
+  topMembers = topMembers.slice(0)
     .sort((a, b) => {
       return b.wins - a.wins
     })

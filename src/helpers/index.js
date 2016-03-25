@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import fetch from 'isomorphic-fetch'
 
 // Fetch helpers
 export function status(response) {
@@ -11,6 +12,12 @@ export function status(response) {
 
 export function json(response) {
   return response.json()
+}
+
+export function fetchJSON(url, options) {
+  return fetch(url, options)
+  .then(status)
+  .then(json)
 }
 
 // Member Levels
@@ -207,6 +214,13 @@ export function getSubtrackStat(subtrackStats) {
   }
 }
 
+// Detect end of the page on scroll
+export function isEndOfScreen(callback, ...callbackArguments) {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    callback.apply(null, callbackArguments)
+  }
+}
+
 // Miscellaneous helpers
 export function getRoundedPercentage(number) {
   if (_.isFinite(number)) {
@@ -246,4 +260,12 @@ export function getSearchTagPreposition(tagType) {
   default:
     return 'in'
   }
+}
+
+export function mapTagToLeaderboardType(tagDomain) {
+  const tagToLeaderboardTypeMap = {
+    SKILLS: 'MEMBER_SKILL'
+  }
+
+  return tagToLeaderboardTypeMap[tagDomain]
 }

@@ -3,13 +3,15 @@ import MemberItem from '../MemberItem/MemberItem'
 
 require('./MemberList.scss')
 
-const MemberList = ({ members }) => (
-  <div className="member-list">
-    {members.map(member =>
-      <MemberItem key={member.userId} member={member} />
-    )}
-  </div>
-)
+const MemberList = (({ members }) => {
+  return (
+    <div className="member-list">
+      {members.map((member, i) =>
+        <MemberItem key={i} member={member} />
+      )}
+    </div>
+  )
+})
 
 MemberList.propTypes = {
   members: PropTypes.arrayOf(PropTypes.object).isRequired

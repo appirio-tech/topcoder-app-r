@@ -3,71 +3,104 @@ import ListContainer from '../ListContainer/ListContainer'
 import TopMemberList from '../TopMemberList/TopMemberList'
 import MemberList from '../MemberList/MemberList'
 import MemberItem from '../MemberItem/MemberItem'
+import PageError from '../PageError/PageError'
 import NoResults from '../NoResults/NoResults'
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
+import LoadMoreButton from '../LoadMoreButton/LoadMoreButton'
 import { getSearchTagPreposition } from '../../helpers'
 
 require('./MemberSearchView.scss')
 
 const MemberSearchView = (props) => {
-  let usernameMatches = props.usernameSearchResults
-  const totalCount    = props.totalUsernameMatches
-  const topMembers    = props.topMemberSearchResults
-  const isLoading     = props.loading
-  const searchTerm    = props.previousSearchTerm
-  const tag           = props.searchTermTag
+  const { usernameMatches, totalCount, topMembers, loading, error } = props
+  const searchTerm = props.previousSearchTerm
+  const tag        = props.searchTermTag
 
-  let memberSearchContent
-  let memberMatch
-
-  if (!isLoading && usernameMatches.length) {
-    const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
-
-    if (isExactMatch && !tag) {
-      memberMatch = <MemberItem member={usernameMatches[0]} withBio />
-      usernameMatches = usernameMatches.slice(1)
-    }
-
-    memberSearchContent = (
-      <ListContainer
-        headerText={`Usernames matching "${searchTerm}"`}
-        listCount={totalCount}
-      >
-        <MemberList members={usernameMatches} />
-      </ListContainer>
-    )
-  } else if (!isLoading && !usernameMatches.length) {
-    memberSearchContent = ''
-  } else {
-    // FIXME: move to page wide, not just memberSearchContent
-    memberSearchContent = <LoadingIndicator />
-  }
-
-  let topMemberContent = ''
-
-  if (topMembers.length && tag) {
-    const preposition = getSearchTagPreposition(tag.domain)
-
-    topMemberContent = (
-      <ListContainer headerText={`Top Members ${preposition} ${tag.name}`}>
-        <TopMemberList topMembers={topMembers} />
-      </ListContainer>
-    )
-  }
-
-  let noResults = null
-  if (!isLoading && !memberMatch && !usernameMatches.length && !topMembers.length) {
-    noResults = <NoResults entry={searchTerm} />
-  }
+  const { exactMemberMatch, memberMatches } = renderUsernameMatches()
+  const topMemberLeaderboard = renderTopMembers()
+  const pageStatus = renderPageState()
+  const loadMoreButton = renderLoadMoreButton()
 
   return (
     <div className="member-search-view">
-      {noResults}
-      {memberMatch}
-      {topMemberContent}
-      {memberSearchContent}
+      {pageStatus}
+
+      {exactMemberMatch}
+
+      {topMemberLeaderboard}
+
+      {memberMatches}
+
+      {loadMoreButton}
     </div>
   )
+
+  function renderPageState() {
+    if (loading) {
+      return <LoadingIndicator />
+
+    } else if (error) {
+      return <PageError />
+
+    } else if (!loading && searchTerm && !usernameMatches.length && !topMembers.length) {
+      return <NoResults entry={searchTerm} />
+    }
+  }
+
+  function renderTopMembers() {
+    if (topMembers.length && tag) {
+      const preposition = getSearchTagPreposition(tag.domain)
+
+      return (
+        <ListContainer headerText={`Top Members ${preposition} ${tag.name}`}>
+          <TopMemberList topMembers={topMembers} />
+        </ListContainer>
+      )
+    }
+
+    return null
+  }
+
+  function renderUsernameMatches() {
+    let memberMatches
+    let exactMemberMatch
+    let restOfUsernameMatches
+
+    if (!loading && usernameMatches.length) {
+      const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
+
+      if (isExactMatch && !tag) {
+        exactMemberMatch = <MemberItem member={usernameMatches[0]} withBio />
+        restOfUsernameMatches = usernameMatches.slice(1)
+      }
+
+      memberMatches = (
+        <ListContainer
+          headerText={`Usernames matching "${searchTerm}"`}
+          listCount={totalCount}
+        >
+          <MemberList members={exactMemberMatch ? restOfUsernameMatches : usernameMatches} />
+        </ListContainer>
+      )
+    }
+
+    return {
+      exactMemberMatch,
+      memberMatches
+    }
+  }
+
+  function renderLoadMoreButton() {
+    const loadMore = () => {
+      props.loadMemberSearch(searchTerm)
+    }
+
+    if (!loading && usernameMatches.length <= 10) {
+      return <LoadMoreButton callback={loadMore}/>
+    }
+
+    return null
+  }
 }
 
 export default MemberSearchView

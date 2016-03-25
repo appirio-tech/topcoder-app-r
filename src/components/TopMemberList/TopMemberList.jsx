@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import MemberItem from '../MemberItem/MemberItem'
 
 const TopMemberList = ({ topMembers }) => {
+  console.log(topMembers)
   topMembers = topMembers
     .sort((a, b) => {
       return b.wins - a.wins

@@ -8,7 +8,7 @@ import DefaultUserAvatarIcon from '../../icons/DefaultUserAvatarIcon'
 import LevelDesignatorIcon from '../../icons/LevelDesignatorIcon'
 require('./UserInfo.scss')
 
-const UserInfo = ({ user, userPlace, exactMatch }) => {
+const UserInfo = ({ user, userPlace, withBio }) => {
   const memberSince = moment(user.createdAt).format('MMM YYYY')
 
   const countryObject = _.find(ISOCountries, {alpha3: user.competitionCountryCode})
@@ -18,11 +18,11 @@ const UserInfo = ({ user, userPlace, exactMatch }) => {
 
   const numberWins = singlePluralFormatter(user.wins, 'win')
 
-
   // FIXME: Move nested HTML into separate React components!!!
 
   let userBio
-  if (exactMatch && user.description) {
+
+  if (withBio && user.description) {
     userBio = (
       <div className="user-bio">
         {user.description}

@@ -10,9 +10,9 @@ require('./UserStats.scss')
 const UserStats = ({ member, searchTermTag }) => {
   let userStatsList
 
-  if (member.stats) {
-    const subtracks = getMostRecentSubtracks(member.stats, 5)
+  const subtracks = getMostRecentSubtracks(member.stats, 5)
 
+  if (subtracks.length) {
     userStatsList = <SubtrackList subtracks={subtracks} />
   } else {
     userStatsList = <TrackList tracks={member.tracks} />

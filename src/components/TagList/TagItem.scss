@@ -17,7 +17,9 @@
   .special-tag {
     color: #B47DD6;
   }
-  &:hover, &:hover .tag-text {
+
+  &:hover,
+  &:hover .tag-text {
     color: $primary;
   }
 }

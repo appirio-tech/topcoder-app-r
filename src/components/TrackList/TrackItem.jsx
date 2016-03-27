@@ -4,7 +4,7 @@ import classNames from 'classnames'
 require('./TrackItem.scss')
 
 const TrackItem = ({ track }) => {
-  const subtrackStyles = classNames(
+  const trackStyles = classNames(
     'user-track-item',
     { [`track-${track.toLowerCase()}`]: track.length },
     { 'no-track': !track.length }
@@ -19,7 +19,7 @@ const TrackItem = ({ track }) => {
   track = trackMap[track]
 
   return (
-    <span className={subtrackStyles}>
+    <span className={trackStyles}>
       <span className="track-name">{track || 'No track'}</span>
     </span>
   )

@@ -13,8 +13,6 @@ const UserInfo = ({ user, userPlace, withBio }) => {
 
   const countryObject = _.find(ISOCountries, {alpha3: user.competitionCountryCode})
   const userCountry = countryObject ? countryObject.name : ''
-  // FIXME: common country name should come directly from backend
-  // const userCountry = user.competitionCountryName
 
   const numberWins = singlePluralFormatter(user.wins, 'win')
 

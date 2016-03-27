@@ -63,17 +63,21 @@ const MemberSearchView = (props) => {
   function renderUsernameMatches() {
     let memberMatches
     let exactMemberMatch
-    let restOfUsernameMatches = []
+    let restOfUsernameMatches
 
     if (usernameMatches.length) {
+      // Check if the first member in the array matches the search term
       const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
 
+      // If it's an exact match, and there is no leaderboard,
+      // show the exact match separately
       if (isExactMatch && !tag) {
         exactMemberMatch = <MemberItem member={usernameMatches[0]} withBio />
+
         restOfUsernameMatches = usernameMatches.slice(1)
       }
 
-      if (!restOfUsernameMatches.length) {
+      if (restOfUsernameMatches && restOfUsernameMatches.length === 0) {
         memberMatches = null
 
       } else {
@@ -86,7 +90,6 @@ const MemberSearchView = (props) => {
           </ListContainer>
         )
       }
-
     }
 
     return {
@@ -96,12 +99,12 @@ const MemberSearchView = (props) => {
   }
 
   function renderLoadMoreButton() {
-    const loadMore = () => {
+    const loadMoreMembers = () => {
       props.loadMemberSearch(searchTerm)
     }
 
     if (!loading && !error && usernameMatches.length === 10) {
-      return <LoadMoreButton callback={loadMore}/>
+      return <LoadMoreButton callback={loadMoreMembers}/>
     }
 
     return null

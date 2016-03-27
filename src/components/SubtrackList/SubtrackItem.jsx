@@ -13,12 +13,15 @@ const SubtrackItem = ({ subtrack }) => {
     'subtrack-item',
     'track-' + subtrack.track
   )
-  const statType   = subtrack.stat.type
+
+  const statType = subtrack.stat.type
+  let statValue  = subtrack.stat.value
+
+  statValue = statType === 'fulfillment'
+    ? getRoundedPercentage(statValue)
+    : numberWithCommas(statValue)
+
   const trophyIcon = statType === 'wins' ? <TrophyIcon /> : null
-
-  let statValue = subtrack.stat.value
-  statValue = statType === 'fulfillment' ? getRoundedPercentage(statValue) : numberWithCommas(statValue)
-
 
   return (
     <span className={subtrackStyles}>

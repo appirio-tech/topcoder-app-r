@@ -1,15 +1,13 @@
 import React, { PropTypes } from 'react'
+import _ from 'lodash'
 import MemberItem from '../MemberItem/MemberItem'
 
 const TopMemberList = ({ topMembers }) => {
-  // FIXME: change to use lodash!!!!
-  topMembers = topMembers.slice(0)
-    .sort((a, b) => {
-      return b.wins - a.wins
-    })
-    .map((member, index) => {
-      return <MemberItem key={member.userId} member={member} userPlace={index}/>
-    })
+  const sortedTopMembers = _.orderBy(topMembers, 'wins', 'desc')
+
+  topMembers = sortedTopMembers.map((member, i) => {
+    return <MemberItem key={i} member={member} userPlace={i}/>
+  })
 
   return (
     <div className="top-member-list">

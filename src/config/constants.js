@@ -13,7 +13,10 @@ export const USERNAME_SEARCH_SUCCESS   = 'USERNAME_SEARCH_SUCCESS'
 export const TOP_MEMBER_SEARCH_SUCCESS = 'TOP_MEMBER_SEARCH_SUCCESS'
 
 // Urls
-const INTERNAL_API = 'https://internal-api.topcoder-dev.com/v3' // Change to process.env.INTERNAL_API
+export const DOMAIN       = process.env.domain
+
+// FIXME: Change to process.env.INTERNAL_API after added to webpack
+export const INTERNAL_API = 'https://internal-api.topcoder-dev.com/v3'
 
 export const memberSearchTagUrl = 'https://xsmjngybcg.execute-api.us-east-1.amazonaws.com/dev/v3/tags/'
 

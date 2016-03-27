@@ -1,11 +1,15 @@
+@import 'topcoder/tc-includes';
+
 .user-track-item {
-  text-align: center;
   padding: 5px 10px;
-  border-radius: 131px;
-  display: inline-block;
-  color: #fff;
-  font-weight: 600;
+  margin-right: 5px;
   margin-bottom: 5px;
+  border-radius: 13px;
+  font-weight: 600;
+  color: $white;
+  &:last-child {
+    margin-right: 0;
+  }
 
   .track-name {
     font-size: 14px;

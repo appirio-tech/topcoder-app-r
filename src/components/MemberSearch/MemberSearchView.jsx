@@ -63,7 +63,7 @@ const MemberSearchView = (props) => {
   function renderUsernameMatches() {
     let memberMatches
     let exactMemberMatch
-    let restOfUsernameMatches
+    let restOfUsernameMatches = []
 
     if (usernameMatches.length) {
       const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
@@ -73,14 +73,20 @@ const MemberSearchView = (props) => {
         restOfUsernameMatches = usernameMatches.slice(1)
       }
 
-      memberMatches = (
-        <ListContainer
-          headerText={`Usernames matching "${searchTerm}"`}
-          listCount={totalCount}
-        >
-          <MemberList members={exactMemberMatch ? restOfUsernameMatches : usernameMatches} />
-        </ListContainer>
-      )
+      if (!restOfUsernameMatches.length) {
+        memberMatches = null
+
+      } else {
+        memberMatches = (
+          <ListContainer
+            headerText={`Usernames matching "${searchTerm}"`}
+            listCount={totalCount}
+          >
+            <MemberList members={exactMemberMatch ? restOfUsernameMatches : usernameMatches} />
+          </ListContainer>
+        )
+      }
+
     }
 
     return {

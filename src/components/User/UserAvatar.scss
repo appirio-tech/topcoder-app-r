@@ -1,0 +1,28 @@
+@import 'topcoder/tc-includes';
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+  position: relative;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  @media (max-width: 700px) {
+    margin-right: 10px;
+  }
+
+  .default-avatar {
+    background-color: $gray-light;
+    border-radius: 50%;
+  }
+
+  .user-rank {
+    width: 17.5px;
+    height: 16.5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+  }
+}

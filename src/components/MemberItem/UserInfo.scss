@@ -1,6 +1,5 @@
 @import 'topcoder/tc-includes';
 
-/* User Info Styles */
 .user-info {
   background-color: #fff;
   flex: 1 1 50%;
@@ -19,7 +18,6 @@
   }
 }
 
-/* User Profile Styles */
 .user-profile {
   display: flex;
 
@@ -32,85 +30,6 @@
     line-height: 28px;
     color: #B7B7B7;
     background-color: #fff;
-  }
-
-  .user-avatar {
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    margin-right: 20px;
-    position: relative;
-    @media (max-width: 700px) {
-      margin-right: 10px;
-    }
-
-    .default-avatar {
-      border-radius: 50%;
-    }
-
-    .user-image {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .user-rank {
-      width: 17.5px;
-      height: 16.5px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 10;
-    }
-  }
-
-  .user-avatar.user-avatar-small {
-    height: 50px;
-    width: 50px;
-
-    .user-image {
-      width: 50px;
-      height: 50px;
-    }
-
-    .user-rank-wrap {
-      width: 7px;
-      height: 7px;
-      display: inline-block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      border-radius: 50%;
-
-      .user-rank {
-        display: none;
-      }
-    }
-
-    .user-rank-wrap.level-1 {
-      background-color: #9D9FA0;
-    }
-
-    .user-rank-wrap.level-2 {
-      background-color: #69C329;
-    }
-
-    .user-rank-wrap.level-3 {
-      background-color: #616BD5;
-    }
-
-    .user-rank-wrap.level-4 {
-      background-color: #FCD617;
-    }
-
-    .user-rank-wrap.level-5 {
-      background-color: #EF3A3A;
-    }
   }
 
   .username-and-details {

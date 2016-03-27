@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import moment from 'moment'
-import { memberLevelByRating, singlePluralFormatter } from '../../helpers'
+import UserAvatar from '../User/UserAvatar'
 import ISOCountries from '../../helpers/ISOCountries'
+import { singlePluralFormatter } from '../../helpers'
 
-import DefaultUserAvatarIcon from '../../icons/DefaultUserAvatarIcon'
-import LevelDesignatorIcon from '../../icons/LevelDesignatorIcon'
 require('./UserInfo.scss')
 
 const UserInfo = ({ user, userPlace, withBio }) => {
@@ -27,28 +26,21 @@ const UserInfo = ({ user, userPlace, withBio }) => {
       </div>
     )
   }
-  const userRating = user.maxRating ? user.maxRating.rating : 0
-  const userLevel = memberLevelByRating(userRating)
 
-  let userImage
-  if (user.photoURL) {
-    userImage = <img className="user-image" src={user.photoURL} />
-  } else {
-    userImage = <DefaultUserAvatarIcon width={'60px'} height={'60px'}/>
+  if (_.isFinite(userPlace)) {
+    userPlace = <div className="list-number">{userPlace + 1}</div>
   }
 
   return (
     <div className="user-info">
       <div className="user-profile">
-        {userPlace !== undefined ? <div className="list-number">{userPlace + 1}</div> : ''}
+        {userPlace}
 
-        <div className="user-avatar">
-          {userImage}
-
-          <div className="user-rank-wrap">
-            <LevelDesignatorIcon level={userLevel}/>
-          </div>
-        </div>
+        <UserAvatar
+          showLevel
+          rating={user.maxRating.rating}
+          photoURL={user.photoURL}
+        />
 
         <div className="username-and-details">
           <div className="username">

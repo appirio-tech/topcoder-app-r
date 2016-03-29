@@ -41,7 +41,7 @@ const MemberSearchView = (props) => {
     } else if (error) {
       return <PageError />
 
-    } else if (searchTerm && !usernameMatches.length && !topMembers.length) {
+    } else if (searchTerm && !loading && !error && !usernameMatches.length && !topMembers.length) {
       return <NoResults entry={searchTerm} />
     }
   }

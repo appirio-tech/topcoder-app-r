@@ -33,6 +33,7 @@
     "moment": "^2.11.2",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "react-dotdotdot": "^1.0.4",
     "react-redux": "^4.0.6",
     "react-router": "^2.0.0-rc6",
     "redux": "^3.3.1",

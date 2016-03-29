@@ -1,0 +1,42 @@
+@import 'topcoder/tc-includes';
+
+.username-and-details {
+  max-width: 200px;
+}
+
+.username {
+  font-size: 22px;
+  line-height: 25px;
+  margin-bottom: 5px;
+  color: $black;
+  @media (max-width: 700px) {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 3px;
+  }
+}
+
+.user-details {
+  line-height: 16px;
+
+  .country-and-wins {
+    color: #394146;
+    font-size: 12px;
+    margin-bottom: 3px;
+    @media (max-width: 700px) {
+      font-size: 14px;
+    }
+
+    .user-country {
+      text-transform: uppercase;
+    }
+  }
+
+  .member-since {
+    color: #A3A3AE;
+    font-size: 12px;
+    @media (max-width: 700px) {
+      font-size: 14px;
+    }
+  }
+}

@@ -31,6 +31,8 @@ export function memberLevelByRating(userRating) {
     return false
   })
 
+  if (userLevel === -1) return 1
+
   return userLevel + 1
 }
 
@@ -114,7 +116,7 @@ export function getSubtrackAbbreviation(subtrack) {
     WIREFRAMES                    : 'Wf'
   }
 
-  const abbreviation = subtrackAbbreviations[subtrack] || '?'
+  const abbreviation = subtrackAbbreviations[subtrack] || 'O'
 
   return abbreviation
 }
@@ -250,6 +252,8 @@ export function singlePluralFormatter(num, noun) {
 }
 
 export function getSearchTagPreposition(tagType) {
+  tagType = tagType.toUpperCase()
+
   switch (tagType) {
   case 'SKILL':
     return 'in'

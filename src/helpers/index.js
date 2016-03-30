@@ -52,7 +52,7 @@ export function memberColorByLevel(userLevel) {
 
 // Process member skills
 export function sortSkillsByScoreAndTag(skills, tag, numSkillsToReturn = Infinity) {
-  if (!skills) return []
+  if (_.isEmpty(skills)) return []
 
   const sortedSkills = _.orderBy(skills, 'score', 'desc')
 

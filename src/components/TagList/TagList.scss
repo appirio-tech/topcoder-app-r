@@ -1,10 +1,8 @@
-.skill-list {
-  white-space: initial;
-  @media (max-width: 700px) {
-    white-space: nowrap;
-  }
+.tag-list {
+  margin-bottom: 5px;
+  white-space: nowrap;
 }
 
-.skill-list.no-skills {
+.tag-list.no-skills {
   color: #D1D3D4;
 }

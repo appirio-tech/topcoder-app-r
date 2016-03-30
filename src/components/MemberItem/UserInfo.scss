@@ -1,12 +1,12 @@
 @import 'topcoder/tc-includes';
 
 .user-info {
-  background-color: #fff;
-  flex: 1 1 50%;
+  background-color: $white;
+  flex-basis: 60%;
   padding: 20px;
   position: relative;
   @media (max-width: 700px) {
-    display: block;
+    flex-basis: 50%;
     border-bottom: 1px solid #F0F0F0;
   }
 }

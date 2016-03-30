@@ -7,6 +7,7 @@ import {
 
 import TrophyIcon from '../../icons/TrophyIcon'
 import classNames from 'classnames'
+require('./SubtrackItem.scss')
 
 const SubtrackItem = ({ subtrack }) => {
   const subtrackStyles = classNames(

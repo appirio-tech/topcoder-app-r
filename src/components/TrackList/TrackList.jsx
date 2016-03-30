@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import TrackItem from './TrackItem'
 
+require('./TrackList.scss')
+
 const TrackList = ({ tracks }) => {
   if (tracks.length) {
     tracks = tracks.map(t => <TrackItem key={t} track={t} />)
@@ -9,7 +11,7 @@ const TrackList = ({ tracks }) => {
   }
 
   return (
-    <div className="user-tracks-list">
+    <div className="track-list">
       {tracks}
     </div>
   )

@@ -1,62 +1,11 @@
-@import 'topcoder/tc-includes';
-
-/* Top Subtrack Item Styles */
-.user-tracks-list,
 .subtracks-list {
-  margin-top: 10px;
-
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   @media (max-width: 700px) {
+    flex-wrap: nowrap;
+    display: block;
+    width: auto;
     white-space: nowrap;
   }
-}
-
-.subtrack-item {
-  padding: 5px 10px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  border-radius: 13px;
-  font-weight: 600;
-  &:last-child {
-    margin-right: 0;
-  }
-
-  .subtrack-rating,
-  .subtrack-ranking,
-  .subtrack-wins {
-    font-weight: 600;
-    font-size: 14px;
-    color: #fff;
-    line-height: 16px;
-  }
-
-  .subtrack-wins svg {
-    margin-right: 2px;
-  }
-
-  .track-code {
-    color: rgba($white, 0.5);
-    margin-left: 3px;
-  }
-
-  .track-copilot-code {
-    color: #CECFD0;
-    margin-left: 4px;
-    font-size: 12px;
-  }
-}
-
-.subtrack-item.track-DESIGN {
-  background-color: #21B2F1;
-}
-
-.subtrack-item.track-DEVELOP {
-  background-color: #05C14F;
-}
-
-.subtrack-item.track-DATA_SCIENCE {
-  background-color: #FC9A00;
-}
-
-.subtrack-item.track-COPILOT {
-  background-color: #9D9FA0;
 }

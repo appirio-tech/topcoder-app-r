@@ -22,7 +22,7 @@ const UserStats = ({ member, searchTermTag }) => {
 
   return (
     <div className="user-stats">
-      <div className="user-stats-wrap">
+      <div className="aligner">
         <TagList tags={skills} label="Skills" emptyMessage="No Skills"/>
 
         {userStatsList}

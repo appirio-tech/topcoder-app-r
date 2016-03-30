@@ -1,13 +1,12 @@
 @import 'topcoder/tc-includes';
 
-.track-item {
+.subtrack-item {
   display: inline-block;
   padding: 5px 10px;
   margin-top: 5px;
   margin-right: 5px;
   border-radius: 13px;
   font-weight: 600;
-  color: $white;
   &:last-child {
     margin-right: 0;
     @media (max-width: 700px) {
@@ -15,36 +14,44 @@
     }
   }
 
-  &.track-design {
+  &.track-DESIGN {
     background-color: #21B2F1;
   }
 
-  &.track-develop {
+  &.track-DEVELOP {
     background-color: #05C14F;
   }
 
-  &.track-data_science {
+  &.track-DATA_SCIENCE {
     background-color: #FC9A00;
   }
 
-  &.track-copilot {
+  &.track-COPILOT {
     background-color: #9D9FA0;
-    font-size: 14px;
-
-    .track-copilot-code {
-      color: #CECFD0;
-      margin-left: 4px;
-      font-size: 12px;
-      line-height: 14px;
-    }
   }
 
-  &.no-track {
-    background-color: #f0f0f0;
-  }
-
-  .track-name {
+  .subtrack-rating,
+  .subtrack-ranking,
+  .subtrack-wins {
+    font-weight: 600;
     font-size: 14px;
+    color: #fff;
     line-height: 16px;
   }
+
+  .subtrack-wins svg {
+    margin-right: 2px;
+  }
+
+  .track-code {
+    color: rgba($white, 0.5);
+    margin-left: 3px;
+  }
+
+  .track-copilot-code {
+    color: #CECFD0;
+    margin-left: 4px;
+    font-size: 12px;
+  }
 }
+

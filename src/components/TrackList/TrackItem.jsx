@@ -5,7 +5,7 @@ require('./TrackItem.scss')
 
 const TrackItem = ({ track }) => {
   const trackStyles = classNames(
-    'user-track-item',
+    'track-item',
     { [`track-${track.toLowerCase()}`]: track.length },
     { 'no-track': !track.length }
   )

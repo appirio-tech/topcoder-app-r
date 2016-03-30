@@ -21,7 +21,7 @@ const UsernameAndDetails = ({ username, country, numWins, memberSince }) => {
       </div>
 
       <div className="user-details">
-        <div className="counry-and-wins">
+        <div className="country-and-wins">
           <span className="user-country">{userCountry}</span>
 
           <span>{' ' + numberWins}</span>

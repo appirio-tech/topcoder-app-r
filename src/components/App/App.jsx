@@ -1,13 +1,11 @@
 import React from 'react'
-// import Nav from '../Nav/Nav'
-// <Nav />
 
 require('./App.scss')
 
-const App = (props) => {
+const App = ({ children }) => {
   return (
     <div>
-      {props.children}
+      {children}
     </div>
   )
 }

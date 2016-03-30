@@ -9,17 +9,11 @@
     display: block;
     border-bottom: 1px solid #F0F0F0;
   }
-
-  .user-bio {
-    font-size: 14px;
-    line-height: 20px;
-    color: #394146;
-    margin-top: 20px;
-  }
 }
 
 .user-profile {
   display: flex;
+  align-items: center;
 
   .list-number {
     display: inline-block;
@@ -29,51 +23,9 @@
     font-size: 22px;
     line-height: 28px;
     color: #B7B7B7;
-    background-color: #fff;
-  }
-
-  .username-and-details {
-    display: inline-block;
-    vertical-align: top;
-    /* aligns the top of the avatar and the details */
-    position: relative;
-    top: -4px;
-  }
-
-  .username {
-    font-size: 22px;
-    line-height: 25px;
-    margin-bottom: 5px;
-    color: $black;
+    background-color: $white;
     @media (max-width: 700px) {
-      font-size: 24px;
-      line-height: 28px;
-      margin-bottom: 3px;
-    }
-  }
-
-  .user-details {
-    line-height: 16px;
-
-    .user-details-1 {
-      color: #394146;
-      font-size: 12px;
-      margin-bottom: 3px;
-      @media (max-width: 700px) {
-        font-size: 14px;
-      }
-
-      .user-country {
-        text-transform: uppercase;
-      }
-    }
-
-    .member-since {
-      color: #A3A3AE;
-      font-size: 12px;
-      @media (max-width: 700px) {
-        font-size: 14px;
-      }
+      width: 25px;
     }
   }
 }

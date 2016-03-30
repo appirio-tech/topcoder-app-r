@@ -218,7 +218,7 @@ export function getSubtrackStat(subtrackStats) {
 
 // Detect end of the page on scroll
 export function isEndOfScreen(callback, ...callbackArguments) {
-  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
     callback.apply(null, callbackArguments)
   }
 }

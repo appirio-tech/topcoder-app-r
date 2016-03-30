@@ -1,18 +1,21 @@
 @import 'topcoder/tc-includes';
 
 .username-and-details {
-  max-width: 200px;
+  max-width: 225px;
 }
 
 .username {
+  margin-bottom: 5px;
   font-size: 22px;
   line-height: 25px;
-  margin-bottom: 5px;
   color: $black;
+  text-overflow: ellipsis;
+  overflow: hidden;
   @media (max-width: 700px) {
+    max-width: 180px;
+    margin-bottom: 3px;
     font-size: 24px;
     line-height: 28px;
-    margin-bottom: 3px;
   }
 }
 

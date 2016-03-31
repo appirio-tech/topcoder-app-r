@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 require('./ListContainer.scss')
 
 const ListContainer = ({ headerText, children, listCount }) => {
-  listCount = <span className="list-count"> {listCount}</span>
+  listCount = <span className="list-count"> - {listCount} results</span>
 
   return (
     <div className="list-container">

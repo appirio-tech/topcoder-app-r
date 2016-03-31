@@ -20,7 +20,7 @@ const TrackItem = ({ track }) => {
 
   return (
     <span className={trackStyles}>
-      <span className="track-name">{track || 'No track'}</span>
+      <span className="track-name">{track || 'No track selected'}</span>
     </span>
   )
 }

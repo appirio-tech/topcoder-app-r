@@ -3,10 +3,13 @@ import React from 'react'
 require('./LoadingIndicator.scss')
 
 const LoadingIndicator = () => {
+  const backgroundImageUrl = { backgroundImage: `url(${require('./ripple.svg')})` }
+
   return (
-    <div className="loading-indicator">
-      <img src={require('./ripple.svg')} alt="Loading..."/>
-    </div>
+    <div
+      className="loading-indicator"
+      style={backgroundImageUrl}
+    />
   )
 }
 

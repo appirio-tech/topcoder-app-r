@@ -24,7 +24,7 @@ const UsernameAndDetails = ({ username, country, numWins, memberSince }) => {
         <div className="country-and-wins">
           <span className="user-country">{userCountry}</span>
 
-          <span>{' ' + numberWins}</span>
+          <span>{numberWins && ` / ${numberWins}`}</span>
         </div>
 
         <div className="member-since">

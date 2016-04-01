@@ -2,16 +2,17 @@ import React, { PropTypes } from 'react'
 
 require('./LoadMoreButton.scss')
 
-const LoadMoreButton = ({ callback }) => {
+const LoadMoreButton = ({ callback, loading }) => {
   return (
     <button className="load-more" onClick={callback}>
-      Load More
+      {loading ? 'Loading...' :'Load More'}
     </button>
   )
 }
 
 LoadMoreButton.propTypes = {
-  callback: PropTypes.func.isRequired
+  callback: PropTypes.func.isRequired,
+  loading : PropTypes.bool
 }
 
 export default LoadMoreButton

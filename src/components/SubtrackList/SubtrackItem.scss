@@ -15,19 +15,19 @@
   }
 
   &.track-DESIGN {
-    background-color: #21B2F1;
+    background-color: $tc-light_blue;
   }
 
   &.track-DEVELOP {
-    background-color: #05C14F;
+    background-color: $tc-green;
   }
 
   &.track-DATA_SCIENCE {
-    background-color: #FC9A00;
+    background-color: $tc-orange;
   }
 
   &.track-COPILOT {
-    background-color: #9D9FA0;
+    background-color: $tc-gray-70;
   }
 
   .subtrack-rating,
@@ -44,14 +44,8 @@
   }
 
   .track-code {
-    color: rgba($white, 0.5);
+    color: rgba($white, 0.7);
     margin-left: 3px;
-  }
-
-  .track-copilot-code {
-    color: #CECFD0;
-    margin-left: 4px;
-    font-size: 12px;
   }
 }
 

@@ -23,7 +23,7 @@ const UserStats = ({ member, searchTermTag }) => {
   return (
     <div className="user-stats">
       <div className="aligner">
-        <TagList tags={skills} label="Skills" emptyMessage="No Skills"/>
+        <TagList tags={skills} label="Skills:" emptyMessage="No skills added"/>
 
         {userStatsList}
       </div>

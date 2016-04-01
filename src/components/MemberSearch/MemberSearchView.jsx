@@ -115,6 +115,10 @@ const MemberSearchView = (props) => {
       return <LoadMoreButton callback={loadMoreMembers}/>
     }
 
+    if (loading && !error && usernameMatches.length === 10) {
+      return <LoadMoreButton callback={loadMoreMembers} loading />
+    }
+
     return null
   }
 

@@ -14,9 +14,9 @@ const TagList = ({ tags, label, emptyMessage = '' }) => {
     { 'tag-list-label': tags.length && label }
   )
 
-  const tagLabel = tags.length && label
+  const tagLabel = tags.length && label ? label : null
 
-  const noTagsMessage = !tags.length && emptyMessage
+  const noTagsMessage = !tags.length && emptyMessage ? emptyMessage : null
 
   tags = tags.map((t, i) => <TagItem key={i} tag={t}/>)
 

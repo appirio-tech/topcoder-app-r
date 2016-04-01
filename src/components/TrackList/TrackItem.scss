@@ -16,27 +16,20 @@
   }
 
   &.track-design {
-    background-color: #21B2F1;
+    background-color: $tc-light_blue;
   }
 
   &.track-develop {
-    background-color: #05C14F;
+    background-color: $tc-green;
   }
 
   &.track-data_science {
-    background-color: #FC9A00;
+    background-color: $tc-orange;
   }
 
   &.track-copilot {
-    background-color: #9D9FA0;
+    background-color: $tc-gray-70;
     font-size: 14px;
-
-    .track-copilot-code {
-      color: #CECFD0;
-      margin-left: 4px;
-      font-size: 12px;
-      line-height: 14px;
-    }
   }
 
   &.no-track {

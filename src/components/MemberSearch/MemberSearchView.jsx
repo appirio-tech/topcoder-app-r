@@ -7,6 +7,7 @@ import PageError from '../PageError/PageError'
 import NoResults from '../NoResults/NoResults'
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton'
+import EndOfResults from '../EndOfResults/EndOfResults'
 import { getSearchTagPreposition } from '../../helpers'
 
 require('./MemberSearchView.scss')
@@ -19,6 +20,7 @@ const MemberSearchView = (props) => {
   const topMemberLeaderboard = renderTopMembers()
   const pageStatus = renderPageState()
   const loadMoreButton = renderLoadMoreButton()
+  const endOfResults = renderEndOfResults()
 
   return (
     <div className="member-search-view">
@@ -31,6 +33,8 @@ const MemberSearchView = (props) => {
       {memberMatches}
 
       {loadMoreButton}
+
+      {endOfResults}
     </div>
   )
 
@@ -51,7 +55,10 @@ const MemberSearchView = (props) => {
       const preposition = getSearchTagPreposition(tag.domain)
 
       return (
-        <ListContainer headerText={`Top Members ${preposition} ${tag.name}`}>
+        <ListContainer
+          headerText={`Top Members ${preposition} `}
+          headerHighlightedText={tag.name}
+        >
           <TopMemberList topMembers={topMembers} />
         </ListContainer>
       )
@@ -83,8 +90,9 @@ const MemberSearchView = (props) => {
       } else {
         memberMatches = (
           <ListContainer
-            headerText={`Usernames matching "${searchTerm}"`}
-            listCount={totalCount}
+            headerText={'Usernames matching '}
+            headerHighlightedText={searchTerm}
+            numListItems={totalCount}
           >
             <MemberList members={exactMemberMatch ? restOfUsernameMatches : usernameMatches} />
           </ListContainer>
@@ -109,6 +117,16 @@ const MemberSearchView = (props) => {
 
     return null
   }
+
+  function renderEndOfResults() {
+    const numResults = usernameMatches.length
+    if (numResults > 0 && numResults === totalCount) {
+      return <EndOfResults />
+    }
+
+    return null
+  }
+
 }
 
 export default MemberSearchView

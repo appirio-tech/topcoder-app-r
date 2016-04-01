@@ -10,11 +10,21 @@ const TagList = ({ tags, label, emptyMessage = '' }) => {
     { 'no-tags': !tags.length }
   )
 
+  const tagLabelStyles = classNames(
+    { 'tag-list-label': tags.length && label }
+  )
+
+  const tagLabel = tags.length && label
+
+  const noTagsMessage = !tags.length && emptyMessage
+
   tags = tags.map((t, i) => <TagItem key={i} tag={t}/>)
 
   return (
     <div className={tagListStyles}>
-      <span>{tags.length ? label + ': ' : emptyMessage}</span>
+      <span className={tagLabelStyles}>{tagLabel}</span>
+
+      <span>{noTagsMessage}</span>
 
       {tags}
     </div>
@@ -23,7 +33,7 @@ const TagList = ({ tags, label, emptyMessage = '' }) => {
 
 TagList.propTypes = {
   tags        : PropTypes.array.isRequired,
-  label       : PropTypes.string.isRequired,
+  label       : PropTypes.string,
   emptyMessage: PropTypes.string.isRequired
 }
 

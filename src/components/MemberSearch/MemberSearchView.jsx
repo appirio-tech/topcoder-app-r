@@ -3,9 +3,9 @@ import ListContainer from '../ListContainer/ListContainer'
 import TopMemberList from '../TopMemberList/TopMemberList'
 import MemberList from '../MemberList/MemberList'
 import MemberItem from '../MemberItem/MemberItem'
+import LoadingListItem from '../LoadingListItem/LoadingListItem'
 import PageError from '../PageError/PageError'
 import NoResults from '../NoResults/NoResults'
-import LoadingIndicator from '../LoadingIndicator/LoadingIndicator'
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton'
 import EndOfResults from '../EndOfResults/EndOfResults'
 import { getSearchTagPreposition } from '../../helpers'
@@ -39,19 +39,28 @@ const MemberSearchView = (props) => {
   )
 
   function renderPageState() {
-    if (loading && !usernameMatches.length) {
-      return <LoadingIndicator />
-
-    } else if (error) {
+    if (error) {
       return <PageError />
 
     } else if (searchTerm && !loading && !error && !usernameMatches.length && !topMembers.length) {
       return <NoResults entry={searchTerm} />
+    } else if (loading && !usernameMatches.length && !topMembers.length) {
+      return (
+        <ListContainer
+          headerText={'Loading users...'}
+        >
+          <ul>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e, i) => {
+              return <LoadingListItem type={'MEMBER'} key={i} />
+            })}
+          </ul>
+        </ListContainer>
+      )
     }
   }
 
   function renderTopMembers() {
-    if (topMembers.length && tag) {
+    if (tag && topMembers.length) {
       const preposition = getSearchTagPreposition(tag.domain)
 
       return (
@@ -84,6 +93,7 @@ const MemberSearchView = (props) => {
         restOfUsernameMatches = usernameMatches.slice(1)
       }
 
+      // If there is an exact match and no other matching usernames
       if (restOfUsernameMatches && restOfUsernameMatches.length === 0) {
         memberMatches = null
 
@@ -124,7 +134,10 @@ const MemberSearchView = (props) => {
 
   function renderEndOfResults() {
     const numResults = usernameMatches.length
-    if (numResults > 0 && numResults === totalCount) {
+
+    // If the member matches list is rendered
+    // and the number of items in the list equals the total number
+    if (numResults > 0 && numResults === totalCount && memberMatches) {
       return <EndOfResults />
     }
 

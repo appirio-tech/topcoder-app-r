@@ -4,7 +4,7 @@ import {
   START_MEMBER_SEARCH, CLEAR_MEMBER_SEARCH,
   USERNAME_SEARCH_SUCCESS, MEMBER_SEARCH_FAILURE,
   TOP_MEMBER_SEARCH_SUCCESS, RESET_SEARCH_TERM,
-  SET_SEARCH_TAG, SET_SEARCH_TERM,
+  SET_SEARCH_TAG, SET_SEARCH_TERM, MEMBER_SEARCH_SUCCESS,
   leaderboardUrl, memberSearchUrl, memberSearchTagUrl } from '../config/constants'
 
 export default function loadMemberSearch(searchTerm) {
@@ -19,7 +19,7 @@ export default function loadMemberSearch(searchTerm) {
     } else if (previousSearchTerm && numCurrentUsernameMatches >= 10) {
       dispatch({ type: START_MEMBER_SEARCH })
 
-      return getUsernameMatches()
+      return getUsernameMatches(true)
     }
 
     dispatch({ type: START_MEMBER_SEARCH })
@@ -27,6 +27,8 @@ export default function loadMemberSearch(searchTerm) {
 
     return checkIfSearchTermIsATag()
     .then((tag) => {
+      dispatch({ type: SET_SEARCH_TAG, searchTermTag: tag })
+
       const memberSearchAPICalls = [getUsernameMatches()]
 
       if (tag) {
@@ -35,8 +37,7 @@ export default function loadMemberSearch(searchTerm) {
 
       return Promise.all(memberSearchAPICalls)
       .then(() => {
-        dispatch({ type: SET_SEARCH_TAG, searchTermTag: tag })
-
+        dispatch({ type: MEMBER_SEARCH_SUCCESS })
       })
       .catch(err => {
         memberSearchFailure()
@@ -58,7 +59,7 @@ export default function loadMemberSearch(searchTerm) {
       })
     }
 
-    function getUsernameMatches() {
+    function getUsernameMatches(loadMore) {
       const offset = numCurrentUsernameMatches
       const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${searchTerm}&offset=${offset}&limit=10`
 
@@ -78,6 +79,10 @@ export default function loadMemberSearch(searchTerm) {
           usernameMatches,
           totalCount
         })
+
+        if (loadMore) {
+          dispatch({ type: MEMBER_SEARCH_SUCCESS })
+        }
 
         return usernameMatches
       })

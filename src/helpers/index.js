@@ -20,6 +20,19 @@ export function fetchJSON(url, options) {
   .then(json)
 }
 
+// Challenge Helpers
+export function isUserRegistered(users) {
+  const currentUser = 'Applications'
+
+  return users.some(user => {
+    if (user.handle === currentUser) {
+      return true
+    }
+
+    return false
+  })
+}
+
 // Member Levels
 export function memberLevelByRating(userRating) {
   const levelRatings = [0, 900, 1200, 1500, 2200]

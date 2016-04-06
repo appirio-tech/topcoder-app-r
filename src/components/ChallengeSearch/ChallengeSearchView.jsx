@@ -7,7 +7,7 @@ require('./ChallengeSearchView.scss')
 const ChallengeSearchView = ({ challengeData }) => {
   const challengeList = (
     <ListContainer headerText={'List of Challenges'}>
-      <ChallengeList challenges={challengeData.map(c => c._source)} />
+      <ChallengeList challenges={challengeData} />
     </ListContainer>
   )
 

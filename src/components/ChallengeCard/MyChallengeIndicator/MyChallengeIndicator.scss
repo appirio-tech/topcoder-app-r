@@ -1,0 +1,19 @@
+@import 'topcoder/tc-includes';
+
+.my-challenge-indicator {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+
+  // Creates a triangle
+  height: 0;
+  width: 0;
+  border-style: solid;
+  border-width: 9px 9px 0 0;
+  border-color: #6B6D78 transparent transparent transparent;
+
+  &.show {
+    display: block;
+  }
+}

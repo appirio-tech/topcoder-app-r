@@ -14,7 +14,7 @@ import { getSearchTagPreposition } from '../../helpers'
 require('./MemberSearchView.scss')
 
 const MemberSearchView = (props) => {
-  const { loading, error, usernameMatches, totalCount, topMembers } = props
+  const { pageLoaded, loadingMore, error, usernameMatches, totalCount, topMembers } = props
   const { previousSearchTerm: searchTerm, searchTermTag: tag } = props
 
   const { exactMemberMatch, memberMatches } = renderUsernameMatches()
@@ -53,7 +53,7 @@ const MemberSearchView = (props) => {
         </ReactCSSTransitionGroup>
       )
 
-    } else if (searchTerm && !loading && !error && !usernameMatches.length && !topMembers.length) {
+    } else if (searchTerm && pageLoaded && !usernameMatches.length && !topMembers.length) {
       return (
         <ReactCSSTransitionGroup
           transitionName="no-results"
@@ -65,23 +65,37 @@ const MemberSearchView = (props) => {
           <NoResults entry={searchTerm} />
         </ReactCSSTransitionGroup>
       )
-    } else if (loading && !usernameMatches.length && !topMembers.length) {
+    } else if (!pageLoaded && !usernameMatches.length && !topMembers.length) {
+      const loadingListItems = []
+      
+      for (let i = 0; i < 10; i++) {
+        loadingListItems.push(
+          <LoadingListItem type={'MEMBER'} key={i} />
+        )
+      }
+
       return (
-        <ListContainer
-          headerText={'Loading users...'}
+        <ReactCSSTransitionGroup
+          transitionName="list-container"
+          transitionAppear
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
         >
-          <ul>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e, i) => {
-              return <LoadingListItem type={'MEMBER'} key={i} />
-            })}
-          </ul>
-        </ListContainer>
+          <ListContainer
+            headerText={'Loading users...'}
+          >
+            <ul>
+              {loadingListItems}
+            </ul>
+          </ListContainer>
+        </ReactCSSTransitionGroup>
       )
     }
   }
 
   function renderTopMembers() {
-    if (!loading && tag && topMembers.length) {
+    if (pageLoaded && tag && topMembers.length) {
       const preposition = getSearchTagPreposition(tag.domain)
 
       return (
@@ -102,7 +116,7 @@ const MemberSearchView = (props) => {
     let exactMemberMatch
     let restOfUsernameMatches
 
-    if (usernameMatches.length) {
+    if (pageLoaded && usernameMatches.length) {
       // Check if the first member in the array matches the search term
       const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
 
@@ -150,11 +164,11 @@ const MemberSearchView = (props) => {
       props.loadMemberSearch(searchTerm)
     }
 
-    if (!loading && !error && usernameMatches.length === 10) {
+    if (pageLoaded && !loadingMore && !error && usernameMatches.length === 10) {
       return <LoadMoreButton callback={loadMoreMembers}/>
     }
 
-    if (loading && !error && usernameMatches.length === 10) {
+    if (loadingMore && !error && usernameMatches.length === 10) {
       return <LoadMoreButton callback={loadMoreMembers} loading />
     }
 
@@ -172,7 +186,6 @@ const MemberSearchView = (props) => {
 
     return null
   }
-
 }
 
 export default MemberSearchView

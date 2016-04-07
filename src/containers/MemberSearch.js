@@ -23,9 +23,9 @@ class MemberSearch extends Component {
   }
 
   handleScroll() {
-    const { moreMatchesAvailable, usernameMatches, loading } = this.props
+    const { moreMatchesAvailable, usernameMatches, loadingMore, pageLoaded } = this.props
 
-    if (!loading && moreMatchesAvailable && usernameMatches.length > 10) {
+    if (pageLoaded && !loadingMore && moreMatchesAvailable && usernameMatches.length > 10) {
       isEndOfScreen(this.props.loadMemberSearch, this.searchTermFromQuery)
     }
   }
@@ -37,8 +37,9 @@ class MemberSearch extends Component {
 
 const mapStateToProps = ({ memberSearch, searchTerm }) => {
   return {
-    loading: memberSearch.loading,
-    error  : memberSearch.error,
+    pageLoaded : memberSearch.pageLoaded,
+    loadingMore: memberSearch.loadingMore,
+    error      : memberSearch.error,
 
     usernameMatches     : memberSearch.usernameMatches,
     moreMatchesAvailable: memberSearch.moreMatchesAvailable,

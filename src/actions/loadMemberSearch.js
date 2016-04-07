@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { fetchJSON, mapTagToLeaderboardType } from '../helpers'
 import {
-  START_MEMBER_SEARCH, CLEAR_MEMBER_SEARCH,
+  CLEAR_MEMBER_SEARCH, LOAD_MORE_USERNAMES,
   USERNAME_SEARCH_SUCCESS, MEMBER_SEARCH_FAILURE,
   TOP_MEMBER_SEARCH_SUCCESS, RESET_SEARCH_TERM,
   SET_SEARCH_TAG, SET_SEARCH_TERM, MEMBER_SEARCH_SUCCESS,
@@ -17,12 +17,11 @@ export default function loadMemberSearch(searchTerm) {
     if (isNewSearchTerm) {
       dispatch({ type: CLEAR_MEMBER_SEARCH })
     } else if (previousSearchTerm && numCurrentUsernameMatches >= 10) {
-      dispatch({ type: START_MEMBER_SEARCH })
+      dispatch({ type: LOAD_MORE_USERNAMES })
 
-      return getUsernameMatches(true)
+      return getUsernameMatches()
     }
 
-    dispatch({ type: START_MEMBER_SEARCH })
     dispatch({ type: SET_SEARCH_TERM, searchTerm })
 
     return checkIfSearchTermIsATag()
@@ -59,7 +58,7 @@ export default function loadMemberSearch(searchTerm) {
       })
     }
 
-    function getUsernameMatches(loadMore) {
+    function getUsernameMatches() {
       const offset = numCurrentUsernameMatches
       const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${searchTerm}&offset=${offset}&limit=10`
 
@@ -79,10 +78,6 @@ export default function loadMemberSearch(searchTerm) {
           usernameMatches,
           totalCount
         })
-
-        if (loadMore) {
-          dispatch({ type: MEMBER_SEARCH_SUCCESS })
-        }
 
         return usernameMatches
       })

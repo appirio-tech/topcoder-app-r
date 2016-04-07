@@ -18,3 +18,13 @@
     color: #737380;
   }
 }
+
+// ReactCSSTransitionGroup transitions
+.no-results-appear {
+  opacity: 0.01;
+}
+
+.no-results-appear.no-results-appear-active {
+  opacity: 1;
+  transition: opacity .25s ease-in;
+}

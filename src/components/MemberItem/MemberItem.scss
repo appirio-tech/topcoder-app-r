@@ -22,9 +22,9 @@
 // ReactCSSTransitionGroup transitions
 .member-item-appear {
   opacity: 0.01;
-}
-
-.member-item-appear.member-item-appear-active {
-  opacity: 1;
-  transition: opacity .25s ease-in;
+  
+  &.member-item-appear-active {
+    opacity: 1;
+    transition: opacity .25s ease-in;
+  }
 }

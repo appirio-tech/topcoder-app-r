@@ -1,6 +1,6 @@
 {
   "name": "topcoder-app-r",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Topcoder pages in React and Redux",
   "scripts": {
     "start": "webpack-dev-server --history-api-fallback --dev --hot --inline --progress --tc --port 3000",
@@ -33,6 +33,7 @@
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.11.2",
     "react": "^0.14.6",
+    "react-addons-css-transition-group": "^0.14.8",
     "react-dom": "^0.14.6",
     "react-dotdotdot": "^1.0.4",
     "react-redux": "^4.0.6",

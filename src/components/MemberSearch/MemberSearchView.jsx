@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ListContainer from '../ListContainer/ListContainer'
 import TopMemberList from '../TopMemberList/TopMemberList'
 import MemberList from '../MemberList/MemberList'
@@ -40,10 +41,30 @@ const MemberSearchView = (props) => {
 
   function renderPageState() {
     if (error) {
-      return <PageError />
+      return (
+        <ReactCSSTransitionGroup
+          transitionName="page-error"
+          transitionAppear
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          <PageError />
+        </ReactCSSTransitionGroup>
+      )
 
     } else if (searchTerm && !loading && !error && !usernameMatches.length && !topMembers.length) {
-      return <NoResults entry={searchTerm} />
+      return (
+        <ReactCSSTransitionGroup
+          transitionName="no-results"
+          transitionAppear
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          <NoResults entry={searchTerm} />
+        </ReactCSSTransitionGroup>
+      )
     } else if (loading && !usernameMatches.length && !topMembers.length) {
       return (
         <ListContainer
@@ -60,7 +81,7 @@ const MemberSearchView = (props) => {
   }
 
   function renderTopMembers() {
-    if (tag && topMembers.length) {
+    if (!loading && tag && topMembers.length) {
       const preposition = getSearchTagPreposition(tag.domain)
 
       return (
@@ -81,14 +102,14 @@ const MemberSearchView = (props) => {
     let exactMemberMatch
     let restOfUsernameMatches
 
-    if (usernameMatches.length) {
+    if (!loading && usernameMatches.length) {
       // Check if the first member in the array matches the search term
       const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
 
       // If it's an exact match, and there is no leaderboard,
       // show the exact match separately
       if (isExactMatch && !tag) {
-        exactMemberMatch = <MemberItem member={usernameMatches[0]} withBio />
+        exactMemberMatch = <MemberItem member={usernameMatches[0]} withBio shouldAnimate />
 
         restOfUsernameMatches = usernameMatches.slice(1)
       }

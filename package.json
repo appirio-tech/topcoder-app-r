@@ -1,6 +1,6 @@
 {
   "name": "topcoder-app-r",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Topcoder pages in React and Redux",
   "scripts": {
     "start": "webpack-dev-server --history-api-fallback --dev --hot --inline --progress --tc --port 3000",

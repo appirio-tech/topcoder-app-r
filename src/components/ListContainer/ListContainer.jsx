@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { singlePluralFormatter } from '../../helpers'
 
 require('./ListContainer.scss')
@@ -8,25 +7,17 @@ const ListContainer = ({ headerText, headerHighlightedText, children, numListIte
   const listCount = renderListCount(numListItems)
 
   return (
-    <ReactCSSTransitionGroup
-      transitionName="list-container"
-      transitionAppear
-      transitionAppearTimeout={500}
-      transitionEnterTimeout={500}
-      transitionLeaveTimeout={500}
-    >
-      <div className="list-container">
-        <div className="list-header">
-          <span className="header-text">{headerText}
-            <span className="highlighted">{headerHighlightedText}</span>
-          </span>
+    <div className="list-container">
+      <div className="list-header">
+        <span className="header-text">{headerText}
+          <span className="highlighted">{headerHighlightedText}</span>
+        </span>
 
-          {listCount}
-        </div>
-
-        {children}
+        {listCount}
       </div>
-    </ReactCSSTransitionGroup>
+
+      {children}
+    </div>
   )
 
   function renderListCount(numItems) {

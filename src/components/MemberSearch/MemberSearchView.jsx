@@ -102,7 +102,7 @@ const MemberSearchView = (props) => {
     let exactMemberMatch
     let restOfUsernameMatches
 
-    if (!loading && usernameMatches.length) {
+    if (usernameMatches.length) {
       // Check if the first member in the array matches the search term
       const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
 
@@ -120,13 +120,21 @@ const MemberSearchView = (props) => {
 
       } else {
         memberMatches = (
-          <ListContainer
-            headerText={'Usernames matching '}
-            headerHighlightedText={searchTerm}
-            numListItems={totalCount}
+          <ReactCSSTransitionGroup
+            transitionName="list-container"
+            transitionAppear
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
           >
-            <MemberList members={exactMemberMatch ? restOfUsernameMatches : usernameMatches} />
-          </ListContainer>
+            <ListContainer
+              headerText={'Usernames matching '}
+              headerHighlightedText={searchTerm}
+              numListItems={totalCount}
+            >
+              <MemberList members={exactMemberMatch ? restOfUsernameMatches : usernameMatches} />
+            </ListContainer>
+          </ReactCSSTransitionGroup>
         )
       }
     }

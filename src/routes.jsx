@@ -2,8 +2,8 @@ import React from 'react'
 import Route from 'react-router/lib/Route'
 
 import App             from './components/App/App'
-import MemberSearch    from './containers/MemberSearch'
-import ChallengeSearch from './containers/ChallengeSearch'
+import MemberSearch    from './components/MemberSearch/MemberSearch'
+import ChallengeSearch from './components/ChallengeSearch/ChallengeSearch'
 
 export default (
   <Route path="/" component={App}>

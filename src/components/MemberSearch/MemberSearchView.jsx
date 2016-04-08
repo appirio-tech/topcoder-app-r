@@ -67,7 +67,7 @@ const MemberSearchView = (props) => {
       )
     } else if (!pageLoaded && !usernameMatches.length && !topMembers.length) {
       const loadingListItems = []
-      
+
       for (let i = 0; i < 10; i++) {
         loadingListItems.push(
           <LoadingListItem type={'MEMBER'} key={i} />

@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import DefaultUserAvatarIcon from '../../icons/DefaultUserAvatarIcon'
 import LevelDesignatorIcon from '../../icons/LevelDesignatorIcon'
 import { memberLevelByRating } from '../../helpers'
 
@@ -12,20 +11,13 @@ const UserAvatar = ({ showLevel, rating, photoURL }) => {
     levelIcon = <LevelDesignatorIcon level={memberLevelByRating(rating)} height={'17px'} width={'17px'}/>
   }
 
-  let defaultUserImage
-  let backgroundImageUrl
-
-  if (photoURL) {
-    backgroundImageUrl = { backgroundImage: `url(${photoURL})` }
-  } else {
-    defaultUserImage = <DefaultUserAvatarIcon width={'60px'} height={'60px'}/>
+  const backgroundImageUrl = {
+    backgroundImage: `url(${photoURL}), url(${require('./default-avatar.svg')})`
   }
 
   return (
     <div className="user-avatar" style={backgroundImageUrl}>
       {levelIcon}
-
-      {defaultUserImage}
     </div>
   )
 }

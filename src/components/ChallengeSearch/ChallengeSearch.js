@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ChallengeSearchView from '../components/ChallengeSearch/ChallengeSearchView'
+import ChallengeSearchView from './ChallengeSearchView'
 
 class ChallengeSearch extends Component {
   constructor(props) {

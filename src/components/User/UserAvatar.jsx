@@ -11,12 +11,13 @@ const UserAvatar = ({ showLevel, rating, photoURL }) => {
     levelIcon = <LevelDesignatorIcon level={memberLevelByRating(rating)} height={'17px'} width={'17px'}/>
   }
 
-  const backgroundImageUrl = {
-    backgroundImage: `url(${photoURL}), url(${require('./default-avatar.svg')})`
-  }
+  let backgroundImageUrl = `url(${require('./default-avatar.svg')})`
+
+  if (photoURL)
+    backgroundImageUrl = `url(${photoURL}), ${backgroundImageUrl}`
 
   return (
-    <div className="user-avatar" style={backgroundImageUrl}>
+    <div className="user-avatar" style={{ backgroundImage: backgroundImageUrl }}>
       {levelIcon}
     </div>
   )

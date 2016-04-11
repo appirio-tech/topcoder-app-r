@@ -38,7 +38,7 @@ export function memberLevelByRating(userRating) {
 
 export function memberColorByLevel(userLevel) {
   const colorsByLevel = {
-    1: '#888894',
+    1: '#A3A3AD',
     2: '#25C089',
     3: '#666EFF',
     4: '#FCB816',

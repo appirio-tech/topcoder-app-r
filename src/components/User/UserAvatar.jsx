@@ -16,8 +16,10 @@ const UserAvatar = ({ showLevel, rating, photoURL }) => {
   if (photoURL)
     backgroundImageUrl = `url(${photoURL}), ${backgroundImageUrl}`
 
+  // Delete -r when taking member search back out of the angular app
+  // Renamed to -r to avoid naming collisions
   return (
-    <div className="user-avatar" style={{ backgroundImage: backgroundImageUrl }}>
+    <div className="user-avatar-r" style={{ backgroundImage: backgroundImageUrl }}>
       {levelIcon}
     </div>
   )

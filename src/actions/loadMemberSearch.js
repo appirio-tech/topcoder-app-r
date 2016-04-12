@@ -89,7 +89,7 @@ export default function loadMemberSearch(searchTerm) {
 
     function getTopMembers(tag) {
       const leaderboardType = mapTagToLeaderboardType(tag.domain)
-      const queryString = `?filter=name%3D${tag.name}%26type%3D${leaderboardType}`
+      const queryString = `?filter=id%3D${tag.id}%26type%3D${leaderboardType}`
       const url = leaderboardUrl + queryString
 
       return fetchJSON(url)

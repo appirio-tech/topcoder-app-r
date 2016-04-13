@@ -40,20 +40,26 @@ export default function loadMemberSearch(searchTerm) {
       })
       .catch(err => {
         memberSearchFailure()
-        throw new Error(`Error thrown fetching member lists: ${err}`)
+        throw new Error(`Could not resolve all promises. Reason: ${err}`)
       })
     })
 
     function checkIfSearchTermIsATag() {
-      const url = `${memberSearchTagUrl}?filter=name%3D${searchTerm}`
+      const url = `${memberSearchTagUrl}?filter=name%3D${window.encodeURIComponent(searchTerm)}`
 
       return fetchJSON(url)
       .then(data => {
-        return _.get(data, 'result.content')[0]
+        const tagInfo = _.get(data, 'result.content')
+
+        if (!_.isArray(tagInfo)) {
+          throw new Error('Tag response must be an array')
+        }
+
+        return tagInfo[0]
       })
       .catch(err => {
         memberSearchFailure()
-        throw new Error(`Error determining if search term is a tag: ${err}`)
+        throw new Error(`Could not determine if search term is a tag. Reason: ${err}`)
 
       })
     }
@@ -83,7 +89,7 @@ export default function loadMemberSearch(searchTerm) {
       })
       .catch(err => {
         dispatch({ type: MEMBER_SEARCH_FAILURE })
-        throw new Error(`Error fetching username matches: ${err}`)
+        throw new Error(`Could not fetch username matches. Reason: ${err}`)
       })
     }
 
@@ -106,7 +112,7 @@ export default function loadMemberSearch(searchTerm) {
       .catch(err => {
         memberSearchFailure()
 
-        throw new Error(`Error fetching top members: ${err}`)
+        throw new Error(`Could not fetch top members. Reason: ${err}`)
       })
     }
 
@@ -116,4 +122,3 @@ export default function loadMemberSearch(searchTerm) {
     }
   })
 }
-

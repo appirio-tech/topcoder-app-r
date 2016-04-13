@@ -32,7 +32,7 @@ const jsxLoader = {
     'react-hot',
     'babel?' + JSON.stringify(babelOptions)
   ],
-  exclude: /node_modules\/(?!appirio-tech.*)/
+  exclude: /node_modules\/(?!appirio-tech.*|topcoder|tc-)/
 }
 
 // Loop over loaders and replace

@@ -11,8 +11,7 @@ const config = require('appirio-tech-webpack-config')({
   entry: {
     app: ['./src/index']
   },
-  template: './src/index.html',
-  browserUrl: 'http://localhost:3000/search/members?q=java'
+  template: './src/index.html'
 })
 
 // Set asset prefix to CDN

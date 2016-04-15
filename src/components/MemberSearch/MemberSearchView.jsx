@@ -83,7 +83,7 @@ const MemberSearchView = (props) => {
           transitionLeaveTimeout={500}
         >
           <ListContainer
-            headerText={'Loading users...'}
+            headerText={'Loading members...'}
           >
             <ul>
               {loadingListItems}

@@ -1,4 +1,4 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .track-item {
   display: inline-block;
@@ -7,7 +7,7 @@
   margin-right: 5px;
   border-radius: 13px;
   font-weight: 600;
-  color: $white;
+  color: $tc-white;
 
   &:last-child {
     margin-right: 0;
@@ -35,7 +35,7 @@
 
   &.no-track {
     font-weight: 500;
-    background-color: #DFDFE1;
+    background-color: $tc-gray-20;
   }
 
   .track-name {

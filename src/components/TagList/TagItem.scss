@@ -1,9 +1,11 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .tag-item {
   margin-bottom: 5px;
   margin-right: 5px;
-  color: $gray;
+  @include tc-label;
+  font-weight: 400;
+  color: $tc-gray-30;
   &:last-child {
     margin-right: 0;
     @media (max-width: 700px) {
@@ -12,15 +14,15 @@
   }
 
   .tag-text {
-    color: #888894;
+    color: $tc-gray-50;
   }
 
   .searched-tag {
-    color: $black;
+    color: $tc-black;
   }
 
   .special-tag {
-    color: #B47DD6;
+    color: $tc-purple-70;
   }
 
   // Commented out since skills are not yet clickable

@@ -1,33 +1,22 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .username-and-details {
   max-width: 225px;
 
   .username {
-    margin-bottom: 5px;
-    font-size: 22px;
-    line-height: 25px;
-    color: #394146;
+    @include tc-heading;
+    color: $tc-gray-80;
     text-overflow: ellipsis;
     overflow: hidden;
     @media (max-width: 700px) {
       max-width: 180px;
-      margin-bottom: 3px;
-      font-size: 24px;
-      line-height: 28px;
     }
   }
 
   .user-details {
-    line-height: 16px;
-
     .country-and-wins {
-      color: #394146;
-      font-size: 12px;
-      margin-bottom: 3px;
-      @media (max-width: 700px) {
-        font-size: 14px;
-      }
+      @include tc-label-small;
+      color: $tc-gray-60;
 
       .user-country {
         text-transform: uppercase;
@@ -35,11 +24,8 @@
     }
 
     .member-since {
-      color: #A3A3AE;
-      font-size: 12px;
-      @media (max-width: 700px) {
-        font-size: 14px;
-      }
+      @include tc-label-small;
+      color: $tc-gray-30;
     }
   }
 }

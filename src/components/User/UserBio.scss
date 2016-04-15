@@ -1,6 +1,8 @@
+@import '~tc-ui/src/styles/tc-includes';
+
 .user-bio {
-  font-size: 14px;
-  line-height: 20px;
-  color: #394146;
+  @include tc-body-small;
+  font-family: 'Proxima-Nova';
+  color: $tc-gray-80;
   margin-top: 20px;
 }

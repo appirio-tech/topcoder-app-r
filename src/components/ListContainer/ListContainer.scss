@@ -1,4 +1,4 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .list-container {
   max-width: 960px;
@@ -9,9 +9,9 @@
 
 .list-header {
   background-color: $tc-gray-20;
-  font-size: 12px;
-  line-height: 14px;
-  padding: 13px 15px;
+  @include tc-label;
+  font-weight: 400;
+  padding: 11px 15px;
 
   .header-text {
     color: $tc-gray-70;

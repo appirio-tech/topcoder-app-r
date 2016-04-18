@@ -67,7 +67,7 @@ export default function loadMemberSearch(searchTerm) {
 
     function getUsernameMatches() {
       const offset = numCurrentUsernameMatches
-      const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${searchTerm}&offset=${offset}&limit=10`
+      const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${window.encodeURIComponent(searchTerm)}&offset=${offset}&limit=10`
 
       return fetchJSON(url)
       .then(data => {

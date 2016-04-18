@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ListContainer from '../ListContainer/ListContainer'
 import TopMemberList from '../TopMemberList/TopMemberList'
@@ -118,7 +119,8 @@ const MemberSearchView = (props) => {
 
     if (pageLoaded && usernameMatches.length) {
       // Check if the first member in the array matches the search term
-      const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
+      const isSearchTerm = _.isString(searchTerm)
+      const isExactMatch = isSearchTerm && usernameMatches[0].handle.toLowerCase() === searchTerm.toLowerCase()
 
       // If it's an exact match, and there is no leaderboard,
       // show the exact match separately

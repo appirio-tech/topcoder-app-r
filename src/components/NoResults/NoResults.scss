@@ -2,15 +2,14 @@
 
 .no-results {
   max-width: 960px;
-  margin: 20px auto;
+  margin: 70px auto 20px;
   text-align: center;
-  font-family: 'Proxima-Nova';
-  font-size: 24px;
-  font-weight: 300;
   color: $tc-gray-80;
 
   p {
-    margin-top: 25px;
+    margin-bottom: 50px;
+    @include tc-heading-large;
+    font-weight: 300;
   }
 
   span:last-child {

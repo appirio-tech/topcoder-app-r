@@ -6,9 +6,9 @@ require('./NoResults.scss')
 const NoResults = ({ entry }) => {
   return (
     <div className="no-results">
-      <RobotIcon />
-
       <p>Sorry, no results found for <span>{entry}</span></p>
+
+      <RobotIcon />
     </div>
   )
 }

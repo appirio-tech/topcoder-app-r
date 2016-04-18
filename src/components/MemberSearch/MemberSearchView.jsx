@@ -180,13 +180,21 @@ const MemberSearchView = (props) => {
   function renderEndOfResults() {
     const numResults = usernameMatches.length
 
-    // If the member matches list is rendered
-    // and the number of items in the list equals the total number
-    if (numResults > 0 && numResults === totalCount && memberMatches) {
+    // Don't show 'End of results' if the page is loading
+    if (!pageLoaded) {
+      return null
+
+    // Or if there are more members to load
+    } else if (numResults !== totalCount) {
+      return null
+
+    // Or if there are no results at all
+    } else if (numResults === 0 && topMembers.length === 0) {
+      return null
+
+    } else {
       return <EndOfResults />
     }
-
-    return null
   }
 }
 

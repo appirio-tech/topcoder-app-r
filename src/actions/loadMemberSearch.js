@@ -12,7 +12,8 @@ export default function loadMemberSearch(searchTerm) {
     const state = getState()
     const numCurrentUsernameMatches = state.memberSearch.usernameMatches.length
     const previousSearchTerm = state.searchTerm.previousSearchTerm
-    const isNewSearchTerm = searchTerm.toLowerCase() !== previousSearchTerm
+    const isPreviousSearchTerm = _.isString(previousSearchTerm)
+    const isNewSearchTerm = isPreviousSearchTerm && searchTerm.toLowerCase() !== previousSearchTerm.toLowerCase()
 
     if (isNewSearchTerm) {
       dispatch({ type: CLEAR_MEMBER_SEARCH })

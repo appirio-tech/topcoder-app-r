@@ -46,7 +46,7 @@ export default function loadMemberSearch(searchTerm) {
     })
 
     function checkIfSearchTermIsATag() {
-      const url = `${memberSearchTagUrl}?filter=name=${window.encodeURIComponent(searchTerm)}`
+      const url = `${memberSearchTagUrl}?filter=name%3D${window.encodeURIComponent(searchTerm)}`
 
       return fetchJSON(url)
       .then(data => {
@@ -96,7 +96,7 @@ export default function loadMemberSearch(searchTerm) {
 
     function getTopMembers(tag) {
       const leaderboardType = mapTagToLeaderboardType(tag.domain)
-      const queryString = `?filter=id=${tag.id}%26type=${leaderboardType}`
+      const queryString = `?filter=id%3D${tag.id}%26type%3D${leaderboardType}`
       const url = leaderboardUrl + queryString
 
       return fetchJSON(url)

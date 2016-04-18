@@ -2,13 +2,14 @@
 
 .page-error {
   max-width: 960px;
-  margin: 50px auto 20px;
+  margin: 70px auto 20px;
   text-align: center;
   color: $tc-gray-80;
 
   p {
     margin-bottom: 50px;
     @include tc-heading-large;
+    font-weight: 300;
   }
 }
 

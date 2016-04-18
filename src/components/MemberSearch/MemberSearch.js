@@ -14,7 +14,7 @@ class MemberSearch extends Component {
   componentWillMount() {
     window.addEventListener('scroll', this.handleScroll)
 
-    this.searchTermFromQuery = this.props.location.query.q
+    this.searchTermFromQuery = this.props.location.query.q || ''
     this.props.loadMemberSearch(this.searchTermFromQuery)
   }
 

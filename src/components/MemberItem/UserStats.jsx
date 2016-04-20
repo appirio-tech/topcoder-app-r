@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import TagList from '../TagList/TagList'
 import SubtrackList from '../SubtrackList/SubtrackList'
@@ -7,7 +8,7 @@ import { getMostRecentSubtracks, sortSkillsByScoreAndTag } from '../../helpers'
 
 require('./UserStats.scss')
 
-const UserStats = ({ member, searchTermTag }) => {
+const UserStats = ({ member, userPlace, searchTermTag }) => {
   let userStatsList
 
   const subtracks = getMostRecentSubtracks(member.stats, 5)
@@ -18,7 +19,11 @@ const UserStats = ({ member, searchTermTag }) => {
     userStatsList = <TrackList tracks={member.tracks} />
   }
 
-  const skills = sortSkillsByScoreAndTag(member.skills, searchTermTag, 4)
+  // Highlight the skill that was searched for if the user has it
+  // but only in the leaderbord, which is indicated by having userPlace
+  const tag = _.isFinite(userPlace) ? searchTermTag : null
+
+  const skills = sortSkillsByScoreAndTag(member.skills, tag, 4)
 
   return (
     <div className="user-stats">

@@ -62,10 +62,12 @@ export function sortSkillsByScoreAndTag(skills, tag, numSkillsToReturn = Infinit
       return skill.name === tag.name
     })
 
-    const tagSkill = sortedSkills.splice(tagIndex, 1)[0]
-    tagSkill.searchedTag = true
+    if (tagIndex !== -1) {
+      const tagSkill = sortedSkills.splice(tagIndex, 1)[0]
+      tagSkill.searchedTag = true
 
-    sortedSkills.unshift(tagSkill)
+      sortedSkills.unshift(tagSkill)
+    }
   }
 
   return sortedSkills.slice(0, numSkillsToReturn)

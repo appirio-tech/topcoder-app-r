@@ -18,9 +18,9 @@ const MemberItem = ({ member, userPlace, withBio, shouldAnimate = false }) => {
       className={memberItemStyles}
       href={`https://www.${DOMAIN}/members/${member.handle}`}
     >
-      <UserInfo user={member} userPlace={userPlace} withBio={withBio}/>
+      <UserInfo user={member} userPlace={userPlace} withBio={withBio} />
 
-      <UserStats member={member} />
+      <UserStats member={member} userPlace={userPlace} />
     </a>
   )
 

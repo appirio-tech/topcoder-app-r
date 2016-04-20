@@ -20,7 +20,7 @@ const UserStats = ({ member, userPlace, searchTermTag }) => {
   }
 
   // Highlight the skill that was searched for if the user has it
-  // but only in the leaderbord, which is indicated by having userPlace
+  // but only in the leaderboard, which is indicated by having userPlace
   const tag = _.isFinite(userPlace) ? searchTermTag : null
 
   const skills = sortSkillsByScoreAndTag(member.skills, tag, 4)

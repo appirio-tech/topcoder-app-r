@@ -4,7 +4,7 @@ import {
   MEMBER_SEARCH_FAILURE, MEMBER_SEARCH_SUCCESS
 } from '../config/constants'
 
-const initialState = {
+export const initialState = {
   pageLoaded: false,
   loadingMore: false,
   error: false,

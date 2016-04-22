@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MemberSearchView from './MemberSearchView'
-import loadMemberSearch from '../../actions/loadMemberSearch'
+import { loadMemberSearch } from '../../actions/loadMemberSearch'
 import { isEndOfScreen } from '../../helpers'
 
 class MemberSearch extends Component {

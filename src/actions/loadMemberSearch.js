@@ -7,7 +7,7 @@ import {
   SET_SEARCH_TAG, SET_SEARCH_TERM, MEMBER_SEARCH_SUCCESS,
   leaderboardUrl, memberSearchUrl, memberSearchTagUrl } from '../config/constants'
 
-export default function loadMemberSearch(searchTerm) {
+export function loadMemberSearch(searchTerm) {
   return ((dispatch, getState) => {
     const state = getState()
     const numCurrentUsernameMatches = state.memberSearch.usernameMatches.length
@@ -20,19 +20,19 @@ export default function loadMemberSearch(searchTerm) {
     } else if (previousSearchTerm && numCurrentUsernameMatches >= 10) {
       dispatch({ type: LOAD_MORE_USERNAMES })
 
-      return getUsernameMatches()
+      return getUsernameMatches(dispatch, searchTerm, numCurrentUsernameMatches)
     }
 
     dispatch({ type: SET_SEARCH_TERM, searchTerm })
 
-    return checkIfSearchTermIsATag()
+    return checkIfSearchTermIsATag(dispatch, searchTerm)
     .then((tag) => {
       dispatch({ type: SET_SEARCH_TAG, searchTermTag: tag })
 
-      const memberSearchAPICalls = [getUsernameMatches()]
+      const memberSearchAPICalls = [getUsernameMatches(dispatch, searchTerm, numCurrentUsernameMatches)]
 
       if (tag) {
-        memberSearchAPICalls.unshift(getTopMembers(tag))
+        memberSearchAPICalls.unshift(getTopMembers(dispatch, tag))
       }
 
       return Promise.all(memberSearchAPICalls)
@@ -40,86 +40,86 @@ export default function loadMemberSearch(searchTerm) {
         dispatch({ type: MEMBER_SEARCH_SUCCESS })
       })
       .catch(err => {
-        memberSearchFailure()
+        memberSearchFailure(dispatch)
         throw new Error(`Could not resolve all promises. Reason: ${err}`)
       })
     })
-
-    function checkIfSearchTermIsATag() {
-      const url = `${memberSearchTagUrl}?filter=name%3D${window.encodeURIComponent(searchTerm)}`
-
-      return fetchJSON(url)
-      .then(data => {
-        const tagInfo = _.get(data, 'result.content')
-
-        if (!_.isArray(tagInfo)) {
-          throw new Error('Tag response must be an array')
-        }
-
-        return tagInfo[0]
-      })
-      .catch(err => {
-        memberSearchFailure()
-        throw new Error(`Could not determine if search term is a tag. Reason: ${err}`)
-
-      })
-    }
-
-    function getUsernameMatches() {
-      const offset = numCurrentUsernameMatches
-      const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${window.encodeURIComponent(searchTerm)}&offset=${offset}&limit=10`
-
-      return fetchJSON(url)
-      .then(data => {
-        const usernameMatches = _.get(data, 'result.content')
-        const totalCount      = _.get(data, 'result.metadata.totalCount')
-
-        if (!_.isArray(usernameMatches)) {
-          throw new Error('Expected array for username response results')
-        } else if (!_.isNumber(totalCount)) {
-          throw new Error('Expected number for metadata total count')
-        }
-
-        dispatch({
-          type: USERNAME_SEARCH_SUCCESS,
-          usernameMatches,
-          totalCount
-        })
-
-        return usernameMatches
-      })
-      .catch(err => {
-        dispatch({ type: MEMBER_SEARCH_FAILURE })
-        throw new Error(`Could not fetch username matches. Reason: ${err}`)
-      })
-    }
-
-    function getTopMembers(tag) {
-      const leaderboardType = mapTagToLeaderboardType(tag.domain)
-      const queryString = `?filter=id%3D${tag.id}%26type%3D${leaderboardType}`
-      const url = leaderboardUrl + queryString
-
-      return fetchJSON(url)
-      .then(data => {
-        const topMembers = _.get(data, 'result.content', [])
-
-        dispatch({
-          type: TOP_MEMBER_SEARCH_SUCCESS,
-          topMembers
-        })
-
-        return topMembers
-      })
-      .catch(err => {
-        memberSearchFailure()
-
-        throw new Error(`Could not fetch top members. Reason: ${err}`)
-      })
-    }
-
-    function memberSearchFailure() {
-      dispatch({ type: MEMBER_SEARCH_FAILURE })
-      dispatch({ type: RESET_SEARCH_TERM})
-    }
   })
+}
+
+export function checkIfSearchTermIsATag(dispatch, searchTerm) {
+  const url = `${memberSearchTagUrl}?filter=name%3D${window.encodeURIComponent(searchTerm)}`
+
+  return fetchJSON(url)
+  .then(data => {
+    const tagInfo = _.get(data, 'result.content')
+
+    if (!_.isArray(tagInfo)) {
+      throw new Error('Tag response must be an array')
+    }
+
+    return tagInfo[0]
+  })
+  .catch(err => {
+    memberSearchFailure(dispatch)
+    throw new Error(`Could not determine if search term is a tag. Reason: ${err}`)
+
+  })
+}
+
+export function getUsernameMatches(dispatch, searchTerm, numMatches) {
+  const offset = numMatches
+  const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${window.encodeURIComponent(searchTerm)}&offset=${offset}&limit=10`
+
+  return fetchJSON(url)
+  .then(data => {
+    const usernameMatches = _.get(data, 'result.content')
+    const totalCount      = _.get(data, 'result.metadata.totalCount')
+
+    if (!_.isArray(usernameMatches)) {
+      throw new Error('Expected array for username response results')
+    } else if (!_.isNumber(totalCount)) {
+      throw new Error('Expected number for metadata total count')
+    }
+
+    dispatch({
+      type: USERNAME_SEARCH_SUCCESS,
+      usernameMatches,
+      totalCount
+    })
+
+    return usernameMatches
+  })
+  .catch(err => {
+    dispatch({ type: MEMBER_SEARCH_FAILURE })
+    throw new Error(`Could not fetch username matches. Reason: ${err}`)
+  })
+}
+
+export function getTopMembers(dispatch, tag) {
+  const leaderboardType = mapTagToLeaderboardType(tag.domain)
+  const queryString = `?filter=id%3D${tag.id}%26type%3D${leaderboardType}`
+  const url = leaderboardUrl + queryString
+
+  return fetchJSON(url)
+  .then(data => {
+    const topMembers = _.get(data, 'result.content', [])
+
+    dispatch({
+      type: TOP_MEMBER_SEARCH_SUCCESS,
+      topMembers
+    })
+
+    return topMembers
+  })
+  .catch(err => {
+    memberSearchFailure(dispatch)
+
+    throw new Error(`Could not fetch top members. Reason: ${err}`)
+  })
+}
+
+export function memberSearchFailure(dispatch) {
+  dispatch({ type: MEMBER_SEARCH_FAILURE })
+  dispatch({ type: RESET_SEARCH_TERM})
 }

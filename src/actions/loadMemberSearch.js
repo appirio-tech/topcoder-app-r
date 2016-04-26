@@ -32,6 +32,7 @@ export function loadMemberSearch(searchTerm) {
       const memberSearchAPICalls = [getUsernameMatches(dispatch, searchTerm, numCurrentUsernameMatches)]
 
       if (tag) {
+        console.log(tag)
         memberSearchAPICalls.unshift(getTopMembers(dispatch, tag))
       }
 
@@ -48,7 +49,7 @@ export function loadMemberSearch(searchTerm) {
 }
 
 export function checkIfSearchTermIsATag(dispatch, searchTerm) {
-  const url = `${memberSearchTagUrl}?filter=name%3D${window.encodeURIComponent(searchTerm)}`
+  const url = `${memberSearchTagUrl}?filter=name%3D${encodeURIComponent(searchTerm)}`
 
   return fetchJSON(url)
   .then(data => {
@@ -69,7 +70,7 @@ export function checkIfSearchTermIsATag(dispatch, searchTerm) {
 
 export function getUsernameMatches(dispatch, searchTerm, numMatches) {
   const offset = numMatches
-  const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${window.encodeURIComponent(searchTerm)}&offset=${offset}&limit=10`
+  const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${encodeURIComponent(searchTerm)}&offset=${offset}&limit=10`
 
   return fetchJSON(url)
   .then(data => {

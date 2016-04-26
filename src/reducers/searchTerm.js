@@ -1,6 +1,6 @@
 import { SET_SEARCH_TERM, SET_SEARCH_TAG, RESET_SEARCH_TERM } from '../config/constants'
 
-const initialState = {
+export const initialState = {
   previousSearchTerm: null,
   searchTermTag: null
 }

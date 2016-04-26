@@ -1,4 +1,6 @@
-// Actions
+/*
+ * ACTIONS
+ */
 
 // Search Term
 export const SET_SEARCH_TERM   = 'SET_SEARCH_TERM'
@@ -13,8 +15,11 @@ export const LOAD_MORE_USERNAMES       = 'LOAD_MORE_USERNAMES'
 export const USERNAME_SEARCH_SUCCESS   = 'USERNAME_SEARCH_SUCCESS'
 export const TOP_MEMBER_SEARCH_SUCCESS = 'TOP_MEMBER_SEARCH_SUCCESS'
 
-// Urls
-export const DOMAIN = process.env.domain
+/*
+ * URLs
+ */
+
+export const DOMAIN = process.env.domain || 'topcoder.com'
 
 // FIXME: Change to process.env.INTERNAL_API after added to webpack
 export const INTERNAL_API = `https://internal-api.${DOMAIN}/v3`

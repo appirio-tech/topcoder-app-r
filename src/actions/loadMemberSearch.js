@@ -32,7 +32,6 @@ export function loadMemberSearch(searchTerm) {
       const memberSearchAPICalls = [getUsernameMatches(dispatch, searchTerm, numCurrentUsernameMatches)]
 
       if (tag) {
-        console.log(tag)
         memberSearchAPICalls.unshift(getTopMembers(dispatch, tag))
       }
 

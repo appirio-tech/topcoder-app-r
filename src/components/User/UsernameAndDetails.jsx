@@ -16,9 +16,9 @@ const UsernameAndDetails = ({ username, country, numWins, memberSince }) => {
 
   return (
     <div className="username-and-details">
-      <div className="username">
+      <h1 className="username">
         {username}
-      </div>
+      </h1>
 
       <div className="user-details">
         <div className="country-and-wins">

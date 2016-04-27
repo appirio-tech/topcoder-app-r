@@ -74,6 +74,8 @@ describe('Helper Functions', () => {
       sortedSkillsAndTag.length.should.equal(3)
 
       sortedSkillsAndTag[0].name.should.equal('Node')
+      sortedSkillsAndTag[0].searchedTag.should.be.true
+
       sortedSkillsAndTag[1].name.should.equal('JavaScript')
       sortedSkillsAndTag[2].name.should.equal('Python')
     })
@@ -84,6 +86,14 @@ describe('Helper Functions', () => {
 
       sortedSkills[0].score.should.equal(80)
       sortedSkills[1].score.should.equal(33)
+    })
+
+    it('does not mutate the sorted array if the tag is not found', () => {
+      const sortedSkills = sortSkillsByScoreAndTag(skills, { name: 'Java' })
+      sortedSkills.length.should.equal(3)
+
+      sortedSkills[0].score.should.equal(80)
+      chai.should().not.exist(sortedSkills[0].searchedTag)
     })
   })
 
@@ -295,11 +305,15 @@ function mockStatsData() {
     DATA_SCIENCE: {
       MARATHON_MATCH: {
         mostRecentEventDate: 1,
-        rank: 500
+        rank: {
+          rating: 500
+        }
       },
       SRM: {
         mostRecentEventDate: 4,
-        rank: 700
+        rank: {
+          rating: 700
+        }
       }
     },
     DESIGN: {

@@ -1,4 +1,6 @@
 import React from 'react'
+import _ from 'lodash'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ListContainer from '../ListContainer/ListContainer'
 import TopMemberList from '../TopMemberList/TopMemberList'
 import MemberList from '../MemberList/MemberList'
@@ -13,7 +15,8 @@ import { getSearchTagPreposition } from '../../helpers'
 require('./MemberSearchView.scss')
 
 const MemberSearchView = (props) => {
-  const { loading, error, usernameMatches, totalCount, topMembers } = props
+  const { pageLoaded, loadingMore, error } = props
+  const { usernameMatches, totalCount, topMembers, moreMatchesAvailable } = props
   const { previousSearchTerm: searchTerm, searchTermTag: tag } = props
 
   const { exactMemberMatch, memberMatches } = renderUsernameMatches()
@@ -40,27 +43,61 @@ const MemberSearchView = (props) => {
 
   function renderPageState() {
     if (error) {
-      return <PageError />
-
-    } else if (searchTerm && !loading && !error && !usernameMatches.length && !topMembers.length) {
-      return <NoResults entry={searchTerm} />
-    } else if (loading && !usernameMatches.length && !topMembers.length) {
       return (
-        <ListContainer
-          headerText={'Loading users...'}
+        <ReactCSSTransitionGroup
+          transitionName="page-error"
+          transitionAppear
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
         >
-          <ul>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e, i) => {
-              return <LoadingListItem type={'MEMBER'} key={i} />
-            })}
-          </ul>
-        </ListContainer>
+          <PageError />
+        </ReactCSSTransitionGroup>
+      )
+
+    } else if (searchTerm && pageLoaded && !usernameMatches.length && !topMembers.length) {
+      return (
+        <ReactCSSTransitionGroup
+          transitionName="no-results"
+          transitionAppear
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          <NoResults entry={searchTerm} />
+        </ReactCSSTransitionGroup>
+      )
+    } else if (!pageLoaded && !usernameMatches.length && !topMembers.length) {
+      const loadingListItems = []
+
+      for (let i = 0; i < 10; i++) {
+        loadingListItems.push(
+          <LoadingListItem type={'MEMBER'} key={i} />
+        )
+      }
+
+      return (
+        <ReactCSSTransitionGroup
+          transitionName="list-container"
+          transitionAppear
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          <ListContainer
+            headerText={'Loading members...'}
+          >
+            <ul>
+              {loadingListItems}
+            </ul>
+          </ListContainer>
+        </ReactCSSTransitionGroup>
       )
     }
   }
 
   function renderTopMembers() {
-    if (tag && topMembers.length) {
+    if (pageLoaded && tag && topMembers.length) {
       const preposition = getSearchTagPreposition(tag.domain)
 
       return (
@@ -81,14 +118,15 @@ const MemberSearchView = (props) => {
     let exactMemberMatch
     let restOfUsernameMatches
 
-    if (usernameMatches.length) {
+    if (pageLoaded && usernameMatches.length) {
       // Check if the first member in the array matches the search term
-      const isExactMatch = usernameMatches[0].handle.toLowerCase() === searchTerm
+      const isSearchTerm = _.isString(searchTerm)
+      const isExactMatch = isSearchTerm && usernameMatches[0].handle.toLowerCase() === searchTerm.toLowerCase()
 
       // If it's an exact match, and there is no leaderboard,
       // show the exact match separately
       if (isExactMatch && !tag) {
-        exactMemberMatch = <MemberItem member={usernameMatches[0]} withBio />
+        exactMemberMatch = <MemberItem member={usernameMatches[0]} withBio shouldAnimate />
 
         restOfUsernameMatches = usernameMatches.slice(1)
       }
@@ -99,13 +137,21 @@ const MemberSearchView = (props) => {
 
       } else {
         memberMatches = (
-          <ListContainer
-            headerText={'Usernames matching '}
-            headerHighlightedText={searchTerm}
-            numListItems={totalCount}
+          <ReactCSSTransitionGroup
+            transitionName="list-container"
+            transitionAppear
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
           >
-            <MemberList members={exactMemberMatch ? restOfUsernameMatches : usernameMatches} />
-          </ListContainer>
+            <ListContainer
+              headerText={'Usernames matching '}
+              headerHighlightedText={searchTerm}
+              numListItems={totalCount}
+            >
+              <MemberList members={exactMemberMatch ? restOfUsernameMatches : usernameMatches} />
+            </ListContainer>
+          </ReactCSSTransitionGroup>
         )
       }
     }
@@ -121,11 +167,11 @@ const MemberSearchView = (props) => {
       props.loadMemberSearch(searchTerm)
     }
 
-    if (!loading && !error && usernameMatches.length === 10) {
+    if (moreMatchesAvailable && pageLoaded && !loadingMore && !error && usernameMatches.length === 10) {
       return <LoadMoreButton callback={loadMoreMembers}/>
     }
 
-    if (loading && !error && usernameMatches.length === 10) {
+    if (moreMatchesAvailable && loadingMore && !error && usernameMatches.length === 10) {
       return <LoadMoreButton callback={loadMoreMembers} loading />
     }
 
@@ -135,15 +181,22 @@ const MemberSearchView = (props) => {
   function renderEndOfResults() {
     const numResults = usernameMatches.length
 
-    // If the member matches list is rendered
-    // and the number of items in the list equals the total number
-    if (numResults > 0 && numResults === totalCount && memberMatches) {
+    // Don't show 'End of results' if the page is loading
+    if (!pageLoaded) {
+      return null
+
+    // Or if there are more members to load
+    } else if (numResults !== totalCount) {
+      return null
+
+    // Or if there are no results at all
+    } else if (numResults === 0 && topMembers.length === 0) {
+      return null
+
+    } else {
       return <EndOfResults />
     }
-
-    return null
   }
-
 }
 
 export default MemberSearchView

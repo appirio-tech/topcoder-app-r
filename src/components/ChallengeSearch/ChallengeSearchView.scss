@@ -1,5 +1,5 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .challenge-search-view {
-  background-color: $medium-gray;
+  background-color: $tc-gray-neutral-dark;
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import MemberSearchView from '../components/MemberSearch/MemberSearchView'
-import loadMemberSearch from '../actions/loadMemberSearch'
-import { isEndOfScreen } from '../helpers'
+import MemberSearchView from './MemberSearchView'
+import { loadMemberSearch } from '../../actions/loadMemberSearch'
+import { isEndOfScreen } from '../../helpers'
 
 class MemberSearch extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class MemberSearch extends Component {
   componentWillMount() {
     window.addEventListener('scroll', this.handleScroll)
 
-    this.searchTermFromQuery = this.props.location.query.q
+    this.searchTermFromQuery = this.props.location.query.q || ''
     this.props.loadMemberSearch(this.searchTermFromQuery)
   }
 
@@ -23,9 +23,9 @@ class MemberSearch extends Component {
   }
 
   handleScroll() {
-    const { moreMatchesAvailable, usernameMatches, loading } = this.props
+    const { moreMatchesAvailable, usernameMatches, loadingMore, pageLoaded } = this.props
 
-    if (!loading && moreMatchesAvailable && usernameMatches.length > 10) {
+    if (pageLoaded && !loadingMore && moreMatchesAvailable && usernameMatches.length > 10) {
       isEndOfScreen(this.props.loadMemberSearch, this.searchTermFromQuery)
     }
   }
@@ -37,8 +37,9 @@ class MemberSearch extends Component {
 
 const mapStateToProps = ({ memberSearch, searchTerm }) => {
   return {
-    loading: memberSearch.loading,
-    error  : memberSearch.error,
+    pageLoaded : memberSearch.pageLoaded,
+    loadingMore: memberSearch.loadingMore,
+    error      : memberSearch.error,
 
     usernameMatches     : memberSearch.usernameMatches,
     moreMatchesAvailable: memberSearch.moreMatchesAvailable,

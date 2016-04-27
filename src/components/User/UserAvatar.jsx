@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import DefaultUserAvatarIcon from '../../icons/DefaultUserAvatarIcon'
 import LevelDesignatorIcon from '../../icons/LevelDesignatorIcon'
 import { memberLevelByRating } from '../../helpers'
 
@@ -9,23 +8,19 @@ const UserAvatar = ({ showLevel, rating, photoURL }) => {
   let levelIcon
 
   if (showLevel) {
-    levelIcon = <LevelDesignatorIcon level={memberLevelByRating(rating)}/>
+    levelIcon = <LevelDesignatorIcon level={memberLevelByRating(rating)} height={'17px'} width={'17px'}/>
   }
 
-  let defaultUserImage
-  let backgroundImageUrl
+  let backgroundImageUrl = `url(${require('./default-avatar.svg')})`
 
-  if (photoURL) {
-    backgroundImageUrl = { backgroundImage: `url(${photoURL})` }
-  } else {
-    defaultUserImage = <DefaultUserAvatarIcon width={'60px'} height={'60px'}/>
-  }
+  if (photoURL)
+    backgroundImageUrl = `url(${photoURL}), ${backgroundImageUrl}`
 
+  // Delete -r when taking member search back out of the angular app
+  // Renamed to -r to avoid naming collisions
   return (
-    <div className="user-avatar" style={backgroundImageUrl}>
+    <div className="user-avatar-r" style={{ backgroundImage: backgroundImageUrl }}>
       {levelIcon}
-
-      {defaultUserImage}
     </div>
   )
 }

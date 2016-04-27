@@ -51,7 +51,7 @@ export function memberLevelByRating(userRating) {
 
 export function memberColorByLevel(userLevel) {
   const colorsByLevel = {
-    1: '#888894',
+    1: '#A3A3AD',
     2: '#25C089',
     3: '#666EFF',
     4: '#FCB816',
@@ -75,10 +75,12 @@ export function sortSkillsByScoreAndTag(skills, tag, numSkillsToReturn = Infinit
       return skill.name === tag.name
     })
 
-    const tagSkill = sortedSkills.splice(tagIndex, 1)[0]
-    tagSkill.searchedTag = true
+    if (tagIndex !== -1) {
+      const tagSkill = sortedSkills.splice(tagIndex, 1)[0]
+      tagSkill.searchedTag = true
 
-    sortedSkills.unshift(tagSkill)
+      sortedSkills.unshift(tagSkill)
+    }
   }
 
   return sortedSkills.slice(0, numSkillsToReturn)
@@ -136,7 +138,7 @@ export function getSubtrackAbbreviation(subtrack) {
 
 // Subtrack filtering
 export function getMostRecentSubtracks(userStatsByTrack, numResults = Infinity) {
-  const subtrackStats = []
+  let subtrackStats = []
 
   // If a user is a copilot with > 10 challenges and > 80% fulfillment,
   // add it to the list of subtracks
@@ -197,6 +199,11 @@ export function getMostRecentSubtracks(userStatsByTrack, numResults = Infinity) 
         stat: getSubtrackStat(subtrack)
       })
     }
+  })
+
+  // Filter out all subtracks with a value of 0 (wins, rating, etc.)
+  subtrackStats = subtrackStats.filter(stat => {
+    return stat.stat.value !== 0
   })
 
   const sortedSubtracks = subtrackStats.sort((a, b) => {

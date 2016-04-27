@@ -1,7 +1,7 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .user-info {
-  background-color: $white;
+  background-color: $tc-white;
   flex-basis: 60%;
   padding: 20px;
   position: relative;
@@ -18,11 +18,11 @@
     display: inline-block;
     width: 40px;
     vertical-align: top;
-    font-family: 'Source-Sans-Pro', Arial, Helvetica, sans-serif;
+    font-family: 'Proxima-Nova';
     font-size: 22px;
     line-height: 28px;
-    color: #B7B7B7;
-    background-color: $white;
+    color: $tc-gray-20;
+    background-color: $tc-white;
     @media (max-width: 700px) {
       width: 25px;
     }

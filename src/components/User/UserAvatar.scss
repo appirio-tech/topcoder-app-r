@@ -1,6 +1,8 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
-.user-avatar {
+// Delete -r when taking member search back out of the angular app
+// Renamed to -r to avoid naming collisions
+.user-avatar-r {
   width: 60px;
   height: 60px;
   margin-right: 20px;
@@ -12,17 +14,9 @@
     margin-right: 10px;
   }
 
-  .default-avatar {
-    background-color: $gray-light;
-    border-radius: 50%;
-  }
-
   .user-rank {
-    width: 17.5px;
-    height: 16.5px;
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 10;
   }
 }

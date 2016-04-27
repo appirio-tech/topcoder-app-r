@@ -1,7 +1,6 @@
-import _ from 'lodash'
 import { SET_SEARCH_TERM, SET_SEARCH_TAG, RESET_SEARCH_TERM } from '../config/constants'
 
-const initialState = {
+export const initialState = {
   previousSearchTerm: null,
   searchTermTag: null
 }
@@ -9,17 +8,17 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
   case SET_SEARCH_TERM:
-    return _.merge({}, state, {
-      previousSearchTerm: action.searchTerm.toLowerCase()
+    return Object.assign({}, state, {
+      previousSearchTerm: action.searchTerm
     })
 
   case SET_SEARCH_TAG:
-    return _.merge({}, state, {
+    return Object.assign({}, state, {
       searchTermTag: action.searchTermTag
     })
 
   case RESET_SEARCH_TERM:
-    return _.merge({}, state, {
+    return Object.assign({}, state, {
       previousSearchTerm: null,
       searchTermTag: null
     })

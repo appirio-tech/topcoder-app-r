@@ -1,7 +1,11 @@
+@import '~tc-ui/src/styles/tc-includes';
+
 .tag-list {
   display: flex;
   flex-wrap: wrap;
   white-space: nowrap;
+  @include tc-label;
+  font-weight: 400;
   @media (max-width: 700px) {
     flex-wrap: nowrap;
     display: block;
@@ -18,5 +22,5 @@
 .tag-list.no-tags {
   margin-bottom: 5px;
   font-style: italic;
-  color: #D1D3D4;
+  color: $tc-gray-20;
 }

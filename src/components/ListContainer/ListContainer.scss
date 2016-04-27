@@ -1,4 +1,4 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .list-container {
   max-width: 960px;
@@ -9,9 +9,9 @@
 
 .list-header {
   background-color: $tc-gray-20;
-  font-size: 12px;
-  line-height: 14px;
-  padding: 13px 15px;
+  @include tc-label;
+  font-weight: 400;
+  padding: 11px 15px;
 
   .header-text {
     color: $tc-gray-70;
@@ -24,5 +24,24 @@
   .list-count {
     color: $tc-gray-70;
     opacity: 0.5;
+  }
+}
+
+// ReactCSSTransitionGroup transitions
+.list-container-appear {
+  opacity: 0.01;
+
+  &.list-container-appear-active {
+    opacity: 1;
+    transition: opacity .25s ease-in;
+  }
+}
+
+.list-container-leave {
+  opacity: 1.0;
+
+  &.list-container-leave-active {
+    opacity: 0;
+    transition: opacity .25s ease-out;
   }
 }

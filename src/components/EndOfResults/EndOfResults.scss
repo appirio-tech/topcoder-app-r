@@ -1,7 +1,8 @@
+@import '~tc-ui/src/styles/tc-includes';
+
 .end-of-results {
-  margin: 0 auto;
-  padding-bottom: 20px;
+  margin: 20px auto;
   text-align: center;
   font-size: 12px;
-  color: #73738F;
+  color: $tc-gray-50;
 }

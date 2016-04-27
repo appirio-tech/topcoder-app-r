@@ -8,7 +8,7 @@ class ChallengeSearch extends Component {
   }
 
   componentWillMount() {
-    // const searchTermFromQuery = this.props.location.query.q
+    // const searchTermFromQuery = this.props.location.query.q || ''
     this.query = this.props.location.query.q
 
 

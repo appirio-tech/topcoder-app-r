@@ -305,11 +305,15 @@ function mockStatsData() {
     DATA_SCIENCE: {
       MARATHON_MATCH: {
         mostRecentEventDate: 1,
-        rank: 500
+        rank: {
+          rating: 500
+        }
       },
       SRM: {
         mostRecentEventDate: 4,
-        rank: 700
+        rank: {
+          rating: 700
+        }
       }
     },
     DESIGN: {

@@ -125,7 +125,7 @@ export function getSubtrackAbbreviation(subtrack) {
 
 // Subtrack filtering
 export function getMostRecentSubtracks(userStatsByTrack, numResults = Infinity) {
-  const subtrackStats = []
+  let subtrackStats = []
 
   // If a user is a copilot with > 10 challenges and > 80% fulfillment,
   // add it to the list of subtracks
@@ -186,6 +186,11 @@ export function getMostRecentSubtracks(userStatsByTrack, numResults = Infinity) 
         stat: getSubtrackStat(subtrack)
       })
     }
+  })
+
+  // Filter out all subtracks with a value of 0 (wins, rating, etc.)
+  subtrackStats = subtrackStats.filter(stat => {
+    return stat.stat.value !== 0
   })
 
   const sortedSubtracks = subtrackStats.sort((a, b) => {

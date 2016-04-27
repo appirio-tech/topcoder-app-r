@@ -1,5 +1,5 @@
 /*
- * ACTIONS
+ * ACTION CONSTANTS
  */
 
 // Search Term
@@ -20,6 +20,10 @@ export const TOP_MEMBER_SEARCH_SUCCESS = 'TOP_MEMBER_SEARCH_SUCCESS'
  */
 
 export const DOMAIN = process.env.domain || 'topcoder.com'
+
+// Accounts URLs
+export const CONNECTOR_URL = `https://accounts.${DOMAIN}/connector.html`
+export const ACCOUNTS_URL = `https://accounts.${DOMAIN}/tc`
 
 // FIXME: Change to process.env.INTERNAL_API after added to webpack
 export const INTERNAL_API = `https://internal-api.${DOMAIN}/v3`

@@ -11,7 +11,6 @@ class ChallengeSearch extends Component {
     // const searchTermFromQuery = this.props.location.query.q || ''
     this.query = this.props.location.query.q
 
-
     // this.props.setSearchTerm(searchTermFromQuery)
     // this.props.loadMemberSearch(searchTermFromQuery)
   }

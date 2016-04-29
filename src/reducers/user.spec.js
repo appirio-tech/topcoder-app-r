@@ -14,7 +14,7 @@ describe('user reducer: ', () => {
 
   const action = { type: 'UNCAUGHT_ACTION' }
 
-  it('should return the original state for any action not caught in its switch block', () => {
+  it('returns the original state for any action not caught in its switch block', () => {
     const newState = user(currentState, action)
 
     newState.should.equal(currentState)

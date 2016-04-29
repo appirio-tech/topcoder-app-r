@@ -6,7 +6,7 @@ import browserHistory from 'react-router/lib/browserHistory'
 import Router         from 'react-router/lib/Router'
 
 import store  from './config/store'
-import routes from './routes'
+import routes from './config/routes'
 
 import { configureConnector } from 'tc-accounts'
 import { CONNECTOR_URL } from './config/constants'

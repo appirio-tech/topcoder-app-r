@@ -107,12 +107,12 @@ describe('loadMemberSearch Actions:', () => {
         }
       })
 
+      mockSuccessfulTagAPICall()
+      mockSuccessfulUsernameMatchesAPICall()
+
       return loadMemberSearch('Java')(store.dispatch, store.getState)
         .then( () => {
           const storeActions = store.getActions()
-
-          mockSuccessfulTagAPICall()
-          mockSuccessfulUsernameMatchesAPICall()
 
           const loadMoreAction = _.some(storeActions, a => a.type === LOAD_MORE_USERNAMES)
           const successAction = _.some(storeActions, a => a.type === USERNAME_SEARCH_SUCCESS)

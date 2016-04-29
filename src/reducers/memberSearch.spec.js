@@ -31,7 +31,7 @@ describe('memberSearch reducer', () => {
 
     const newState = memberSearch(currentState, action)
 
-    it('should clear the username matches and top members', () => {
+    it('clears the username matches and top members', () => {
       newState.usernameMatches.should.be.an('array')
       newState.usernameMatches.length.should.equal(0)
 
@@ -39,15 +39,15 @@ describe('memberSearch reducer', () => {
       newState.topMembers.length.should.equal(0)
     })
 
-    it('should reset the error flag', () => {
+    it('resets the error flag', () => {
       newState.error.should.be.false
     })
 
-    it('should reset the loadingMore flag', () => {
+    it('resets the loadingMore flag', () => {
       newState.loadingMore.should.be.false
     })
 
-    it('should reset the total count of username matches', () => {
+    it('resets the total count of username matches', () => {
       newState.totalCount.should.equal(0)
     })
   })
@@ -61,7 +61,7 @@ describe('memberSearch reducer', () => {
 
     const newState = memberSearch(currentState, action)
 
-    it('should set pageLoaded to true', () => {
+    it('sets pageLoaded to true', () => {
       newState.pageLoaded.should.be.true
     })
   })
@@ -79,11 +79,11 @@ describe('memberSearch reducer', () => {
 
     const newState = memberSearch(currentState, action)
 
-    it('should set error to true', () => {
+    it('sets error to true', () => {
       newState.error.should.be.true
     })
 
-    it('should reset loadingMore, totalCount, usernameMatches, and topMembers', () => {
+    it('resets loadingMore, totalCount, usernameMatches, and topMembers', () => {
       newState.loadingMore.should.be.false
       newState.totalCount.should.equal(0)
       newState.usernameMatches.length.should.equal(0)
@@ -100,7 +100,7 @@ describe('memberSearch reducer', () => {
 
     const newState = memberSearch(currentState, action)
 
-    it('should set loadingMore to true', () => {
+    it('sets loadingMore to true', () => {
       newState.loadingMore.should.be.true
     })
   })
@@ -121,22 +121,22 @@ describe('memberSearch reducer', () => {
 
     const newState = memberSearch(currentState, action)
 
-    it('should set loadingMore to false', () => {
+    it('sets loadingMore to false', () => {
       newState.loadingMore.should.be.false
     })
 
-    it('should set the totalCount', () => {
+    it('sets the totalCount', () => {
       newState.totalCount.should.equal(6)
     })
 
-    it('should set moreMatchesAvailable to true if the number of usernameMatches is less than the totalCount after concatenating the new usernameMatches results', () => {
+    it('sets moreMatchesAvailable to true if the number of usernameMatches is less than the totalCount after concatenating the new usernameMatches results', () => {
       const newNumOfUsernameMatches = currentState.usernameMatches.length + action.usernameMatches.length
 
       newState.usernameMatches.length.should.equal(newNumOfUsernameMatches)
       newState.moreMatchesAvailable.should.be.true
     })
 
-    it('should concatenate the new usernameMatches to the previous state\'s usernameMatches', () => {
+    it('concatenates the new usernameMatches to the previous state\'s usernameMatches', () => {
       newState.usernameMatches.should.deep.equal([1, 2, 3, 4, 5])
     })
   })
@@ -153,7 +153,7 @@ describe('memberSearch reducer', () => {
 
     const newState = memberSearch(currentState, action)
 
-    it('should replace the old state\'s topMembers with the new ones', () => {
+    it('replaces the old state\'s topMembers with the new ones', () => {
       newState.topMembers.should.deep.equal([3, 2, 1])
     })
   })

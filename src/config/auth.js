@@ -1,16 +1,20 @@
-import { getFreshToken } from 'tc-accounts'
+import _ from 'lodash'
+import { getFreshToken, decodeToken } from 'tc-accounts'
+import { SET_USER, UNSET_USER } from './constants'
+import store from './store'
 
-export const checkAuth = () => {
-  return getFreshToken()
-    .then(token => {
-      console.log(`My token: ${token}`)
+export const refreshAuth = (nextState, replace, callback) => {
+  getFreshToken()
+    .then((token) => {
+      const decodedJWT = decodeToken(token)
 
-      return token
+      const user = _.pick(decodedJWT, ['handle', 'roles', 'userId'])
+
+      store.dispatch({ type: SET_USER, user })
+      callback()
     })
-    .catch(err => {
-      console.log('No user is logged in.')
-      console.log(err)
-
-      return null
+    .catch( () => {
+      store.dispatch({ type: UNSET_USER })
+      callback()
     })
 }

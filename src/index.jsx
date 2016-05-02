@@ -5,12 +5,12 @@ import { Provider }   from 'react-redux'
 import browserHistory from 'react-router/lib/browserHistory'
 import Router         from 'react-router/lib/Router'
 
+import { configureConnector } from 'tc-accounts'
+import { CONNECTOR_URL } from './config/constants'
 import store  from './config/store'
 import routes from './config/routes'
 
-import { configureConnector } from 'tc-accounts'
-import { CONNECTOR_URL } from './config/constants'
-
+// Connect to Topcoder accounts app
 configureConnector({
   connectorUrl: CONNECTOR_URL,
   frameId: 'tc-accounts-iframe'

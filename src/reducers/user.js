@@ -1,4 +1,4 @@
-import { SET_USER, LOGOUT_USER } from '../config/constants'
+import { SET_USER, UNSET_USER } from '../config/constants'
 
 export const initialState = null
 
@@ -8,7 +8,7 @@ export default function(state = initialState, action) {
   case SET_USER:
     return Object.assign({}, state, action.user)
 
-  case LOGOUT_USER:
+  case UNSET_USER:
     return null
 
   default:

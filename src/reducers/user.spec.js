@@ -2,7 +2,7 @@ import user from './user'
 import freeze from 'deep-freeze-node'
 import chai from 'chai'
 
-import { SET_USER, LOGOUT_USER } from '../config/constants'
+import { SET_USER, UNSET_USER } from '../config/constants'
 
 describe('user reducer: ', () => {
   const mockUser = {
@@ -32,10 +32,10 @@ describe('user reducer: ', () => {
     })
   })
 
-  describe(LOGOUT_USER, () => {
+  describe(UNSET_USER, () => {
     const currentState = freeze(mockUser)
 
-    const action = { type: LOGOUT_USER }
+    const action = { type: UNSET_USER }
 
     const newState = user(currentState, action)
 

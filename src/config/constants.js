@@ -4,7 +4,7 @@
 
 // Current Logged in User
 export const SET_USER    = 'SET_USER'
-export const LOGOUT_USER = 'LOGOUT_USER'
+export const UNSET_USER = 'UNSET_USER'
 
 // Search Term
 export const SET_SEARCH_TERM   = 'SET_SEARCH_TERM'

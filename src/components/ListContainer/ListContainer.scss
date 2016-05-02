@@ -8,10 +8,9 @@
 }
 
 .list-header {
+  padding: 11px 15px;
   background-color: $tc-gray-20;
   @include tc-label;
-  font-weight: 400;
-  padding: 11px 15px;
 
   .header-text {
     color: $tc-gray-70;

@@ -9,6 +9,11 @@ export const refreshAuth = (nextState, replace, callback) => {
       const decodedJWT = decodeToken(token)
 
       const user = _.pick(decodedJWT, ['handle', 'roles', 'userId'])
+      // Update properties names and values
+      user.username = user.handle
+      user.id   = _.toNumber(user.userId)
+      delete user.handle
+      delete user.userId
 
       store.dispatch({ type: SET_USER, user })
       callback()

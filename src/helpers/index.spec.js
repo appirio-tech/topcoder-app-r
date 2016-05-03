@@ -283,6 +283,20 @@ describe('Helper Functions', () => {
     })
   })
 
+  describe('mapTrackConstantsToClassNames', () => {
+    const mapTrackConstantsToClassNames = helpers.mapTrackConstantsToClassNames
+
+    it('maps tracks to shorter, lowercased class names', () => {
+      mapTrackConstantsToClassNames('DEVELOP').should.equal('develop')
+      mapTrackConstantsToClassNames('DESIGN').should.equal('design')
+      mapTrackConstantsToClassNames('DATA_SCIENCE').should.equal('data')
+    })
+
+    it('returns the original string if it is not a track', () => {
+      mapTrackConstantsToClassNames('r2d2').should.equal('r2d2')
+    })
+  })
+
   describe('mapTagToLeaderboardType', () => {
     const mapTagToLeaderboardType = helpers.mapTagToLeaderboardType
 
@@ -292,6 +306,15 @@ describe('Helper Functions', () => {
 
     it('returns undefined for any string not in the map', () => {
       chai.should().not.exist(mapTagToLeaderboardType('myString'))
+    })
+  })
+
+  describe('challengeDetailsURL', () => {
+    const challengeDetailsURL = helpers.challengeDetailsURL
+
+    it('returns a complete URL given the parameters', () => {
+      const finishedURL = 'https://www.topcoder-dev.com/challenge-details/8/?type=develop'
+      challengeDetailsURL('DEVELOP', 8).should.equal(finishedURL)
     })
   })
 })

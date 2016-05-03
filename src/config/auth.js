@@ -16,10 +16,10 @@ export const refreshAuth = (nextState, replace, callback) => {
       delete user.userId
 
       store.dispatch({ type: SET_USER, user })
-      callback()
     })
     .catch( () => {
       store.dispatch({ type: UNSET_USER })
-      callback()
+
     })
+    .then(callback)
 }

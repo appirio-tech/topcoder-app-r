@@ -23,7 +23,7 @@ export const TOP_MEMBER_SEARCH_SUCCESS = 'TOP_MEMBER_SEARCH_SUCCESS'
  * URLs
  */
 
-export const DOMAIN = process.env.domain || 'topcoder.com'
+export const DOMAIN = process.env.domain || 'topcoder-dev.com'
 
 // Accounts URLs
 export const CONNECTOR_URL = `https://accounts.${DOMAIN}/connector.html`
@@ -36,5 +36,8 @@ export const memberSearchTagUrl = `${INTERNAL_API}/tags/`
 
 export const memberSearchUrl = `${INTERNAL_API}/members/_search/`
 export const challengeSearchUrl = 'https://ol348e2ya5.execute-api.us-east-1.amazonaws.com/dev'
-
+// search-topcoder-squ62azmqlwkvnmztjmk4cq5fq.us-east-1.es.amazonaws.com/challenges/_search
+/*{
+    "query": { "match": { "name":"Command Line Utility" } }
+}*/
 export const leaderboardUrl = `${INTERNAL_API}/leaderboards/`

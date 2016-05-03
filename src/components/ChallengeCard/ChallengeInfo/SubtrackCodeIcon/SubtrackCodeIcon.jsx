@@ -1,19 +1,27 @@
 import React, { PropTypes } from 'react'
-import { getSubtrackAbbreviation } from '../../../../helpers'
+import { getSubtrackAbbreviation,
+  mapTrackConstantsToClassNames } from '../../../../helpers'
 
+import classNames from 'classnames'
 require('./SubtrackCodeIcon.scss')
 
-const SubtrackCodeIcon = ({ subtrack }) => {
+const SubtrackCodeIcon = ({ track, subtrack }) => {
+  const subtrackCodeStyles = classNames(
+    'subtrack-code-icon',
+    mapTrackConstantsToClassNames(track)
+  )
+
   const subtrackCode = getSubtrackAbbreviation(subtrack)
 
   return (
-    <div className="subtrack-code-icon">
+    <div className={subtrackCodeStyles}>
       {subtrackCode}
     </div>
   )
 }
 
 SubtrackCodeIcon.propTypes = {
+  track   : PropTypes.string.isRequired,
   subtrack: PropTypes.string.isRequired
 }
 

@@ -1,6 +1,11 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
-.challenge-info {
+.challenge-card-info {
   flex-basis: 70%;
   max-width: 390px;
+}
+
+.challenge-card-title {
+  @include tc-label-large;
+  color: $tc-black;
 }

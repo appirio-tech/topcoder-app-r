@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
+import { DOMAIN } from '../config/constants'
 
 // Fetch helpers
 export function status(response) {
@@ -243,7 +244,6 @@ export function isEndOfScreen(callback, ...callbackArguments) {
   }
 }
 
-// Miscellaneous helpers
 export function getRoundedPercentage(number) {
   if (_.isFinite(number)) {
     const roundedNumber = Math.round(number)
@@ -286,10 +286,29 @@ export function getSearchTagPreposition(tagType) {
   }
 }
 
+export function mapTrackConstantsToClassNames(track) {
+  switch (track) {
+  case 'DEVELOP':
+    return 'develop'
+  case 'DESIGN':
+    return 'design'
+  case 'DATA_SCIENCE':
+    return 'data'
+  default:
+    return track
+  }
+}
+
 export function mapTagToLeaderboardType(tagDomain) {
   const tagToLeaderboardTypeMap = {
     SKILLS: 'MEMBER_SKILL'
   }
 
   return tagToLeaderboardTypeMap[tagDomain]
+}
+
+export function challengeDetailsURL(track, id) {
+  track = track.toLowerCase()
+
+  return `https://www.${DOMAIN}/challenge-details/${id}/?type=${track}`
 }

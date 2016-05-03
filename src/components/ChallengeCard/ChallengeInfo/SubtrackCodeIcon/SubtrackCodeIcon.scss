@@ -1,4 +1,4 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .subtrack-code-icon {
   display: flex;
@@ -7,10 +7,10 @@
   width: 30px;
   height: 30px;
   margin-right: 20px;
-  font-family: 'Roboto', Arial;
-  font-size: 13px;
+  @include roboto;
+  @include tc-label;
   font-weight: bold;
-  color: #FAFAFB;
+  color: $tc-gray-neutral-light;
+  @include tc-track-background-colors;
   border-radius: 50%;
-  background-color: #21B2F1;
 }

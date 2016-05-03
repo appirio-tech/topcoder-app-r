@@ -8,13 +8,14 @@ import { isUserRegistered } from '../../helpers'
 require('./ChallengeCard.scss')
 
 const ChallengeCard = ({ challenge }) => {
+  const { id, name, track, subtrack } = challenge
   const myChallenge = isUserRegistered(challenge.users)
 
   return (
     <div className="challenge-card">
       <MyChallengeIndicator myChallenge={myChallenge} />
 
-      <ChallengeInfo challenge={challenge} />
+      <ChallengeInfo id={id} name={name} track={track} subtrack={subtrack} />
 
       <ChallengeInfoSecondary challenge={challenge} />
 

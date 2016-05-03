@@ -1,6 +1,146 @@
 /*eslint-disable */
 const mockChallengeData = [
   {
+    "id": 30049141,
+    "name": "SWIFT for Puneet dev challenge",
+    "description": null,
+    "track": "DEVELOP",
+    "status": "ACTIVE",
+    "createdBy": "23235151",
+    "createdAt": 1427937857,
+    "updatedBy": "22841596",
+    "updatedAt": 1428358931,
+    "subtrack": "CODE",
+    "submissions": 0,
+    "registrants": 0,
+    "phases": [
+      {
+        "duration": 432000000,
+        "createdAt": 1427923738,
+        "updatedBy": "22841596",
+        "actualStartTime": 1427926344,
+        "createdBy": "23235151",
+        "scheduledStartTime": 1427926344,
+        "scheduledEndTime": 1428358492,
+        "actualEndTime": 1428358492,
+        "id": 732715,
+        "type": "REGISTRATION",
+        "updatedAt": 1428358972,
+        "status": "CLOSED"
+      },
+      {
+        "duration": 431700000,
+        "createdAt": 1427923738,
+        "updatedBy": "22841596",
+        "actualStartTime": 1427927163,
+        "createdBy": "23235151",
+        "scheduledStartTime": 1427927163,
+        "scheduledEndTime": 1428358952,
+        "actualEndTime": 1428358952,
+        "id": 732716,
+        "type": "SUBMISSION",
+        "updatedAt": 1428358972,
+        "status": "CLOSED"
+      }
+    ],
+    "prizes": [
+      {
+        "amount": 350,
+        "id": 241982,
+        "place": 1
+      },
+      {
+        "amount": 150,
+        "id": 241983,
+        "place": 2
+      }
+    ],
+    "users": [
+      {
+        "roles": [
+          "MANAGER"
+        ],
+        "handle": "appiriowes",
+        "id": 23252679,
+        "placement": null
+      },
+      {
+        "roles": [
+          "MANAGER"
+        ],
+        "handle": "Applications",
+        "id": 22770213,
+        "placement": null
+      }
+    ]
+  },
+  {
+    "id": 30049480,
+    "name": "foo3 design",
+    "description": null,
+    "track": "DESIGN",
+    "status": "ACTIVE",
+    "createdBy": "40141235",
+    "createdAt": 1447370607,
+    "updatedBy": "8547899",
+    "updatedAt": 1447778169,
+    "subtrack": "WIDGET_OR_MOBILE_SCREEN_DESIGN",
+    "submissions": 3,
+    "registrants": 6,
+    "phases": [
+      {
+        "duration": 172800000,
+        "createdAt": 1447352608,
+        "updatedBy": "8547899",
+        "actualStartTime": 1447352824,
+        "createdBy": "40141235",
+        "scheduledStartTime": 1447352824,
+        "scheduledEndTime": 1447352881,
+        "actualEndTime": 1447352881,
+        "id": 733517,
+        "type": "SPECIFICATION_SUBMISSION",
+        "updatedAt": 1447778169,
+        "status": "CLOSED"
+      },
+      {
+        "duration": 1000,
+        "createdAt": 1447352608,
+        "updatedBy": "8547899",
+        "actualStartTime": 1447352883,
+        "createdBy": "40141235",
+        "scheduledStartTime": 1447352883,
+        "scheduledEndTime": 1447371578,
+        "actualEndTime": 1447371578,
+        "id": 733518,
+        "type": "SPECIFICATION_REVIEW",
+        "updatedAt": 1447778169,
+        "status": "CLOSED"
+      }
+    ],
+    "prizes": [
+      {
+        "amount": 1250,
+        "id": 242640,
+        "place": 1
+      },
+      {
+        "amount": 250,
+        "id": 242641,
+        "place": 2
+      }
+    ],
+    "users": [
+      {
+        "roles": [
+          "SPECIFICATION_SUBMITTER"
+        ],
+        "handle": "jcopilotdev",
+        "id": 40141235,
+        "placement": null
+      }
+    ]
+  },
+  {
     id: 325212,
     name: 'Interlochen Media - iOS Screen Design',
     track: 'DEVELOP',

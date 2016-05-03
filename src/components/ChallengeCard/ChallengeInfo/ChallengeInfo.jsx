@@ -1,20 +1,29 @@
 import React, { PropTypes } from 'react'
 import SubtrackCodeIcon from './SubtrackCodeIcon/SubtrackCodeIcon'
+import TagList from '../../TagList/TagList'
+import { challengeDetailsURL } from '../../../helpers'
 
 require('./ChallengeInfo.scss')
 
-const ChallengeInfo = ({ challenge }) => {
-  return (
-    <div className="challenge-info">
-      <SubtrackCodeIcon subtrack={challenge.subtrack}/>
+const ChallengeInfo = ({ subtrack, track, name, id }) => {
+  const url = challengeDetailsURL(track, id)
 
-      <h1>{challenge.name}</h1>
+  return (
+    <div className="challenge-card-info">
+      <SubtrackCodeIcon track={track} subtrack={subtrack}/>
+
+      <a className="tc-link challenge-card-title" href={url}>{name}</a>
+
+      <TagList tags={[{name: 'JavaScript'}, {name: 'Python'}]} />
     </div>
   )
 }
 
 ChallengeInfo.propTypes = {
-  challenge: PropTypes.object.isRequired
+  id      : PropTypes.number.isRequired,
+  name    : PropTypes.string.isRequired,
+  track   : PropTypes.string.isRequired,
+  subtrack: PropTypes.string.isRequired
 }
 
 export default ChallengeInfo

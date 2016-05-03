@@ -7,7 +7,8 @@ import { SET_USER, UNSET_USER } from '../config/constants'
 describe('user reducer: ', () => {
   const mockUser = {
     username: 'r2d2',
-    id: 123456
+    id: 123456,
+    roles: ['copilot']
   }
 
   const currentState = freeze({ oldState: 'oldState' })

@@ -1,26 +1,13 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 
 require('./App.scss')
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    )
-  }
+const App = ({ children }) => {
+  return (
+    <div>
+      {children}
+    </div>
+  )
 }
 
-const mapStateToProps = ({ user }) => {
-  return {
-    user
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default App

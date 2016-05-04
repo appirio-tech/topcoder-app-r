@@ -2,11 +2,16 @@ import React, { PropTypes } from 'react'
 
 require('./PhaseTimeline.scss')
 
-const PhaseTimeline = ({ /* Add destructured props here */ }) => {
+const PhaseTimeline = ({ phases }) => {
+  const phaseName = phases[0].type
+
+  return (
+    <div>{phaseName}</div>
+  )
 }
 
 PhaseTimeline.propTypes = {
-  // Add all proptypes
+  phases: PropTypes.array.isRequired
 }
 
 export default PhaseTimeline

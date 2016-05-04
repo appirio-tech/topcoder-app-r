@@ -34,7 +34,7 @@ const TagList = ({ tags, label, emptyMessage = '' }) => {
 TagList.propTypes = {
   tags        : PropTypes.array.isRequired,
   label       : PropTypes.string,
-  emptyMessage: PropTypes.string.isRequired
+  emptyMessage: PropTypes.string
 }
 
 export default TagList

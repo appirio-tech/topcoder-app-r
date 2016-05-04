@@ -2,11 +2,14 @@ import React, { PropTypes } from 'react'
 
 require('./ChallengeResult.scss')
 
-const ChallengeResult = ({ /* Add destructured props here */ }) => {
+const ChallengeResult = ({ results }) => {
+  return (
+    <div>Results: {results}</div>
+  )
 }
 
 ChallengeResult.propTypes = {
-  // Add all proptypes
+  results: PropTypes.boolean
 }
 
 export default ChallengeResult

@@ -2,11 +2,18 @@ import React, { PropTypes } from 'react'
 
 require('./ChallengeWinners.scss')
 
-const ChallengeWinners = ({ /* Add destructured props here */ }) => {
+const ChallengeWinners = ({ winners }) => {
+  const names = winners.map((winner) => {
+    return <span>{winner.handle}</span>
+  })
+
+  return (
+    <div>{names}</div>
+  )
 }
 
 ChallengeWinners.propTypes = {
-  // Add all proptypes
+  winners: PropTypes.array.isRequired
 }
 
 export default ChallengeWinners

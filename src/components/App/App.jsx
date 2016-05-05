@@ -1,10 +1,13 @@
 import React from 'react'
+import NavBarContainer from '../NavBarContainer/NavBarContainer'
 
 require('./App.scss')
 
 const App = ({ children }) => {
   return (
     <div>
+      <NavBarContainer />
+
       {children}
     </div>
   )

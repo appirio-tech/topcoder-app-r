@@ -30,7 +30,7 @@ class NavBarContainer extends Component {
       <NavBar
         domain={DOMAIN}
         username={'polynickglot'}
-        userImage={'https://www.topcoder.com/members/polynickglot/'}
+        userImage={'https://www.topcoder.com/i/m/polynickglot.jpeg'}
         searchSuggestionsFunc={this.getSuggestions}
         onSearch={this.onSearch}
       />

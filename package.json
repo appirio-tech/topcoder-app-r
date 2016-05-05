@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "appirio-styles": "0.x.x",
-    "appirio-tech-react-components": "0.0.10",
+    "appirio-tech-react-components": "0.x.x",
     "classnames": "^2.2.3",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",

@@ -145,6 +145,14 @@ const mockChallengeData = [
         "handle": "jcopilotdev",
         "id": 40141235,
         "placement": null
+      },
+      {
+        "roles": [
+          "SUBMITTER"
+        ],
+        "handle": "albertwang",
+        "id": 10336829,
+        "placement": null
       }
     ]
   },

@@ -7,7 +7,9 @@ const CallToAction = ({ phases, users }) => {
   const user = users[0] ? users[0].handle : null
 
   return (
-    <div>{phase} {user}</div>
+    <div className="challenge-call-to-action">
+      {phase} {user}
+    </div>
   )
 }
 

@@ -1,5 +1,7 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .challenge-meta-data {
+  display: flex;
   flex-basis: 33%;
+  justify-content: space-between;
 }

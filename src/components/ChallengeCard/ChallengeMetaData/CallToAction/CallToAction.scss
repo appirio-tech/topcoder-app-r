@@ -1,1 +1,7 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
+
+.challenge-call-to-action {
+  width: 130px;
+  padding: 20px;
+  background-color: $tc-gray-neutral-light;
+}

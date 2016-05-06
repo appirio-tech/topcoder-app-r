@@ -4,9 +4,9 @@ require('./PhaseTimeline.scss')
 
 const PhaseTimeline = ({ phases }) => {
   const phaseName = phases[0].type
-
+  console.log(phaseName)
   return (
-    <div>{phaseName}</div>
+    <div>{'timeline'}</div>
   )
 }
 

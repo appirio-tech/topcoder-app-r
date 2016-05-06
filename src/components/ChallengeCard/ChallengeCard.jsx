@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import MyChallengeIndicator from './MyChallengeIndicator/MyChallengeIndicator'
 import ChallengeInfo from './ChallengeInfo/ChallengeInfo'
 import ChallengeInfoSecondary from './ChallengeInfoSecondary/ChallengeInfoSecondary'
@@ -7,9 +8,9 @@ import { isUserRegistered } from '../../helpers'
 
 require('./ChallengeCard.scss')
 
-const ChallengeCard = ({ challenge }) => {
-  const { id, name, track, subtrack } = challenge
-  const myChallenge = isUserRegistered(challenge.users)
+const ChallengeCard = ({ challenge, loggedInUser }) => {
+  const { id, name, track, subtrack, users } = challenge
+  const myChallenge = isUserRegistered(loggedInUser, users)
 
   return (
     <div className="challenge-card">
@@ -28,4 +29,10 @@ ChallengeCard.propTypes = {
   challenge: PropTypes.object.isRequired
 }
 
-export default ChallengeCard
+const mapStateToProps = ({ user }) => {
+  return {
+    loggedInUser: user
+  }
+}
+
+export default connect(mapStateToProps)(ChallengeCard)

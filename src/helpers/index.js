@@ -22,11 +22,9 @@ export function fetchJSON(url, options) {
 }
 
 // Challenge Helpers
-export function isUserRegistered(users) {
-  const currentUser = 'Applications'
-
+export function isUserRegistered(loggedInUser, users) {
   return users.some(user => {
-    if (user.handle === currentUser) {
+    if (user.id === loggedInUser.id) {
       return true
     }
 

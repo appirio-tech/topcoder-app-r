@@ -5,7 +5,7 @@ import {
   USERNAME_SEARCH_SUCCESS, MEMBER_SEARCH_FAILURE,
   TOP_MEMBER_SEARCH_SUCCESS, RESET_SEARCH_TERM,
   SET_SEARCH_TAG, SET_SEARCH_TERM, MEMBER_SEARCH_SUCCESS,
-  leaderboardUrl, memberSearchUrl, memberSearchTagUrl } from '../config/constants'
+  leaderboardURL, memberSearchURL, memberSearchTagURL } from '../config/constants'
 
 export function loadMemberSearch(searchTerm) {
   return ((dispatch, getState) => {
@@ -48,7 +48,7 @@ export function loadMemberSearch(searchTerm) {
 }
 
 export function checkIfSearchTermIsATag(dispatch, searchTerm) {
-  const url = `${memberSearchTagUrl}?filter=name%3D${encodeURIComponent(searchTerm)}`
+  const url = `${memberSearchTagURL}?filter=name%3D${encodeURIComponent(searchTerm)}`
 
   return fetchJSON(url)
   .then(data => {
@@ -69,7 +69,7 @@ export function checkIfSearchTermIsATag(dispatch, searchTerm) {
 
 export function getUsernameMatches(dispatch, searchTerm, numMatches) {
   const offset = numMatches
-  const url = `${memberSearchUrl}?query=MEMBER_SEARCH&handle=${encodeURIComponent(searchTerm)}&offset=${offset}&limit=10`
+  const url = `${memberSearchURL}?query=MEMBER_SEARCH&handle=${encodeURIComponent(searchTerm)}&offset=${offset}&limit=10`
 
   return fetchJSON(url)
   .then(data => {
@@ -99,7 +99,7 @@ export function getUsernameMatches(dispatch, searchTerm, numMatches) {
 export function getTopMembers(dispatch, tag) {
   const leaderboardType = mapTagToLeaderboardType(tag.domain)
   const queryString = `?filter=id%3D${tag.id}%26type%3D${leaderboardType}`
-  const url = leaderboardUrl + queryString
+  const url = leaderboardURL + queryString
 
   return fetchJSON(url)
   .then(data => {

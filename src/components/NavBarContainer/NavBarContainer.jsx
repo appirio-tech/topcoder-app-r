@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import _ from 'lodash'
 import NavBar from 'appirio-tech-react-components/components/NavBar/NavBar'
 import { DOMAIN } from '../../config/constants'
@@ -21,16 +22,16 @@ class NavBarContainer extends Component {
       })
   }
 
-  onSearch() {
-    window.location.replace('/search/challenges?q=')
+  onSearch(searchTerm) {
+    window.location.replace(`/search/challenges?q=${encodeURIComponent(searchTerm)}`)
   }
 
   render() {
     return (
       <NavBar
         domain={DOMAIN}
-        username={'polynickglot'}
-        userImage={'https://www.topcoder.com/i/m/polynickglot.jpeg'}
+        username={this.props.username}
+        userImage={this.props.photoURL}
         searchSuggestionsFunc={this.getSuggestions}
         onSearch={this.onSearch}
       />
@@ -38,4 +39,11 @@ class NavBarContainer extends Component {
   }
 }
 
-export default NavBarContainer
+const mapStateToProps = ({ user }) => {
+  return {
+    username: user.username,
+    photoURL: user.photoURL
+  }
+}
+
+export default connect(mapStateToProps)(NavBarContainer)

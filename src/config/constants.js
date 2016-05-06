@@ -3,8 +3,9 @@
  */
 
 // Current Logged in User
-export const SET_USER    = 'SET_USER'
-export const UNSET_USER = 'UNSET_USER'
+export const SET_USER       = 'SET_USER'
+export const SET_USER_PHOTO = 'SET_USER_PHOTO'
+export const UNSET_USER     = 'UNSET_USER'
 
 // Search Term
 export const SET_SEARCH_TERM   = 'SET_SEARCH_TERM'
@@ -23,21 +24,23 @@ export const TOP_MEMBER_SEARCH_SUCCESS = 'TOP_MEMBER_SEARCH_SUCCESS'
  * URLs
  */
 
+// API URLs
 export const DOMAIN = process.env.domain || 'topcoder-dev.com'
+export const INTERNAL_API = `https://internal-api.${DOMAIN}/v3`
 
 // Accounts URLs
 export const CONNECTOR_URL = `https://accounts.${DOMAIN}/connector.html`
 export const ACCOUNTS_URL = `https://accounts.${DOMAIN}/tc`
 
-// FIXME: Change to process.env.INTERNAL_API after added to webpack
-export const INTERNAL_API = `https://internal-api.${DOMAIN}/v3`
+// Member URLs
+export const userProfileURL = `${process.env.API_URL}/members/`
 
-export const memberSearchTagUrl = `${INTERNAL_API}/tags/`
-
-export const memberSearchUrl = `${INTERNAL_API}/members/_search/`
-export const challengeSearchUrl = 'https://ol348e2ya5.execute-api.us-east-1.amazonaws.com/dev'
+// Search URLs
+export const memberSearchTagURL = `${INTERNAL_API}/tags/`
+export const memberSearchURL = `${INTERNAL_API}/members/_search/`
+export const challengeSearchURL = 'https://ol348e2ya5.execute-api.us-east-1.amazonaws.com/dev'
 // search-topcoder-squ62azmqlwkvnmztjmk4cq5fq.us-east-1.es.amazonaws.com/challenges/_search
 /*{
     "query": { "match": { "name":"Command Line Utility" } }
 }*/
-export const leaderboardUrl = `${INTERNAL_API}/leaderboards/`
+export const leaderboardURL = `${INTERNAL_API}/leaderboards/`

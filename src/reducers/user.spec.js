@@ -1,8 +1,10 @@
-import user from './user'
-import freeze from 'deep-freeze-node'
-import chai from 'chai'
+import register from 'ignore-styles'
+register(['.svg', '.scss'])
 
-import { SET_USER, UNSET_USER } from '../config/constants'
+import user, { initialState } from './user'
+import freeze from 'deep-freeze-node'
+
+import { SET_USER, UNSET_USER, SET_USER_PHOTO } from '../config/constants'
 
 describe('user reducer: ', () => {
   const mockUser = {
@@ -24,12 +26,31 @@ describe('user reducer: ', () => {
   describe(SET_USER, () => {
     const currentState = null
 
-    const action = { type: SET_USER, user: mockUser }
+    const { username, id, roles } = mockUser
+    const action = { type: SET_USER, username, id, roles }
 
     const newState = user(currentState, action)
 
     it('sets the new user', () => {
       newState.should.deep.equal(mockUser)
+    })
+  })
+
+  describe(SET_USER_PHOTO, () => {
+    const currentState = freeze(mockUser)
+
+    const mockPhotoURL = 'https://www.topcoder.com/i/m/r2d2.jpeg'
+    const action = { type: SET_USER_PHOTO, photoURL: mockPhotoURL }
+
+    const newState = user(currentState, action)
+
+    it('sets the photoURL of the user', () => {
+      newState.should.deep.equal({
+        username: 'r2d2',
+        id: 123456,
+        roles: ['copilot'],
+        photoURL: mockPhotoURL
+      })
     })
   })
 
@@ -40,8 +61,8 @@ describe('user reducer: ', () => {
 
     const newState = user(currentState, action)
 
-    it('sets the user to null when logging out', () => {
-      chai.should().not.exist(newState)
+    it('sets the user to initial state when logging out', () => {
+      newState.should.deep.equal(initialState)
     })
   })
 })

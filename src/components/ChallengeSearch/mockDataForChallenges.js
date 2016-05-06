@@ -58,6 +58,14 @@ const mockChallengeData = [
     "users": [
       {
         "roles": [
+          "SUBMITTER"
+        ],
+        "handle": "albertwang",
+        "id": 10336829,
+        "placement": null
+      },
+      {
+        "roles": [
           "MANAGER"
         ],
         "handle": "appiriowes",

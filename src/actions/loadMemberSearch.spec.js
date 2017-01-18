@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import nock from 'nock'
 import { initialState } from '../reducers/memberSearch.js'
 import { initialState as searchTermInitialState } from '../reducers/searchTerm.js'
-import { INTERNAL_API } from '../config/constants.js'
+import { V3_API } from '../config/constants.js'
 
 import {
   loadMemberSearch, checkIfSearchTermIsATag,
@@ -35,7 +35,7 @@ describe('loadMemberSearch Actions:', () => {
   const topMemberResults = ['topMember1', 'topMember2']
 
   const mockSuccessfulTagAPICall = () => {
-    nock(INTERNAL_API)
+    nock(V3_API)
       .get(/\/tags/)
       .reply(200, { result: {
         content: [mockTag]
@@ -43,7 +43,7 @@ describe('loadMemberSearch Actions:', () => {
   }
 
   const mockSuccessfulUsernameMatchesAPICall = () => {
-    nock(INTERNAL_API)
+    nock(V3_API)
       .get(/\/members\/_search/)
       .reply(200, { result: {
         content: usernameMatchResults,
@@ -52,7 +52,7 @@ describe('loadMemberSearch Actions:', () => {
   }
 
   const mockSuccessfulTopMembersAPICall = () => {
-    nock(INTERNAL_API)
+    nock(V3_API)
       .get(/\/leaderboards\/\?filter/)
       .reply(200, { result: { content: topMemberResults } })
   }
@@ -71,7 +71,7 @@ describe('loadMemberSearch Actions:', () => {
         }
       })
 
-      nock(INTERNAL_API)
+      nock(V3_API)
         .get(/\/tags/)
         .reply(200, { result: { content: [] }})
 
@@ -166,7 +166,7 @@ describe('loadMemberSearch Actions:', () => {
     it('calls memberSearchFailure when the request fails', () => {
       const store = mockStore({ memberSearch: initialState })
 
-      nock(INTERNAL_API)
+      nock(V3_API)
         .get(/\/tags/)
         .reply(500, 'failure')
 
@@ -209,7 +209,7 @@ describe('loadMemberSearch Actions:', () => {
     it(`dispatches ${MEMBER_SEARCH_FAILURE} when the request fails`, () => {
       const store = mockStore({ memberSearch: initialState })
 
-      nock(INTERNAL_API)
+      nock(V3_API)
         .get(/\/members\/_search/)
         .reply(500, 'failure')
 
@@ -247,7 +247,7 @@ describe('loadMemberSearch Actions:', () => {
     it('calls memberSearchFailure when the request fails', () => {
       const store = mockStore({ memberSearch: initialState })
 
-      nock(INTERNAL_API)
+      nock(V3_API)
         .get(/\/leaderboards.*/)
         .reply(500, 'failure')
 

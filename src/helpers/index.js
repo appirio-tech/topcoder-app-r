@@ -278,5 +278,5 @@ export function mapTagToLeaderboardType(tagDomain) {
     SKILLS: 'MEMBER_SKILL'
   }
 
-  return tagToLeaderboardTypeMap[tagDomain]
+  return tagDomain ? tagToLeaderboardTypeMap[tagDomain.toUpperCase()] : null
 }

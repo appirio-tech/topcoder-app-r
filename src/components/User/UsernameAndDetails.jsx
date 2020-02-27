@@ -38,7 +38,7 @@ const UsernameAndDetails = ({ username, country, numWins, memberSince }) => {
 UsernameAndDetails.propTypes = {
   username   : PropTypes.string.isRequired,
   country    : PropTypes.string.isRequired,
-  numWins    : PropTypes.number.isRequired,
+  numWins    : PropTypes.number,
   memberSince: PropTypes.number.isRequired
 }
 

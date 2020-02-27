@@ -144,7 +144,7 @@ export function getMostRecentSubtracks(userStatsByTrack, numResults = Infinity) 
   const marathonMatchStats = _.get(userStatsByTrack, 'DATA_SCIENCE.MARATHON_MATCH')
   const SRMStats           = _.get(userStatsByTrack, 'DATA_SCIENCE.SRM')
 
-  if (marathonMatchStats.mostRecentEventDate) {
+  if (marathonMatchStats && marathonMatchStats.mostRecentEventDate) {
     subtrackStats.push({
       track: 'DATA_SCIENCE',
       name: 'MARATHON_MATCH',
@@ -153,7 +153,7 @@ export function getMostRecentSubtracks(userStatsByTrack, numResults = Infinity) 
     })
   }
 
-  if (SRMStats.mostRecentEventDate) {
+  if (SRMStats && SRMStats.mostRecentEventDate) {
     subtrackStats.push({
       track: 'DATA_SCIENCE',
       name: 'SRM',
@@ -167,7 +167,7 @@ export function getMostRecentSubtracks(userStatsByTrack, numResults = Infinity) 
   const developSubtracks = _.get(userStatsByTrack, 'DEVELOP.subTracks', [])
 
   designSubtracks.forEach((subtrack) => {
-    if (subtrack.mostRecentEventDate) {
+    if (subtrack && subtrack.mostRecentEventDate) {
       subtrackStats.push({
         track: 'DESIGN',
         name: subtrack.name,
@@ -178,7 +178,7 @@ export function getMostRecentSubtracks(userStatsByTrack, numResults = Infinity) 
   })
 
   developSubtracks.forEach((subtrack) => {
-    if (subtrack.mostRecentEventDate) {
+    if (subtrack && subtrack.mostRecentEventDate) {
       subtrackStats.push({
         track: 'DEVELOP',
         name: subtrack.name,

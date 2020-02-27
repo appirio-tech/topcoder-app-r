@@ -11,7 +11,8 @@ require('./UserStats.scss')
 const UserStats = ({ member, userPlace, searchTermTag }) => {
   let userStatsList
 
-  const subtracks = getMostRecentSubtracks(member.stats, 5)
+  const stats = (_.isArray(member.stats) && member.stats.length > 0) ? member.stats[0]:member.stats
+  const subtracks = getMostRecentSubtracks(stats, 5)
 
   if (subtracks.length) {
     userStatsList = <SubtrackList subtracks={subtracks} />
